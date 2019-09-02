@@ -1,0 +1,10 @@
+MLWebLab Application User Stories
+	[ ] FEATURE: Univariate Linear Regression Machine Learning
+		[ ] US: Select a file and load data from a list of preloaded (univariate) data files
+		[ ] US: View stats on loaded data set
+		[ ] US: Provide option to view first few data records
+		[ ] US: View histogram of numeric variable and target
+		[ ] US: View values of variable vs target x-y graph
+		[ ] US: Select training ratio for linear regression
+		[ ] US: Train the model and view validation set errors / accuracy
+		[ ] US: Input new test data and view prediction
