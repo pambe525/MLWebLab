@@ -1,47 +1,40 @@
 <!doctype html>
 <html lang="en">
   <head>
+    {% load static %}
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+ 	<link rel="stylesheet" href="{% static 'css/stylesheet.css' %}">
     <title>Machine Learning Lab</title>
   </head>
-  <body>
-  <table style="width:100%; height:100vh">
-	<tr>
-    	<td class="bg-info align-middle" style="width:270px; border-bottom:1px groove black">
-    		<table>
-        	<tr>
-			   	<td>
-			   		{% load static %}
-			   		<img src="{% static 'images/machine-learning-icon.png' %}" width="50px" />
-			   	</td>
-			   	<td class="text-white" style="text-shadow:1px 1px black">
-			   		<b>MACHINE LEARNING LAB</b>
-			   	</td>
-			</tr>
-        	</table>
-        </td>
-        <td id="content" class="align-bottom px-3" style="height:60px; box-shadow:3px 0px 3px 3px #ccc">
-        	<h5>Header</h5>
-        </td>
-      </tr>
-      <tr>
-    	<td class="p-3 bg-dark align-top text-white" style="box-shadow:0px 3px 3px 3px #ccc">
-    	Navigation
-		</td>
-		<td class="p-3 align-top">
-    		<!-- Content Header -->
-			<h4>{% block home_content %}{% endblock %}</h4>      	
-		</td>
-      </tr>
-    </table>
-	
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <body class="fixed-sn pink-skin">
+   <!-- Logo & title -->
+    <div class="logo-badge">
+		<img src="{% static 'images/machine-learning-icon.png' %}" width="50px" />
+		<span class="logo-text">MACHINE LEARNING LAB</span>
+    </div>
+   <!-- Logo & title -->
+   <!-- Double navigation-->
+    <!-- Top navigation -->
+    <div class="topnav">
+    </div>
+    <!-- /Top navigation -->
+	<!-- Side navigation -->
+	<div class="sidenav">
+	  <a href="#"><i class="fa fa-home"></i><span>Dashboard</span></a>
+	  <a href="#"><i class="fa fa-database"></i><span>Manage Data</span></a>
+	</div>
+	<!-- /Side navigation -->
+  <!-- /Double navigation-->
+
+  <!-- Main Content -->
+  <div class="main">
+	<h4>{% block home_content %}{% endblock %}</h4>      	
+  </div>
+  <!-- /Main Content -->
+
   </body>
 </html>
