@@ -86,19 +86,9 @@
 	background-color: lightyellow;
 	box-shadow: 2px 3px 3px #ccc;
 	margin-top: 30px;
-	border: 1px solid gray;
+	border: 1px solid black;
 	border-radius: 8px;
 }
-
-.tileheader {
-	text-align: center;
-	font-weight: bold;
-	color: white;
-	padding: 6px;
-	border-radius: 8px 8px 0px 0px;
-	background-color: #3c3c3c;
-}
-
 .tilecontent {
 	padding: 8px;
 }
