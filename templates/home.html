@@ -1,53 +1,34 @@
 {% extends 'base.html' %}
 {% block home_content %}
-<h2>Dashboard</h2>
-
-<!--  DataSet Tile  -->
-<div class= "flowtile">
-	<div class="bg-dark rounded-top p-1 w-100 text-light text-center">SELECT DATA SET</div>
-	<div class="p-2 h6">
-	    <div class="p-1">
-			<span>Select Data File:</span>
-		</div>
-		<div class="dropdown p-1">
-		  <button class="btn w-100 border-1 border-dark dropdown-toggle text-left bg-light" type="button" id="dropdownMenu2">
-		  	Select data file
-		  </button>
-		  <div class="dropdown-menu">
-		    <button class="dropdown-item" type="button">Action</button>
-		    <button class="dropdown-item" type="button">Another action</button>
-		    <button class="dropdown-item" type="button">Something else here</button>
-		  </div>
-		 </div>
-		 <div class="p-1 mt-1">
-		  	<span>Data Records : </span><div class="badge bg-primary text-white"></div>
-		 </div>
-		 <div class="p-1">
-		  	<span>Base Features: </span><div class="badge bg-primary text-white mt-2"></div>
-		 </div>
-		 <div class="p-1">
-			  <span class="mt-2">Select Target:</span>
-		 </div>
-		 <div class="dropdown p-1">
-			<button class="btn w-100 border-1 border-dark dropdown-toggle text-left bg-light" type="button" id="dropdownMenu2">
-				Select Target
-		    </button>
-		    <div class="dropdown-menu">
-		    	<button class="dropdown-item" type="button">Action</button>
-		    	<button class="dropdown-item" type="button">Another action</button>
-		    	<button class="dropdown-item" type="button">Something else here</button>
-		  	</div>
-		  </div>
-		  <hr>
-		  <button class="btn w-100 border-1 border-dark bg-primary" type="button" id="dropdownMenu2">
-			 Load Data
-		  </button>
-	  </div>
-	</div>	
+<!-- File input form  -->
+<form>
+<div class="input-group h5 w-25">
+   <div class="input-group-prepend">
+     <span class="input-group-text">Data File:</span>
+   </div>
+   <select id="inputFile" class="form-control custom-select" placeholder="Select file"></select>
+   <div class="input-group-append">
+ 	 <button type="submit" class="btn btn-primary">Select</button>
+   </div>
 </div>
+</form>
+<hr>
+<!-- /File input form  -->
 
+<!-- MLFLowChart -->
+<div id="mlflow">
+	<!--  Data Source Tile  -->
+	<div class= "flow-tile">
+		<div class="tile-header">DATA SOURCE</div>
+		<div class="tile-label">Current Data File:</div><div class="tile-badge">File_for_MLFLOW_xcxcxvxx1.txt</div>
+		<div><span class="tile-label">Data Records:</span><span class="tile-badge">200</span></div>
+		<div><span class="tile-label">Data Columns:</span><span class="tile-badge">4</span></div>
+		<hr>
+		<div class="text-center"><button type="button"  data-toggle="modal" data-target="#myModal" id="btnExploreData">Explore Data ...</button></div>
+	</div>
+	<!--  /Data Source Tile  -->
 
-<!--  DataSet Tile  -->
-
+</div>
+<!-- /MLFLowChart -->
 {% endblock home_content %}
 

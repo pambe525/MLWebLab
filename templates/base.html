@@ -20,22 +20,40 @@
    
    <!-- Double navigation-->
     <!-- Top navigation -->
-    <div class="topnav">
+    <div class="topnav bg-dark">
     </div>
     <!-- /Top navigation -->
-	<!-- Side navigation -->
-	<div class="sidenav">
-	  <a href="#"><i class="fa fa-home"></i><span>Dashboard</span></a>
-	  <a href="#"><i class="fa fa-database"></i><span>Manage Data</span></a>
-	</div>
-	<!-- /Side navigation -->
-  <!-- /Double navigation-->
 
   <!-- Main Content -->
   <div class="main">
 	<h4>{% block home_content %}{% endblock %}</h4>      	
   </div>
   <!-- /Main Content -->
+  
+  <!-- The Modal -->
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Modal Heading</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        Modal body..
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
