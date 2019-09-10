@@ -16,18 +16,63 @@
 <!-- /File input form  -->
 
 <!-- MLFLowChart -->
-<div id="mlflow">
+<div class={{visibility}}>
+    <table>
+    <tr>
 	<!--  Data Source Tile  -->
-	<div class= "flow-tile">
-		<div class="tile-header">DATA SOURCE</div>
-		<div class="tile-label">Current Data File:</div><div class="tile-badge">File_for_MLFLOW_xcxcxvxx1.txt</div>
-		<div><span class="tile-label">Data Records:</span><span class="tile-badge">200</span></div>
-		<div><span class="tile-label">Data Columns:</span><span class="tile-badge">4</span></div>
-		<hr>
-		<div class="text-center"><button type="button"  data-toggle="modal" data-target="#myModal" id="btnExploreData">Explore Data ...</button></div>
-	</div>
+	<td>
+    <div class="card bg-light text-center border-dark col-*" style="width:16rem; box-shadow:2px 23px 23px #ccc">
+	  <div class="card-header bg-dark text-center h6 text-white">
+	   	<i class="fa fa-database"></i><span class="px-2">DATA SOURCE</span>
+	  </div>
+	  <div class="card-body m-2 p-2 bg-white border">
+	    <h6 class="card-title font-weight-bold text-left">Data File</h6>
+	    <div class="badge-secondary p-2 rounded font-weight-bold" style="font-size:15px">Some_data_file..txt</div>
+	  </div>
+ 	  <div class="card-body m-2 p-2 bg-white border row">
+	      <h6 class="card-title font-weight-bold my-1 col-*">Rows:</h6>
+	      <span class="badge-secondary p-1 mx-1 rounded font-weight-bold col" style="font-size:15px">20</span>
+      	  <h6 class="card-title font-weight-bold my-1 col-*">Cols:</h6>
+	      <span class="badge-secondary p-1 mx-1 rounded font-weight-bold col" style="font-size:15px">5</span>
+	  </div>
+ 	  <button class="btn m-3 bg-primary text-white"  data-toggle="modal" data-target="#myModal">Explore Data ...</button>	
+    </div>    
+    </td>
 	<!--  /Data Source Tile  -->
+	
+	<!-- Right arrow -->
+	{% load static %}
+	<td>
+	<div class="col-* mt-3">
+		<img src="{% static 'images/right_arrow.png' %}" height="50px"/>
+	</div>
+	</td>
+	<!-- /Right arrow -->
 
+	<!--  Training Set Tile  -->
+	<td>
+    <div class="card bg-light text-center border-dark col-*" style="width:16rem; box-shadow:2px 23px 23px #ccc">
+	  <div class="card-header bg-dark text-center h6 text-white">
+	   	<i class="fa fa-analytics"></i><span class="px-2">TRAINING SET</span>
+	  </div>
+	  <div class="card-body m-2 p-2 bg-white border">
+	    <h6 class="card-title font-weight-bold text-left">Target Feature</h6>
+	    <div class="badge-secondary p-2 rounded font-weight-bold" style="font-size:15px">Some Feature</div>
+	  </div>
+ 	  <div class="card-body m-2 p-2 bg-white border row">
+	      <h6 class="card-title font-weight-bold my-1 col-*">Base Features:</h6>
+	      <span class="badge-secondary p-1 mx-1 rounded font-weight-bold col" style="font-size:15px">5</span>
+	  </div>
+	  <div class="card-body m-2 p-2 bg-white border row">
+      	  <h6 class="card-title font-weight-bold my-1 col-*">Training Ratio:</h6>
+	      <span class="badge-secondary p-1 mx-1 rounded font-weight-bold col" style="font-size:15px">80%</span>
+	  </div>
+ 	  <button class="btn m-3 bg-primary text-white"  data-toggle="modal" data-target="#myModal">Edit ...</button>	
+    </div>
+    </td>
+	<!--  /Training Set Tile  -->
+	
+	</tr>
 </div>
 <!-- /MLFLowChart -->
 {% endblock home_content %}
