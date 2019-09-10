@@ -7,8 +7,8 @@
    <div class="input-group-prepend">
      <span class="input-group-text">Data File:</span>
    </div>
-   <select id="inputFile" class="form-control custom-select">
-     <option selected hidden disabled>Select file to import ...</option>
+   <select id="input_file" class="form-control custom-select">
+     <option selected hidden disabled>Select data file ...</option>
      {% for fname in filenames %}
 	     <option>{{fname}}</option> 
      {% endfor %}
@@ -21,7 +21,7 @@
 <!-- /File input form  -->
 
 <!-- MLFLowChart -->
-<div class={{visibility}}>
+<div id='flow_container' class={{visibility}}>
     <table>
     <tr>
 	<!--  Data Source Tile  -->
