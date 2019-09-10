@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
- 	<link rel="stylesheet" href="{% static 'css/stylesheet.css' %}">
     <title>Machine Learning Lab</title>
   </head>
   <body>
@@ -17,7 +16,7 @@
 	    <!-- Logo & title -->
 	    <div class="badge-info p-1 col-*" style="border-bottom:4px solid orange;">
 			<img src="{% static 'images/machine-learning-icon.png' %}" width="50px" />
-			<span class="logo-text p-1">MACHINE LEARNING LAB</span>
+			<span class="text-white font-weight-bold h6 p-1" style="text-shadow:1px 1px black">MACHINE LEARNING LAB</span>
 	    </div>
 	   <!-- Logo & title -->
    
@@ -28,7 +27,7 @@
     <!-- /Top header -->
  
     <!-- Main Content -->
-    <div class="main">
+    <div class="p-3">
 	  <h4>{% block home_content %}{% endblock %}</h4>      	
     </div>
     <!-- /Main Content -->
