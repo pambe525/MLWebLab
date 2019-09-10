@@ -10,25 +10,29 @@
  	<link rel="stylesheet" href="{% static 'css/stylesheet.css' %}">
     <title>Machine Learning Lab</title>
   </head>
-  <body class="fixed-sn pink-skin">
-   <!-- Logo & title -->
-    <div class="logo-badge">
-		<img src="{% static 'images/machine-learning-icon.png' %}" width="50px" />
-		<span class="logo-text">MACHINE LEARNING LAB</span>
-    </div>
-   <!-- Logo & title -->
+  <body>
+  <div class="container-fluid">
+    <!-- Top header -->
+    <div class="row">
+	    <!-- Logo & title -->
+	    <div class="badge-info p-1 col-*" style="border-bottom:4px solid orange;">
+			<img src="{% static 'images/machine-learning-icon.png' %}" width="50px" />
+			<span class="logo-text p-1">MACHINE LEARNING LAB</span>
+	    </div>
+	   <!-- Logo & title -->
    
-   <!-- Double navigation-->
-    <!-- Top navigation -->
-    <div class="topnav bg-dark">
+       <!-- Top navigation -->
+	    <div class="p-1 bg-dark col" style="border-bottom:4px solid orange;"></div>
+	    <!-- /Top navigation -->
+	</div>
+    <!-- /Top header -->
+ 
+    <!-- Main Content -->
+    <div class="main">
+	  <h4>{% block home_content %}{% endblock %}</h4>      	
     </div>
-    <!-- /Top navigation -->
-
-  <!-- Main Content -->
-  <div class="main">
-	<h4>{% block home_content %}{% endblock %}</h4>      	
+    <!-- /Main Content -->
   </div>
-  <!-- /Main Content -->
   
   <!-- The Modal -->
 <div class="modal fade" id="myModal">
