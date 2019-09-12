@@ -3,11 +3,11 @@
 
 <!-- File input form  -->
 <form>
-<div class="input-group h5 w-25">
+<div class="input-group h5" style="width:500px">
    <div class="input-group-prepend">
      <span class="input-group-text">Data File:</span>
    </div>
-   <select id="input_file" class="form-control custom-select">
+   <select name="input_file" class="form-control custom-select">
      <option selected hidden disabled>Select data file ...</option>
      {% for fname in filenames %}
 	     <option>{{fname}}</option> 
