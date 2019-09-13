@@ -2,7 +2,8 @@
 {% block home_content %}
 
 <!-- File input form  -->
-<form>
+<form action={% url 'home' %} method="POST">
+{% csrf_token %}
 <div class="input-group h5" style="width:500px">
    <div class="input-group-prepend">
      <span class="input-group-text">Data File:</span>

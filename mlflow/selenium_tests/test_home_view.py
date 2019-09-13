@@ -35,5 +35,11 @@ class HomeViewTemplateTestCase(StaticLiveServerTestCase):
         self.assertGreater(len(filelist), 5)
         self.assertTrue("ex1data1.txt" in [opt.text for opt in filelist])
 
+    def test_file_select_button_clicked_with_no_selection(self):
+        file_select_btn = self.browser.find_element_by_css_selector('button.btn.btn-primary')
+        file_select_btn.click()
+        flow_container = self.browser.find_element_by_id('flow_container')
+        self.assertEquals(flow_container.get_attribute('class'), 'invisible')
+
  
         
