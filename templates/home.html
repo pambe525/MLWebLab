@@ -2,27 +2,26 @@
 {% block home_content %}
 
 <!-- File input form  -->
-<form action={% url 'home' %} method="POST">
-{% csrf_token %}
-<div class="input-group h5" style="width:500px">
-   <div class="input-group-prepend">
-     <span class="input-group-text">Data File:</span>
-   </div>
-   <select name="input_file" class="form-control custom-select">
-     <option selected hidden disabled>Select data file ...</option>
-     {% for fname in filenames %}
-	     <option>{{fname}}</option> 
-     {% endfor %}
-   </select>
-   <div class="input-group-append">
- 	 <button type="submit" class="btn btn-primary">Select</button>
-   </div>
-</div>
-</form>
+<form class="row align-items-center" action={% url 'home' %} method="POST">
+    {% csrf_token %}
+    <div class="h5 px-2 mt-3" >
+        {{ form.data_file.label_tag }}
+    </div>
+    <div class="h5 px-1 mt-2">
+        {{ form.data_file }}
+    </div>
+    <button type="submit" name="select_btn" class="btn btn-primary ml-2 py-1" {{select_btn_disabled}}>
+        Select
+    </button>
+    <button type="submit" name="change_btn" class="btn btn-primary ml-2 py-1" {{change_btn_disabled}}>
+        Change Data File
+    </button>
+ </form>
+<div class= "h5">{{ text_message }}</div>
 <!-- /File input form  -->
 
 <!-- MLFLowChart -->
-<div id='flow_container' class={{visibility}}>
+<div id='flow_container' class="{{ flow_chart_visibility }} mt-2">
     <table>
     <tr>
 	<!--  Data Source Tile  -->
