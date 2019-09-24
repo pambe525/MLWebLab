@@ -1,5 +1,16 @@
 {% extends 'base.html' %}
 {% block home_content %}
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    {% if error_message != None %}
+        <script type="text/javascript">
+        $(document).ready(function(){
+            $('#messageBox').modal("show");
+        })
+        </script>
+    {% endif %}
 
 <!-- File input form  -->
 <form class="row align-items-center" action={% url 'home' %} method="POST">
@@ -17,11 +28,10 @@
         Change Data File
     </button>
  </form>
-<div class= "h5">{{ text_message }}</div>
 <!-- /File input form  -->
 
 <!-- MLFLowChart -->
-<div id='flow_container' class="{{ flow_chart_visibility }} mt-2">
+<div id='flow_container' class="{{ flow_chart_visibility }} mt-4">
     <table>
     <tr>
 	<!--  Data Source Tile  -->
@@ -31,14 +41,20 @@
 	   	<i class="fa fa-database"></i><span class="px-2">DATA SOURCE</span>
 	  </div>
 	  <div class="card-body m-2 p-2 bg-white border">
-	    <h6 class="card-title font-weight-bold text-left">Data File</h6>
-	    <div class="badge-secondary p-2 rounded font-weight-bold" style="font-size:15px">Some_data_file..txt</div>
+	    <h6 class="card-title text-left">Data File</h6>
+	    <div class="badge-secondary p-2 rounded h6 text-left" name="source_file">
+            {{ data_file_name }}
+        </div>
 	  </div>
  	  <div class="card-body m-2 p-2 bg-white border row">
-	      <h6 class="card-title font-weight-bold my-1 col-*">Rows:</h6>
-	      <span class="badge-secondary p-1 mx-1 rounded font-weight-bold col" style="font-size:15px">20</span>
-      	  <h6 class="card-title font-weight-bold my-1 col-*">Cols:</h6>
-	      <span class="badge-secondary p-1 mx-1 rounded font-weight-bold col" style="font-size:15px">5</span>
+	      <h6 class="card-title my-1 col-*">Rows:</h6>
+	      <span class="badge-secondary p-1 mx-1 rounded col h6" name="source_rows">
+              {{ data_file_rows }}
+          </span>
+      	  <h6 class="card-title my-1 col-*">Cols:</h6>
+	      <span class="badge-secondary p-1 mx-1 rounded col h6" name="source_cols">
+              {{ data_file_cols }}
+          </span>
 	  </div>
  	  <button class="btn m-3 bg-primary text-white"  data-toggle="modal" data-target="#myModal">Explore Data ...</button>	
     </div>    
@@ -61,16 +77,16 @@
 	   	<i class="fa fa-brain"></i><span class="px-2">TRAINING SET</span>
 	  </div>
 	  <div class="card-body m-2 p-2 bg-white border">
-	    <h6 class="card-title font-weight-bold text-left">Target Feature</h6>
-	    <div class="badge-secondary p-2 rounded font-weight-bold" style="font-size:15px">Some Feature</div>
+	    <h6 class="card-title text-left">Target Feature</h6>
+	    <div class="badge-secondary p-2 rounded text-left" style="font-size:15px">Some Feature</div>
 	  </div>
  	  <div class="card-body m-2 p-2 bg-white border row">
-	      <h6 class="card-title font-weight-bold my-1 col-*">Base Features:</h6>
-	      <span class="badge-secondary p-1 mx-1 rounded font-weight-bold col" style="font-size:15px">5</span>
+	      <h6 class="card-title my-1 col-*">Base Features:</h6>
+	      <span class="badge-secondary p-1 mx-1 rounded col" style="font-size:15px">5</span>
 	  </div>
 	  <div class="card-body m-2 p-2 bg-white border row">
-      	  <h6 class="card-title font-weight-bold my-1 col-*">Training Ratio:</h6>
-	      <span class="badge-secondary p-1 mx-1 rounded font-weight-bold col" style="font-size:15px">80%</span>
+      	  <h6 class="card-title my-1 col-*">Training Ratio:</h6>
+	      <span class="badge-secondary p-1 mx-1 rounded col" style="font-size:15px">80%</span>
 	  </div>
  	  <button class="btn m-3 bg-primary text-white"  data-toggle="modal" data-target="#myModal">Edit ...</button>	
     </div>

@@ -21,7 +21,7 @@ class HomeViewTemplateTestCase(StaticLiveServerTestCase):
         cls.browser.quit()
         super().tearDownClass()
 
-    def test_initial_state_of_view(self):
+    def test_initial_view(self):
         self.assertTrue('Machine Learning Lab' in self.browser.title)
         self.verify_flowchart_is_visible(False)
         # File Selector contains data file names
@@ -30,16 +30,17 @@ class HomeViewTemplateTestCase(StaticLiveServerTestCase):
         self.assertTrue("ex1data1.txt" in [opt.text for opt in file_list])
         self.verify_file_selection_enabled(True)
 
-    def test_file_select_button_clicked_with_no_selection(self):
+    def test_select_button_clicked_with_no_file_selected(self):
         file_select_btn = self.browser.find_element_by_name('select_btn')
         file_select_btn.click()
         self.verify_flowchart_is_visible(False)
         self.verify_file_selection_enabled(True)
 
-    def test_file_select_button_clicked_with_file_selection(self):
+    def test_select_button_clicked_with_file_selected(self):
         self.select_a_file('ex1data1.txt')
         self.verify_flowchart_is_visible(True)
         self.verify_file_selection_enabled(False, 'ex1data1.txt')
+        self.verify_source_file_data('ex1data1.txt', 97, 2)
 
     def test_change_file_button_clicked(self):
         self.select_a_file('ex1data1.txt')
@@ -74,3 +75,8 @@ class HomeViewTemplateTestCase(StaticLiveServerTestCase):
         Select(file_selector).select_by_visible_text(file_name)
         file_select_btn = self.browser.find_element_by_name('select_btn')
         file_select_btn.click()
+
+    def verify_source_file_data(self, file_name, rows, cols):
+        self.assertEquals(file_name, self.browser.find_element_by_name("source_file").text)
+        self.assertEquals(rows, int(self.browser.find_element_by_name("source_rows").text))
+        self.assertEquals(cols, int(self.browser.find_element_by_name("source_cols").text))
