@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    {% load static %}
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <title>Machine Learning Lab</title>
+  </head>
+  <body>
+  <!-- Header bar with Navigation -->
+  <div class="container-fluid">
+    <!-- Top header -->
+    <div class="row">
+        <!-- Logo & title -->
+        <div class="badge-info p-1 col-*" style="border-bottom:4px solid orange;">
+            <img src="{% static 'images/machine-learning-icon.png' %}" width="50px" />
+            <span class="text-white font-weight-bold h6 p-1" style="text-shadow:1px 1px black">
+                MACHINE LEARNING LAB
+            </span>
+        </div>
+       <!-- Logo & title -->
+
+       <!-- Top navigation -->
+        <div class="p-1 bg-dark col" style="border-bottom:4px solid orange;"></div>
+        <!-- /Top navigation -->
+    </div>
+    <!-- /Top header -->
+
+    <!-- Modal Message Dialog -->
+    <div class="modal fade" id="messageBox">
+      <div class="modal-dialog">
+        <div class="modal-content">
+
+          <!-- Modal Header -->
+          <div class="modal-header bg-danger">
+            <h4 class="modal-title text-white h5 font-weight-bold">ERROR</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+
+          <!-- Modal body -->
+          <div class="modal-body h6">
+            An error occurred!
+          </div>
+
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!-- /Modal Message Dialog-->
+
+    <!-- Main Content -->
+    <div class="p-3">
+	  <h4>{% block home_content %}{% endblock %}</h4>      	
+    </div>
+    <!-- /Main Content -->
+  </div>
+  </body>
+</html>

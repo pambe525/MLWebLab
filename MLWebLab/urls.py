@@ -20,5 +20,4 @@ from mlflow.views import home_view
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_view, name='index'),
-    path('home/', home_view, name='home')
 ]
