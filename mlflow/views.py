@@ -36,6 +36,9 @@ def __read_file_and_load_stats(file_name, context):
     file_path = os.path.join(settings.BASE_DIR, 'data/' + file_name)
     try:
         data_frame = read_csv(file_path)
+        if int(data_frame.shape[1]) < 2: raise Exception("Data file has only one column")
+        if int(data_frame.shape[0]) < 2: raise Exception("Data file has only one row")
+        if not __has_headers(data_frame): raise Exception("Data file has no headers")
         context['error_message'] = None
         context['data_file_rows'] = int(data_frame.shape[0])
         context['data_file_cols'] = int(data_frame.shape[1])
@@ -44,3 +47,13 @@ def __read_file_and_load_stats(file_name, context):
     except Exception as e:
         context['error_message'] = str(e)
         return False
+
+
+def __has_headers(dataframe):
+    for header in dataframe.columns:
+        try:
+            float(header)
+            return False
+        except ValueError:
+            continue
+    return True

@@ -8,7 +8,6 @@ from pandas.errors import EmptyDataError
 
 
 class HomeViewTestCase(SimpleTestCase):
-
     datafile_choices = ["file1.dat", "file2.txt", "file3.dat"]
 
     def test_home_view_get_loads_file_selection_list(self):
@@ -25,19 +24,14 @@ class HomeViewTestCase(SimpleTestCase):
         self.assertEquals(response.context['error_message'], None)
 
     def test_home_view_post_with_a_file_selected(self):
-        with patch("mlflow.views.read_csv") as mock_read_csv:
-            mock_data_frame = MagicMock(DataFrame)
-            mock_data_frame.shape = ('4', '2')
-            mock_read_csv.return_value = mock_data_frame
-            response = self.__make_home_view_request("POST", {'data_file': 'file2.txt'})
-            datafiles_path = os.path.join(settings.BASE_DIR, 'data/file2.txt')
-            mock_read_csv.assert_called_once_with(datafiles_path)
+        data = {"col1": [1, 2, 3, 4], "col2": [5, 6, 7, 8]}
+        response = self.__make_home_view_request_with_mock_read_csv(data)
         self.__validate_form_state(response, True, True, "file2.txt")
         self.__validate_file_selection_enabled(response, False)
         self.__validate_source_file_data(response, 'file2.txt', 4, 2)
         self.assertEquals(response.context['error_message'], None)
 
-    def test_home_view_post_handles_read_exception(self):
+    def test_home_view_post_error_on_read_exception(self):
         with patch("mlflow.views.read_csv") as mock_read_csv:
             mock_read_csv.side_effect = EmptyDataError("No data in file")
             response = self.__make_home_view_request("POST", {'data_file': 'file2.txt'})
@@ -45,6 +39,20 @@ class HomeViewTestCase(SimpleTestCase):
         self.__validate_form_state(response, True, True, "file2.txt")
         self.__validate_file_selection_enabled(response, True)
         self.assertEquals(response.context['error_message'], "No data in file")
+
+    def test_home_view_error_on_data_with_one_column(self):
+        data = {"col1": [1, 2, 3, 4]}
+        response = self.__make_home_view_request_with_mock_read_csv(data)
+        self.__validate_form_state(response, True, True, "file2.txt")
+        self.__validate_file_selection_enabled(response, True)
+        self.assertEquals(response.context['error_message'], "Data file has only one column")
+
+    def test_home_view_error_on_data_with_numeric_headers(self):
+        data = {"1.5": [1.1, 2.1, 3.1], "2.2": [1.2, 2.2, 3.2], "col3": [1.3, 2.3, 3.3]}
+        response = self.__make_home_view_request_with_mock_read_csv(data)
+        self.__validate_form_state(response, True, True, "file2.txt")
+        self.__validate_file_selection_enabled(response, True)
+        self.assertEquals(response.context['error_message'], "Data file has no headers")
 
     # ------------------------------------------------------------------------------------------------------------------
     # HELPER METHODS
@@ -66,12 +74,20 @@ class HomeViewTestCase(SimpleTestCase):
         mock_listdir.assert_called_once_with(datafiles_path)
         return response
 
+    def __make_home_view_request_with_mock_read_csv(self, data):
+        with patch("mlflow.views.read_csv") as mock_read_csv:
+            mock_read_csv.return_value = DataFrame(data)
+            response = self.__make_home_view_request("POST", {'data_file': 'file2.txt'})
+            datafiles_path = os.path.join(settings.BASE_DIR, 'data/file2.txt')
+            mock_read_csv.assert_called_once_with(datafiles_path)
+        return response
+
     def __validate_form_state(self, response, is_valid, is_bound, initial):
         form = response.context['form']
         self.assertTrue(form.is_valid()) if is_valid else self.assertFalse(form.is_valid())
         self.assertTrue(form.is_bound) if is_bound else self.assertFalse(form.is_bound)
         self.assertEqual(form.fields['data_file'].initial, initial)
-        self.assertEqual(len(form.fields['data_file'].choices), len(self.datafile_choices)+1)
+        self.assertEqual(len(form.fields['data_file'].choices), len(self.datafile_choices) + 1)
         self.assertEqual(form.fields['data_file'].choices[0], ("Choose a file...", "Choose a file..."))
         self.assertEqual(form.fields['data_file'].choices[2], (self.datafile_choices[1], self.datafile_choices[1]))
 

@@ -2,7 +2,12 @@ from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver
 from django.test import tag
 from selenium.webdriver.support.ui import Select
-
+import csv
+import os
+from django.conf import settings
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
 
 @tag('selenium')
 class HomeViewTemplateTestCase(StaticLiveServerTestCase):
@@ -11,6 +16,10 @@ class HomeViewTemplateTestCase(StaticLiveServerTestCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.browser = webdriver.Firefox()
+        # Create a empty fake data file so it appears in selection list
+        cls.fake_datafile = "fake_data.csv"
+        cls.datafile_path = os.path.join(settings.BASE_DIR, "data/" + cls.fake_datafile)
+        open(cls.datafile_path, 'a+').close()
 
     def setUp(self):
         self.browser.implicitly_wait(10)
@@ -20,6 +29,7 @@ class HomeViewTemplateTestCase(StaticLiveServerTestCase):
     def tearDownClass(cls):
         cls.browser.quit()
         super().tearDownClass()
+        os.remove(cls.datafile_path)
 
     def test_initial_view(self):
         self.assertTrue('Machine Learning Lab' in self.browser.title)
@@ -27,7 +37,7 @@ class HomeViewTemplateTestCase(StaticLiveServerTestCase):
         # File Selector contains data file names
         file_list = Select(self.browser.find_element_by_name('data_file')).options
         self.assertGreater(len(file_list), 5)
-        self.assertTrue("ex1data1.txt" in [opt.text for opt in file_list])
+        self.assertTrue(self.fake_datafile in [opt.text for opt in file_list])
         self.verify_file_selection_enabled(True)
 
     def test_select_button_clicked_with_no_file_selected(self):
@@ -37,20 +47,45 @@ class HomeViewTemplateTestCase(StaticLiveServerTestCase):
         self.verify_file_selection_enabled(True)
 
     def test_select_button_clicked_with_file_selected(self):
-        self.select_a_file('ex1data1.txt')
+        csv_data = [["col1", "col2", "col3", "col4"], [1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]]
+        self.write_csvfile(csv_data)
+        self.select_a_file(self.fake_datafile)
         self.verify_flowchart_is_visible(True)
-        self.verify_file_selection_enabled(False, 'ex1data1.txt')
-        self.verify_source_file_data('ex1data1.txt', 97, 2)
+        self.verify_file_selection_enabled(False, self.fake_datafile)
+        self.verify_source_file_data(self.fake_datafile, 3, 4)
 
     def test_change_file_button_clicked(self):
-        self.select_a_file('ex1data1.txt')
+        csv_data = [["col1", "col2", "col3", "col4"], [1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]]
+        self.write_csvfile(csv_data)
+        self.select_a_file(self.fake_datafile)
         self.browser.find_element_by_name('change_btn').click()
         self.verify_flowchart_is_visible(False)
         self.verify_file_selection_enabled(True)
 
+    def test_message_dialog_when_bad_data_in_file(self):
+        self.write_csvfile([])
+        self.select_a_file(self.fake_datafile)
+        self.verify_message_box_and_close("No columns to parse from file")
+        self.verify_flowchart_is_visible(False)
+        self.verify_file_selection_enabled(True, self.fake_datafile)
+
+    def test_message_dialog_when_data_file_has_no_headers(self):
+        csv_data = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]]
+        self.write_csvfile(csv_data)
+        self.select_a_file(self.fake_datafile)
+        self.verify_message_box_and_close("Data file has no headers")
+        self.verify_flowchart_is_visible(False)
+        self.verify_file_selection_enabled(True, self.fake_datafile)
+
     # ------------------------------------------------------------------------------------------------------------------
     # HELPER METHODS
     # ------------------------------------------------------------------------------------------------------------------
+
+    def write_csvfile(self, csv_data):
+        with open(self.datafile_path, mode='w+') as csv_file:
+            writer = csv.writer(csv_file, delimiter=',', quoting=csv.QUOTE_NONNUMERIC)
+            writer.writerows(csv_data)
+        csv_file.close()
 
     def verify_flowchart_is_visible(self, is_visible):
         flow_container = self.browser.find_element_by_id('flow_container')
@@ -80,3 +115,11 @@ class HomeViewTemplateTestCase(StaticLiveServerTestCase):
         self.assertEquals(file_name, self.browser.find_element_by_name("source_file").text)
         self.assertEquals(rows, int(self.browser.find_element_by_name("source_rows").text))
         self.assertEquals(cols, int(self.browser.find_element_by_name("source_cols").text))
+
+    def verify_message_box_and_close(self, message_text):
+        message = self.browser.switch_to.active_element
+        self.assertTrue(message.is_displayed())
+        btnXPath = "//button[contains(text(),'Close')]"
+        close_button = WebDriverWait(self.browser, 10).until(EC.element_to_be_clickable((By.XPATH, btnXPath)))
+        self.assertEqual(self.browser.find_element_by_class_name("modal-body").text, message_text)
+        close_button.click()
