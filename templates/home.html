@@ -13,20 +13,22 @@
     {% endif %}
 
 <!-- File input form  -->
-<form class="row align-items-center" action={% url 'index' %} method="POST">
+<form action={% url 'index' %} method="POST">
     {% csrf_token %}
-    <div class="h5 px-2 mt-3" >
-        {{ form.data_file.label_tag }}
+    <div class="input-group">
+        <div class="input-prepend" >
+            <span class="input-group-text pt-1 pb-0">{{ form.data_file.label_tag }}</span>
+        </div>
+        <div class="input-group-append">{{ form.data_file }}</div>
+        <div class="input-group-append">
+            <button type="submit" name="select_btn" class="btn btn-primary" {{select_btn_disabled}}>
+                Select
+            </button>
+            <button type="submit" name="change_btn" class="btn btn-primary" {{change_btn_disabled}}>
+                Change Data File
+            </button>
+        </div>
     </div>
-    <div class="h5 px-1 mt-2">
-        {{ form.data_file }}
-    </div>
-    <button type="submit" name="select_btn" class="btn btn-primary ml-2 py-1" {{select_btn_disabled}}>
-        Select
-    </button>
-    <button type="submit" name="change_btn" class="btn btn-primary ml-2 py-1" {{change_btn_disabled}}>
-        Change Data File
-    </button>
  </form>
 <!-- /File input form  -->
 

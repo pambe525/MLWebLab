@@ -19,6 +19,7 @@ class DataFileForm(forms.Form):
         super(DataFileForm, self).__init__(*args, **kwargs)
         self.fields['data_file'] = forms.ChoiceField(label="Data File", choices=get_datafile_choices())
         self.fields['data_file'].initial = "Choose a file..."
+        self.fields['data_file'].widget.attrs['class'] = 'input-group-text custom-select'
 
     def is_valid(self):
         valid = super(DataFileForm, self).is_valid()
