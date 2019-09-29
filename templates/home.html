@@ -39,26 +39,26 @@
 	<!--  Data Source Tile  -->
 	<td>
     <div class="card text-center border-dark col-*" style="width:16rem; box-shadow:2px 23px 23px #ccc; background-color:lightyellow">
-	  <div class="card-header bg-dark text-center h6 text-white">
+	  <div class="card-header bg-dark text-center h6 text-white font-weight-bold">
 	   	<i class="fa fa-database"></i><span class="px-2">DATA SOURCE</span>
 	  </div>
-	  <div class="card-body m-2 p-2 bg-white border">
-	    <h6 class="card-title text-left">Data File</h6>
-	    <div class="badge-secondary p-2 rounded h6 text-left" name="source_file">
+	  <div class="card-body m-1 p-1 border">
+	    <h6 class="card-title text-left">Data File:</h6>
+	    <div class="badge-secondary p-1 rounded h6 text-left" name="source_file">
             {{ data_file_name }}
         </div>
 	  </div>
- 	  <div class="card-body m-2 p-2 bg-white border row">
-	      <h6 class="card-title my-1 col-*">Rows:</h6>
-	      <span class="badge-secondary p-1 mx-1 rounded col h6" name="source_rows">
+      <div class="card-body m-1 p-1 row border">
+          <h6 class="card-title text-left pt-1 col-*">Rows:</h6>
+          <span class="badge-secondary mx-1 p-1 rounded col h6" name="source_rows">
               {{ data_file_rows }}
           </span>
-      	  <h6 class="card-title my-1 col-*">Cols:</h6>
-	      <span class="badge-secondary p-1 mx-1 rounded col h6" name="source_cols">
+          <h6 class="card-title text-left pt-1 col-*">Cols:</h6>
+          <span class="badge-secondary mx-1 p-1 rounded col h6" name="source_cols">
               {{ data_file_cols }}
           </span>
-	  </div>
- 	  <button class="btn m-3 bg-primary text-white"  data-toggle="modal" data-target="#myModal">Explore Data ...</button>	
+      </div>
+  	  <button class="btn m-2 bg-primary text-white" disabled>Explore Data ...</button>
     </div>    
     </td>
 	<!--  /Data Source Tile  -->
@@ -75,22 +75,26 @@
 	<!--  Training Set Tile  -->
 	<td>
     <div class="card text-center border-dark col-*" style="width:16rem; box-shadow:2px 23px 23px #ccc; background-color:lightyellow">
-	  <div class="card-header bg-dark text-center h6 text-white">
+	  <div class="card-header bg-dark text-center h6 text-white font-weight-bold">
 	   	<i class="fa fa-brain"></i><span class="px-2">TRAINING SET</span>
 	  </div>
-	  <div class="card-body m-2 p-2 bg-white border">
-	    <h6 class="card-title text-left">Target Feature</h6>
-	    <div class="badge-secondary p-2 rounded text-left" style="font-size:15px">Some Feature</div>
+	  <div class="card-body m-1 p-1 border">
+	    <h6 class="card-title text-left">Target Feature:</h6>
+	    <div class="badge-secondary p-1 rounded text-left h6" style="font-size:15px">{{ target_feature }}</div>
 	  </div>
- 	  <div class="card-body m-2 p-2 bg-white border row">
-	      <h6 class="card-title my-1 col-*">Base Features:</h6>
-	      <span class="badge-secondary p-1 mx-1 rounded col" style="font-size:15px">5</span>
+ 	  <div class="card-body m-1 p-1 border row">
+	      <h6 class="card-title pt-1 col-*">Base Features:</h6>
+	      <span class="badge-secondary p-1 mx-1 rounded col h6" style="font-size:15px">{{  base_features }}</span>
 	  </div>
-	  <div class="card-body m-2 p-2 bg-white border row">
-      	  <h6 class="card-title my-1 col-*">Training Ratio:</h6>
-	      <span class="badge-secondary p-1 mx-1 rounded col" style="font-size:15px">80%</span>
+	  <div class="card-body m-1 p-1 border row">
+      	  <h6 class="card-title pt-1 col-*">Training Ratio:</h6>
+	      <span class="badge-secondary p-1 mx-1 rounded col h6" style="font-size:15px">{{ training_ratio }}</span>
 	  </div>
- 	  <button class="btn m-3 bg-primary text-white"  data-toggle="modal" data-target="#myModal">Edit ...</button>	
+ 	  <div class="card-body m-1 p-1 border row">
+	      <h6 class="card-title pt-1 col-*">No. of Data Points:</h6>
+	      <span class="badge-secondary p-1 mx-1 rounded col h6" style="font-size:15px">{{ training_rows }}</span>
+	  </div>
+ 	  <button class="btn m-2 bg-primary text-white" disabled>Edit ...</button>
     </div>
     </td>
 	<!--  /Training Set Tile  -->
@@ -102,8 +106,53 @@
 	</div>
 	</td>
 	<!-- /Right arrow -->
-	
+
+	<!--  Method Tile  -->
+	<td>
+    <div class="card text-center border-dark col-*" style="width:16rem; box-shadow:2px 23px 23px #ccc; background-color:lightyellow">
+	  <div class="card-header bg-dark text-center h6 text-white font-weight-bold">
+	   	<i class="fa fa-cog"></i><span class="px-2">METHOD/ALGORITHM</span>
+	  </div>
+	  <div class="card-body m-1 p-1 border">
+	    <h6 class="card-title text-left">Method:</h6>
+	    <div class="badge-secondary p-1 rounded text-left h6" style="font-size:15px">{{ training_method }}</div>
+	  </div>
+ 	  <button class="btn m-2 bg-primary text-white" disabled>Edit...</button>
+ 	  <button class="btn m-2 bg-primary text-white">
+          Train  <i id="spinner" class="fas fa-spinner fa-spin" hidden></i>
+      </button>
+    </div>
+    </td>
+	<!--  /Method Tile  -->
+
+    <!-- Right arrow -->
+	<td>
+	<div class="col-* mt-3">
+		<img src="{% static 'images/right_arrow.png' %}" height="50px"/>
+	</div>
+	</td>
+	<!-- /Right arrow -->
+
+    <!--  Validation Tile  -->
+	<td>
+    <div class="card text-center border-dark col-*" style="width:16rem; box-shadow:2px 23px 23px #ccc; background-color:lightyellow">
+	  <div class="card-header bg-dark text-center h6 text-white font-weight-bold">
+	   	<i class="fa fa-clipboard-check"></i><span class="px-2">VALIDATION SET</span>
+	  </div>
+	  <div class="card-body m-1 p-1 border row">
+	      <h6 class="card-title pt-1 col-*">No. of Data Points:</h6>
+	      <span class="badge-secondary p-1 mx-1 rounded col h6" style="font-size:15px">{{ validation_rows }}</span>
+	  </div>
+	  <div class="card-body m-1 p-1 border row">
+	      <h6 class="card-title pt-1 col-*">Accuracy Score:</h6>
+	      <span class="badge-secondary p-1 mx-1 rounded col h6" style="font-size:15px">{{ validation_score }}</span>
+	  </div>
+ 	  <button class="btn m-2 bg-primary text-white" disabled>Predict...</button>
+    </div>
+    </td>
+	<!--  /Validation Tile  -->
 	</tr>
+    </table>
 </div>
 <!-- /MLFLowChart -->
 {% endblock home_content %}

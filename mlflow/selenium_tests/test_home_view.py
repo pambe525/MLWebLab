@@ -1,6 +1,5 @@
-from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver
-from django.test import tag
+from django.test import tag, SimpleTestCase
 from selenium.webdriver.support.ui import Select
 import csv
 import os
@@ -10,7 +9,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 
 @tag('selenium')
-class HomeViewTemplateTestCase(StaticLiveServerTestCase):
+class HomeViewTemplateTestCase(SimpleTestCase):
 
     @classmethod
     def setUpClass(cls):
