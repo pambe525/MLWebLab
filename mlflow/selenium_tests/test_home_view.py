@@ -52,6 +52,9 @@ class HomeViewTemplateTestCase(SimpleTestCase):
         self.verify_flowchart_is_visible(True)
         self.verify_file_selection_enabled(False, self.fake_datafile)
         self.verify_source_file_data(self.fake_datafile, 3, 4)
+        self.verify_training_set_data('col4', 3, '80%', 2)
+        self.verify_method_data("Linear Regression")
+        self.verify_validation_set_data(1)
 
     def test_change_file_button_clicked(self):
         csv_data = [["col1", "col2", "col3", "col4"], [1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]]
@@ -114,6 +117,22 @@ class HomeViewTemplateTestCase(SimpleTestCase):
         self.assertEquals(file_name, self.browser.find_element_by_name("source_file").text)
         self.assertEquals(rows, int(self.browser.find_element_by_name("source_rows").text))
         self.assertEquals(cols, int(self.browser.find_element_by_name("source_cols").text))
+
+    def verify_training_set_data(self, target_feature, base_features, training_ratio, training_rows):
+        self.assertEquals(target_feature, self.browser.find_element_by_name("target_feature").text)
+        self.assertEquals(base_features, int(self.browser.find_element_by_name("base_features").text))
+        self.assertEquals(training_ratio, self.browser.find_element_by_name("training_ratio").text)
+        self.assertEquals(training_rows, int(self.browser.find_element_by_name("training_rows").text))
+
+    def verify_method_data(self, training_method):
+        self.assertEquals(training_method, self.browser.find_element_by_name("training_method").text)
+
+    def verify_validation_set_data(self, validation_rows, validation_score=''):
+        self.assertEquals(validation_rows, int(self.browser.find_element_by_name("validation_rows").text))
+        self.assertEquals(validation_score, self.browser.find_element_by_name("validation_score").text)
+        self.assertTrue(self.browser.find_element_by_id("warning_icon").is_displayed())
+        self.assertFalse(self.browser.find_element_by_id("check_icon").is_displayed())
+        self.assertFalse(self.browser.find_element_by_name("predict_btn").is_enabled())
 
     def verify_message_box_and_close(self, message_text):
         message = self.browser.switch_to.active_element

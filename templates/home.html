@@ -1,16 +1,28 @@
 {% extends 'base.html' %}
 {% block home_content %}
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+          integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+          crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+          integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+          crossorigin="anonymous">
+  </script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+          integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+          crossorigin="anonymous">
+  </script>
 
-    {% if error_message is not None %}
-        <script type="text/javascript">
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/stylesheet.css' %}">
+
+  {% if error_message is not None %}
+     <script type="text/javascript">
         $(document).ready(function(){
             $('#messageBox').modal("show");
         })
-        </script>
-    {% endif %}
+     </script>
+  {% endif %}
 
 <!-- File input form  -->
 <form action={% url 'index' %} method="POST">
@@ -58,13 +70,12 @@
               {{ data_file_cols }}
           </span>
       </div>
-  	  <button class="btn m-2 bg-primary text-white" disabled>Explore Data ...</button>
+  	  <button class="btn m-2 bg-primary text-white" name="explore_btn">Explore Data ...</button>
     </div>    
     </td>
 	<!--  /Data Source Tile  -->
 	
 	<!-- Right arrow -->
-	{% load static %}
 	<td>
 	<div class="col-* mt-3">
 		<img src="{% static 'images/double_arrow_h.png' %}" height="50px"/>
@@ -76,25 +87,33 @@
 	<td>
     <div class="card text-center border-dark col-*" style="width:16rem; box-shadow:2px 23px 23px #ccc; background-color:lightyellow">
 	  <div class="card-header bg-dark text-center h6 text-white font-weight-bold">
-	   	<i class="fa fa-brain"></i><span class="px-2">TRAINING SET</span>
+	   	<i class="fa fa-tasks"></i><span class="px-2">TRAINING SET</span>
 	  </div>
 	  <div class="card-body m-1 p-1 border">
 	    <h6 class="card-title text-left">Target Feature:</h6>
-	    <div class="badge-secondary p-1 rounded text-left h6" style="font-size:15px">{{ target_feature }}</div>
+	    <div class="badge-secondary p-1 rounded text-left h6" name="target_feature">
+            {{ target_feature }}
+        </div>
 	  </div>
  	  <div class="card-body m-1 p-1 border row">
 	      <h6 class="card-title pt-1 col-*">Base Features:</h6>
-	      <span class="badge-secondary p-1 mx-1 rounded col h6" style="font-size:15px">{{  base_features }}</span>
+	      <span class="badge-secondary p-1 mx-1 rounded col h6" name="base_features">
+              {{  base_features }}
+          </span>
 	  </div>
 	  <div class="card-body m-1 p-1 border row">
       	  <h6 class="card-title pt-1 col-*">Training Ratio:</h6>
-	      <span class="badge-secondary p-1 mx-1 rounded col h6" style="font-size:15px">{{ training_ratio }}</span>
+	      <span class="badge-secondary p-1 mx-1 rounded col h6" name="training_ratio">
+              {{ training_ratio }}
+          </span>
 	  </div>
  	  <div class="card-body m-1 p-1 border row">
 	      <h6 class="card-title pt-1 col-*">No. of Data Points:</h6>
-	      <span class="badge-secondary p-1 mx-1 rounded col h6" style="font-size:15px">{{ training_rows }}</span>
+	      <span class="badge-secondary p-1 mx-1 rounded col h6" name="training_rows">
+              {{ training_rows }}
+          </span>
 	  </div>
- 	  <button class="btn m-2 bg-primary text-white" disabled>Edit ...</button>
+ 	  <button class="btn m-2 bg-primary text-white" name="edit_data_btn">Edit ...</button>
     </div>
     </td>
 	<!--  /Training Set Tile  -->
@@ -115,12 +134,12 @@
 	  </div>
 	  <div class="card-body m-1 p-1 border">
 	    <h6 class="card-title text-left">Method:</h6>
-	    <div class="badge-secondary p-1 rounded text-left h6" style="font-size:15px">{{ training_method }}</div>
+	    <div class="badge-secondary p-1 rounded text-left h6" name="training_method">
+            {{ training_method }}
+        </div>
 	  </div>
- 	  <button class="btn m-2 bg-primary text-white" disabled>Edit...</button>
- 	  <button class="btn m-2 bg-primary text-white">
-          Train  <i id="spinner" class="fas fa-spinner fa-spin" hidden></i>
-      </button>
+ 	  <button class="btn m-2 bg-primary text-white" name="edit_method_btn">Edit...</button>
+      <button class="btn m-2 bg-primary text-white" name="train_btn">Train</button>
     </div>
     </td>
 	<!--  /Method Tile  -->
@@ -141,13 +160,20 @@
 	  </div>
 	  <div class="card-body m-1 p-1 border row">
 	      <h6 class="card-title pt-1 col-*">No. of Data Points:</h6>
-	      <span class="badge-secondary p-1 mx-1 rounded col h6" style="font-size:15px">{{ validation_rows }}</span>
+	      <span class="badge-secondary p-1 mx-1 rounded col h6" name="validation_rows">
+              {{ validation_rows }}
+          </span>
 	  </div>
 	  <div class="card-body m-1 p-1 border row">
 	      <h6 class="card-title pt-1 col-*">Accuracy Score:</h6>
-	      <span class="badge-secondary p-1 mx-1 rounded col h6" style="font-size:15px">{{ validation_score }}</span>
+	      <span class="badge-secondary p-1 mx-1 rounded col h6" name="validation_score">
+              {{ validation_score }}
+          </span>
+          <img src="{% static 'images/warning.png' %}" height="25px" id="warning_icon"
+               title="Train data to see score" {{ warning_icon_visibility }}/>
+          <img src="{% static 'images/check.png' %}" height="25px" id="check_icon" {{ check_icon_visibility }}/>
 	  </div>
- 	  <button class="btn m-2 bg-primary text-white" disabled>Predict...</button>
+ 	  <button class="btn m-2 bg-primary text-white" name="predict_btn" {{ predict_btn_state }}>Predict...</button>
     </div>
     </td>
 	<!--  /Validation Tile  -->

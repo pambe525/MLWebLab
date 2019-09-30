@@ -40,9 +40,7 @@ def __read_file_and_load_stats(file_name, context):
         if int(data_frame.shape[0]) < 2: raise Exception("Data file has only one row")
         if not __has_headers(data_frame): raise Exception("Data file has no headers")
         context['error_message'] = None
-        context['data_file_rows'] = int(data_frame.shape[0])
-        context['data_file_cols'] = int(data_frame.shape[1])
-        context['data_file_name'] = file_name
+        __set_default_flowchart_parameters(file_name, data_frame, context)
         return True
     except Exception as e:
         context['error_message'] = str(e)
@@ -57,3 +55,19 @@ def __has_headers(dataframe):
         except ValueError:
             continue
     return True
+
+def __set_default_flowchart_parameters(file_name, data_frame, context):
+    training_ratio = 0.8
+    context['data_file_name'] = file_name
+    context['data_file_rows'] = int(data_frame.shape[0])
+    context['data_file_cols'] = int(data_frame.shape[1])
+    context['target_feature'] = data_frame.columns[-1]
+    context['base_features'] = data_frame.shape[1]-1
+    context['training_ratio'] = str(int(training_ratio * 100)) + "%"
+    context['training_rows'] = int(data_frame.shape[0] * training_ratio)
+    context['training_method'] = "Linear Regression"
+    context['validation_rows'] = context['data_file_rows'] - context['training_rows']
+    context['validation_score'] = ""
+    context['warning_icon_visibility'] = ""
+    context['check_icon_visibility'] = "hidden"
+    context['predict_btn_state'] = "disabled"

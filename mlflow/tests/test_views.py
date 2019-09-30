@@ -24,11 +24,15 @@ class HomeViewTestCase(SimpleTestCase):
         self.assertEquals(response.context['error_message'], None)
 
     def test_home_view_post_with_a_file_selected(self):
-        data = {"col1": [1, 2, 3, 4], "col2": [5, 6, 7, 8]}
+        data = {"col1": [1, 2, 3, 4], "col2": [5, 6, 7, 8], "col3": [9, 10, 11, 12],
+                "col4": [13, 14, 15, 16], "col5": [17, 18, 19, 20]}
         response = self.__make_home_view_request_with_mock_read_csv(data)
         self.__validate_form_state(response, True, True, "file2.txt")
         self.__validate_file_selection_enabled(response, False)
-        self.__validate_source_file_data(response, 'file2.txt', 4, 2)
+        self.__validate_source_file_data(response, 'file2.txt', 4, 5)
+        self.__validate_training_set_data(response, 'col5', 4, '80%', 3)
+        self.__validate_method_data(response, "Linear Regression")
+        self.__validate_validation_set_data(response, 1, "")
         self.assertEquals(response.context['error_message'], None)
 
     def test_home_view_post_error_on_read_exception(self):
@@ -108,3 +112,16 @@ class HomeViewTestCase(SimpleTestCase):
         self.assertEquals(file_name, response.context['data_file_name'])
         self.assertEquals(rows, response.context['data_file_rows'])
         self.assertEquals(cols, response.context['data_file_cols'])
+
+    def __validate_training_set_data(self, response, target_feature, base_features, training_ratio, training_rows):
+        self.assertEquals(target_feature, response.context["target_feature"])
+        self.assertEquals(base_features, response.context["base_features"])
+        self.assertEquals(training_ratio, response.context["training_ratio"])
+        self.assertEquals(training_rows, response.context["training_rows"])
+
+    def __validate_method_data(self, response, training_method):
+        self.assertEquals(training_method, response.context["training_method"])
+
+    def __validate_validation_set_data(self, response, validation_rows, validation_score):
+        self.assertEquals(validation_rows, response.context["validation_rows"])
+        self.assertEquals(validation_score, response.context["validation_score"])
