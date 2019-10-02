@@ -9,9 +9,16 @@ from django.conf import settings
 def home_view(request):
     context = {'error_message': None}
     __set_context_for_file_selection_enabled(True, context)
+    form = DataFileForm()
+    context['form'] = form
+    return render(request, 'home.html', context)
+
+
+def datafile_selected(request):
+    context = {'error_message': None}
+    __set_context_for_file_selection_enabled(True, context)
     if request.method == 'POST':
         form = DataFileForm(request.POST)
-        context["post_context"] = form.is_valid()
         if form.is_valid():
             file_name = form.cleaned_data['data_file']
             form.fields['data_file'].initial = file_name
@@ -20,11 +27,12 @@ def home_view(request):
                 form.fields['data_file'].disabled = True
             else:
                 __set_context_for_file_selection_enabled(True, context)
-    else:
-        form = DataFileForm()
     context['form'] = form
     return render(request, 'home.html', context)
 
+
+def train_model(request):
+    pass
 
 def __set_context_for_file_selection_enabled(is_enabled, context):
     context['select_btn_disabled'] = '' if is_enabled else 'disabled'
@@ -56,13 +64,14 @@ def __has_headers(dataframe):
             continue
     return True
 
+
 def __set_default_flowchart_parameters(file_name, data_frame, context):
     training_ratio = 0.8
     context['data_file_name'] = file_name
     context['data_file_rows'] = int(data_frame.shape[0])
     context['data_file_cols'] = int(data_frame.shape[1])
     context['target_feature'] = data_frame.columns[-1]
-    context['base_features'] = data_frame.shape[1]-1
+    context['base_features'] = data_frame.shape[1] - 1
     context['training_ratio'] = str(int(training_ratio * 100)) + "%"
     context['training_rows'] = int(data_frame.shape[0] * training_ratio)
     context['training_method'] = "Linear Regression"

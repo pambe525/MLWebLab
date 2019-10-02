@@ -24,7 +24,7 @@
   {% endif %}
 
 <!-- File input form  -->
-<form action={% url 'index' %} method="POST">
+<form action={% url 'datafile_selected' %} method="POST">
     {% csrf_token %}
     <div class="input-group">
         <div class="input-prepend" >
