@@ -64,7 +64,7 @@
               {{ data_file_cols }}
           </span>
       </div>
-  	  <button class="btn m-3" name="explore_btn">Explore Data ...</button>
+  	  <button type="submit" class="btn m-2" name="explore_btn">Explore Data ...</button>
     </div>    
     </td>
 	<!--  /Data Source Tile  -->
@@ -72,7 +72,7 @@
 	<!-- Right arrow -->
 	<td>
 	<div class="col-* mb-3">
-		<img src="{% static 'images/double_arrow_h.png' %}" width="40px"/>
+		<img src="{% static 'images/double_arrow_h.png' %}" width="35px"/>
 	</div>
 	</td>
 	<!-- /Right arrow -->
@@ -107,7 +107,7 @@
               {{ training_rows }}
           </span>
 	  </div>
- 	  <button class="btn m-3" name="edit_data_btn">Edit ...</button>
+ 	  <button type="submit" class="btn m-2" name="edit_data_btn">Edit ...</button>
     </div>
     </td>
 	<!--  /Training Set Tile  -->
@@ -115,7 +115,7 @@
 	<!-- Right arrow -->
 	<td>
 	<div class="col-* mb-2">
-		<img src="{% static 'images/right_arrow.png' %}" width="40px"/>
+		<img src="{% static 'images/right_arrow.png' %}" width="35px"/>
 	</div>
 	</td>
 	<!-- /Right arrow -->
@@ -141,7 +141,7 @@
     <!-- Right arrow -->
 	<td>
 	<div class="col-* mb-2">
-		<img src="{% static 'images/right_arrow.png' %}" width="40px"/>
+		<img src="{% static 'images/right_arrow.png' %}" width="35px"/>
 	</div>
 	</td>
 	<!-- /Right arrow -->
@@ -183,8 +183,8 @@
         $(document).ready(function(){
             {% if error_message is not None %} $('#messageBox').modal("show"); {% endif %}
             $("#glass_pane").hide();
-            $("#flowchart_form").on('submit', function(data) {
-                $("#glass_pane").show();
+            $("#flowchart_form").on('submit', function(e) {
+                if ( $(document.activeElement).attr('name') === "train_btn") $("#glass_pane").show();
             })
         })
      </script>

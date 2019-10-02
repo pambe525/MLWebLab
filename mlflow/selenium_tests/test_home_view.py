@@ -79,9 +79,9 @@ class HomeViewTemplateTestCase(SimpleTestCase):
         self.verify_flowchart_is_visible(False)
         self.verify_file_selection_enabled(True, self.fake_datafile)
 
-    # def test_train_button_clicked_with_default_settings(self):
-    #     self.browser.find_element_by_name("train_btn").click()
-    #     self.assertFalse(self.browser.find_element_by_id("glass_pane").isdisplayed());
+    def test_train_button_clicked_with_default_settings(self):
+        self.browser.find_element_by_name("train_btn").click()
+        self.assertFalse(self.browser.find_element_by_id("glass_pane").isdisplayed());
 
     # ------------------------------------------------------------------------------------------------------------------
     # HELPER METHODS
