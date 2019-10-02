@@ -14,7 +14,6 @@
   </script>
 
   {% load static %}
-  <link rel="stylesheet" href="{% static 'css/stylesheet.css' %}">
 
   {% if error_message is not None %}
      <script type="text/javascript">
@@ -54,23 +53,23 @@
 	  <div class="card-header bg-dark text-center h6 text-white font-weight-bold">
 	   	<i class="fa fa-database"></i><span class="px-2">DATA SOURCE</span>
 	  </div>
-	  <div class="card-body m-1 p-1 border">
+	  <div class="card-body">
 	    <h6 class="card-title text-left">Data File:</h6>
-	    <div class="badge-secondary p-1 rounded h6 text-left" name="source_file">
+	    <div class="card-label" name="source_file">
             {{ data_file_name }}
         </div>
 	  </div>
-      <div class="card-body m-1 p-1 row border">
+      <div class="card-body row">
           <h6 class="card-title text-left pt-1 col-*">Rows:</h6>
-          <span class="badge-secondary mx-1 p-1 rounded col h6" name="source_rows">
+          <span class="card-label col" name="source_rows">
               {{ data_file_rows }}
           </span>
           <h6 class="card-title text-left pt-1 col-*">Cols:</h6>
-          <span class="badge-secondary mx-1 p-1 rounded col h6" name="source_cols">
+          <span class="card-label col" name="source_cols">
               {{ data_file_cols }}
           </span>
       </div>
-  	  <button class="btn m-2 bg-primary text-white" name="explore_btn">Explore Data ...</button>
+  	  <button class="btn m-2" name="explore_btn">Explore Data ...</button>
     </div>    
     </td>
 	<!--  /Data Source Tile  -->
@@ -89,31 +88,31 @@
 	  <div class="card-header bg-dark text-center h6 text-white font-weight-bold">
 	   	<i class="fa fa-tasks"></i><span class="px-2">TRAINING SET</span>
 	  </div>
-	  <div class="card-body m-1 p-1 border">
+	  <div class="card-body">
 	    <h6 class="card-title text-left">Target Feature:</h6>
-	    <div class="badge-secondary p-1 rounded text-left h6" name="target_feature">
+	    <div class="card-label" name="target_feature">
             {{ target_feature }}
         </div>
 	  </div>
- 	  <div class="card-body m-1 p-1 border row">
+ 	  <div class="card-body row">
 	      <h6 class="card-title pt-1 col-*">Base Features:</h6>
-	      <span class="badge-secondary p-1 mx-1 rounded col h6" name="base_features">
+	      <span class="card-label col" name="base_features">
               {{  base_features }}
           </span>
 	  </div>
-	  <div class="card-body m-1 p-1 border row">
+	  <div class="card-body row">
       	  <h6 class="card-title pt-1 col-*">Training Ratio:</h6>
-	      <span class="badge-secondary p-1 mx-1 rounded col h6" name="training_ratio">
+	      <span class="card-label col" name="training_ratio">
               {{ training_ratio }}
           </span>
 	  </div>
- 	  <div class="card-body m-1 p-1 border row">
+ 	  <div class="card-body row">
 	      <h6 class="card-title pt-1 col-*">No. of Data Points:</h6>
-	      <span class="badge-secondary p-1 mx-1 rounded col h6" name="training_rows">
+	      <span class="card-label col" name="training_rows">
               {{ training_rows }}
           </span>
 	  </div>
- 	  <button class="btn m-2 bg-primary text-white" name="edit_data_btn">Edit ...</button>
+ 	  <button class="btn m-2" name="edit_data_btn">Edit ...</button>
     </div>
     </td>
 	<!--  /Training Set Tile  -->
@@ -132,14 +131,14 @@
 	  <div class="card-header bg-dark text-center h6 text-white font-weight-bold">
 	   	<i class="fa fa-cog"></i><span class="px-2">METHOD/ALGORITHM</span>
 	  </div>
-	  <div class="card-body m-1 p-1 border">
+	  <div class="card-body">
 	    <h6 class="card-title text-left">Method:</h6>
-	    <div class="badge-secondary p-1 rounded text-left h6" name="training_method">
+	    <div class="card-label" name="training_method">
             {{ training_method }}
         </div>
 	  </div>
- 	  <button class="btn m-2 bg-primary text-white" name="edit_method_btn">Edit...</button>
-      <button class="btn m-2 bg-primary text-white" name="train_btn">Train</button>
+ 	  <button class="btn m-2" name="edit_method_btn">Edit...</button>
+      <button class="btn m-2" name="train_btn">Train</button>
     </div>
     </td>
 	<!--  /Method Tile  -->
@@ -158,22 +157,22 @@
 	  <div class="card-header bg-dark text-center h6 text-white font-weight-bold">
 	   	<i class="fa fa-clipboard-check"></i><span class="px-2">VALIDATION SET</span>
 	  </div>
-	  <div class="card-body m-1 p-1 border row">
+	  <div class="card-body row">
 	      <h6 class="card-title pt-1 col-*">No. of Data Points:</h6>
-	      <span class="badge-secondary p-1 mx-1 rounded col h6" name="validation_rows">
+	      <span class="card-label col" name="validation_rows">
               {{ validation_rows }}
           </span>
 	  </div>
-	  <div class="card-body m-1 p-1 border row">
+	  <div class="card-body row">
 	      <h6 class="card-title pt-1 col-*">Accuracy Score:</h6>
-	      <span class="badge-secondary p-1 mx-1 rounded col h6" name="validation_score">
+	      <span class="card-label col" name="validation_score">
               {{ validation_score }}
           </span>
           <img src="{% static 'images/warning.png' %}" height="25px" id="warning_icon"
                title="Train data to see score" {{ warning_icon_visibility }}/>
           <img src="{% static 'images/check.png' %}" height="25px" id="check_icon" {{ check_icon_visibility }}/>
 	  </div>
- 	  <button class="btn m-2 bg-primary text-white" name="predict_btn" {{ predict_btn_state }}>Predict...</button>
+ 	  <button class="btn m-2" name="predict_btn" {{ predict_btn_state }}>Predict...</button>
     </div>
     </td>
 	<!--  /Validation Tile  -->
