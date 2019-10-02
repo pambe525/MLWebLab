@@ -32,12 +32,12 @@
     border: 2px ridge darkgray;
     border-radius: 3px;
     background-color: lightgray;
-    padding: 3px;
+    padding: 2px;
     font-size: 14px;
     text-align: center;
     font-weight: bold;
     margin: 2px;
-    height: 26px;
+    height: 28px;
 }
 
 .card-title {

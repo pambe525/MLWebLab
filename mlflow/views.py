@@ -9,30 +9,30 @@ from django.conf import settings
 def home_view(request):
     context = {'error_message': None}
     __set_context_for_file_selection_enabled(True, context)
-    form = DataFileForm()
-    context['form'] = form
-    return render(request, 'home.html', context)
-
-
-def datafile_selected(request):
-    context = {'error_message': None}
-    __set_context_for_file_selection_enabled(True, context)
     if request.method == 'POST':
         form = DataFileForm(request.POST)
         if form.is_valid():
-            file_name = form.cleaned_data['data_file']
-            form.fields['data_file'].initial = file_name
-            if __read_file_and_load_stats(file_name, context):
-                __set_context_for_file_selection_enabled(False, context)
-                form.fields['data_file'].disabled = True
-            else:
-                __set_context_for_file_selection_enabled(True, context)
+            datafile_selected(form, context)
+    else:
+        form = DataFileForm()
     context['form'] = form
     return render(request, 'home.html', context)
 
 
-def train_model(request):
+def datafile_selected(form, context):
+    file_name = form.cleaned_data['data_file']
+    form.fields['data_file'].initial = file_name
+    if __read_file_and_load_stats(file_name, context):
+        __set_context_for_file_selection_enabled(False, context)
+        form.fields['data_file'].disabled = True
+    else:
+        __set_context_for_file_selection_enabled(True, context)
+    context['form'] = form
+
+
+def train_model(request, context):
     pass
+
 
 def __set_context_for_file_selection_enabled(is_enabled, context):
     context['select_btn_disabled'] = '' if is_enabled else 'disabled'

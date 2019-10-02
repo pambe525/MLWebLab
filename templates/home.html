@@ -15,16 +15,8 @@
 
   {% load static %}
 
-  {% if error_message is not None %}
-     <script type="text/javascript">
-        $(document).ready(function(){
-            $('#messageBox').modal("show");
-        })
-     </script>
-  {% endif %}
-
 <!-- File input form  -->
-<form action={% url 'datafile_selected' %} method="POST">
+<form action={% url 'index' %} method="POST">
     {% csrf_token %}
     <div class="input-group">
         <div class="input-prepend" >
@@ -32,18 +24,20 @@
         </div>
         <div class="input-group-append">{{ form.data_file }}</div>
         <div class="input-group-append">
-            <button type="submit" name="select_btn" class="btn btn-primary" {{select_btn_disabled}}>
+            <button type="submit" name="select_btn" class="btn" {{select_btn_disabled}}>
                 Select
             </button>
-            <button type="submit" name="change_btn" class="btn btn-primary" {{change_btn_disabled}}>
+            <button type="submit" name="change_btn" class="btn" {{change_btn_disabled}}>
                 Change Data File
             </button>
         </div>
     </div>
  </form>
+ <h6>{{  post_data }}</h6>
 <!-- /File input form  -->
 
 <!-- MLFLowChart -->
+<form action={% url 'index' %} method="POST">
 <div id='flow_container' class="{{ flow_chart_visibility }} mt-4">
     <table>
     <tr>
@@ -137,8 +131,8 @@
             {{ training_method }}
         </div>
 	  </div>
- 	  <button class="btn m-2" name="edit_method_btn">Edit...</button>
-      <button class="btn m-2" name="train_btn">Train</button>
+ 	  <button type="submit" class="btn m-2" name="edit_method_btn">Edit...</button>
+      <button type="submit" class="btn m-2" name="train_btn">Train</button>
     </div>
     </td>
 	<!--  /Method Tile  -->
@@ -180,5 +174,17 @@
     </table>
 </div>
 <!-- /MLFLowChart -->
+</form>
 {% endblock home_content %}
+
+{% block javascript %}
+      <script type="text/javascript">
+        $(document).ready(function(){
+            {% if error_message is not None %} $('#messageBox').modal("show"); {% endif %}
+        })
+        $("button[name='train_btn']").on('click', function() {
+            $("#glass_pane").show();
+        })
+     </script>
+{% endblock javascript %}
 
