@@ -9,6 +9,7 @@ from django.conf import settings
 def home_view(request):
     context = {'error_message': None}
     __set_context_for_file_selection_enabled(True, context)
+    # context['post_data'] = request.POST
     if request.method == 'POST':
         form = DataFileForm(request.POST)
         if form.is_valid():

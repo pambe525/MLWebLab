@@ -13,7 +13,13 @@
 }
 
 .h6{
-    font-size: 14px;
+    font-size: 12px;
+}
+.card {
+    width:14rem;
+    box-shadow:2px 23px 23px #ccc;
+    background-color: lightyellow;
+    border: 1px solid black;
 }
 
 .card-body {

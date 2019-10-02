@@ -37,13 +37,14 @@
 <!-- /File input form  -->
 
 <!-- MLFLowChart -->
-<form action={% url 'index' %} method="POST">
+<form id="flowchart_form" action={% url 'index' %} method="POST">
+{% csrf_token %}
 <div id='flow_container' class="{{ flow_chart_visibility }} mt-4">
     <table>
     <tr>
 	<!--  Data Source Tile  -->
-	<td>
-    <div class="card text-center border-dark col-*" style="width:16rem; box-shadow:2px 23px 23px #ccc; background-color:lightyellow">
+	<td style="vertical-align: top">
+    <div class="card text-center border-dark col-*">
 	  <div class="card-header bg-dark text-center h6 text-white font-weight-bold">
 	   	<i class="fa fa-database"></i><span class="px-2">DATA SOURCE</span>
 	  </div>
@@ -63,22 +64,22 @@
               {{ data_file_cols }}
           </span>
       </div>
-  	  <button class="btn m-2" name="explore_btn">Explore Data ...</button>
+  	  <button class="btn m-3" name="explore_btn">Explore Data ...</button>
     </div>    
     </td>
 	<!--  /Data Source Tile  -->
 	
 	<!-- Right arrow -->
 	<td>
-	<div class="col-* mt-3">
-		<img src="{% static 'images/double_arrow_h.png' %}" height="50px"/>
+	<div class="col-* mb-3">
+		<img src="{% static 'images/double_arrow_h.png' %}" width="40px"/>
 	</div>
 	</td>
 	<!-- /Right arrow -->
 
 	<!--  Training Set Tile  -->
-	<td>
-    <div class="card text-center border-dark col-*" style="width:16rem; box-shadow:2px 23px 23px #ccc; background-color:lightyellow">
+	<td style="vertical-align: top">
+    <div class="card text-center border-dark col-*">
 	  <div class="card-header bg-dark text-center h6 text-white font-weight-bold">
 	   	<i class="fa fa-tasks"></i><span class="px-2">TRAINING SET</span>
 	  </div>
@@ -106,22 +107,22 @@
               {{ training_rows }}
           </span>
 	  </div>
- 	  <button class="btn m-2" name="edit_data_btn">Edit ...</button>
+ 	  <button class="btn m-3" name="edit_data_btn">Edit ...</button>
     </div>
     </td>
 	<!--  /Training Set Tile  -->
 	
 	<!-- Right arrow -->
 	<td>
-	<div class="col-* mt-3">
-		<img src="{% static 'images/right_arrow.png' %}" height="50px"/>
+	<div class="col-* mb-2">
+		<img src="{% static 'images/right_arrow.png' %}" width="40px"/>
 	</div>
 	</td>
 	<!-- /Right arrow -->
 
 	<!--  Method Tile  -->
-	<td>
-    <div class="card text-center border-dark col-*" style="width:16rem; box-shadow:2px 23px 23px #ccc; background-color:lightyellow">
+	<td style="vertical-align: top">
+    <div class="card text-center border-dark col-*">
 	  <div class="card-header bg-dark text-center h6 text-white font-weight-bold">
 	   	<i class="fa fa-cog"></i><span class="px-2">METHOD/ALGORITHM</span>
 	  </div>
@@ -139,15 +140,15 @@
 
     <!-- Right arrow -->
 	<td>
-	<div class="col-* mt-3">
-		<img src="{% static 'images/right_arrow.png' %}" height="50px"/>
+	<div class="col-* mb-2">
+		<img src="{% static 'images/right_arrow.png' %}" width="40px"/>
 	</div>
 	</td>
 	<!-- /Right arrow -->
 
     <!--  Validation Tile  -->
-	<td>
-    <div class="card text-center border-dark col-*" style="width:16rem; box-shadow:2px 23px 23px #ccc; background-color:lightyellow">
+	<td style="vertical-align: top">
+    <div class="card text-center border-dark col-*">
 	  <div class="card-header bg-dark text-center h6 text-white font-weight-bold">
 	   	<i class="fa fa-clipboard-check"></i><span class="px-2">VALIDATION SET</span>
 	  </div>
@@ -173,17 +174,18 @@
 	</tr>
     </table>
 </div>
-<!-- /MLFLowChart -->
 </form>
+<!-- /MLFLowChart -->
 {% endblock home_content %}
 
 {% block javascript %}
       <script type="text/javascript">
         $(document).ready(function(){
             {% if error_message is not None %} $('#messageBox').modal("show"); {% endif %}
-        })
-        $("button[name='train_btn']").on('click', function() {
-            $("#glass_pane").show();
+            $("#glass_pane").hide();
+            $("#flowchart_form").on('submit', function(data) {
+                $("#glass_pane").show();
+            })
         })
      </script>
 {% endblock javascript %}
