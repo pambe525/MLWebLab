@@ -16,7 +16,7 @@
     font-size: 12px;
 }
 .card {
-    width:14rem;
+    width:220px;
     box-shadow:2px 23px 23px #ccc;
     background-color: lightyellow;
     border: 1px solid black;
@@ -44,6 +44,9 @@
     font-weight: bold;
     margin: 2px;
     height: 28px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .card-title {
