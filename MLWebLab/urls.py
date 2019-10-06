@@ -15,9 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from mlflow.views import home_view, datafile_selected, train_model
+from mlflow.views import home_view, flowchart_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_view, name='index'),
+    path('flowchart', flowchart_view, name="flowchart")
 ]

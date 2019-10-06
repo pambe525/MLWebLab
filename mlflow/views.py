@@ -20,6 +20,20 @@ def home_view(request):
     return render(request, 'home.html', context)
 
 
+def flowchart_view(request):
+    context = {'error_message': None}
+    __set_context_for_file_selection_enabled(True, context)
+    # context['post_data'] = request.POST
+    if request.method == 'POST':
+        form = DataFileForm(request.POST)
+        if form.is_valid():
+            datafile_selected(form, context)
+    else:
+        form = DataFileForm()
+    context['form'] = form
+    return render(request, 'home.html', context)
+
+
 def datafile_selected(form, context):
     file_name = form.cleaned_data['data_file']
     form.fields['data_file'].initial = file_name

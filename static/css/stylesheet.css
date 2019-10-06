@@ -11,15 +11,23 @@
     opacity: 0.4;
     background-color:black;
 }
-
+hr {
+    margin: 8px 0px;
+    border: 1px groove gray;
+}
+.h5 {
+    font-size: 16px;
+    font-weight: bold;
+}
 .h6{
     font-size: 12px;
 }
 .card {
-    width:220px;
+    width:250px;
     box-shadow:2px 23px 23px #ccc;
     background-color: lightyellow;
     border: 1px solid black;
+    text-align: left;
 }
 
 .card-body {
@@ -61,6 +69,7 @@
 .btn {
     color: white;
     background-color: dodgerblue;
+    font-weight: bold;
 }
 
 .btn:hover {
@@ -71,4 +80,38 @@
     background-color: silver;
     color: navy;
     border: 1px solid darkgray;
+}
+
+.tabbed_content_area {
+    height: auto;
+    width: auto;
+    margin: 6px 20px 0px 30px;
+    border-radius: 4px;
+}
+.nav-tabs {
+    font-size: 18px;
+}
+.nav-tabs {
+    border-bottom: 2px solid darkgray;
+}
+.nav-tabs .nav-link.active {
+    color: black;
+    background-color: #efefef;
+    border: 2px solid darkgray;
+    border-bottom: transparent;
+    border-radius: 10px 10px 0 0;
+}
+.nav-tabs .nav-link:hover {
+    border-bottom: 2px solid darkgray;
+}
+.nav-tabs .nav-link.active:hover {
+    border-bottom: transparent;
+}
+.tab-pane {
+    font-size: 16px;
+    padding: 20px 10px;
+    border:solid 2px darkgray;
+    border-top: 0;
+    height: 400px;
+    width: 600px;
 }
