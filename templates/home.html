@@ -43,28 +43,30 @@
 	        <div class="card-header bg-dark text-center h5 text-white">
 	   	        <i class="fa fa-cog"></i><span class="px-2">CONTROL PANEL</span>
 	        </div>
-	        <div class="card-body">
-	            <h6 class="card-title text-left">Target Feature:</h6>
-	            <div class="card-label" name="target_feature">{{ target_feature }}</div>
-	        </div>
- 	        <div class="card-body row">
-	            <h6 class="card-title pt-1 col-*">Base Features:</h6>
+            <h6 class="card-title">Task: SUPERVISED LEARNING</h6>
+            <h6 class="card-title">Problem Type: REGRESSION</h6>
+            <h6 class="card-title">Target Feature:</h6>
+            <div class="card-label" name="target_feature">{{ target_feature }}</div>
+ 	        <div class="row mx-0">
+	            <h6 class="card-title col-*">Base Features:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h6>
 	            <span class="card-label col" name="base_features">{{  base_features }}</span>
 	        </div>
             <hr>
-	        <div class="card-body row">
-      	        <h6 class="card-title pt-1 col-*">Training Ratio:</h6>
+	        <div class="row mx-0">
+      	        <h6 class="card-title col-*">Training Set Ratio:&nbsp;&nbsp;</h6>
 	            <span class="card-label col" name="training_ratio">{{ training_ratio }}</span>
 	        </div>
- 	        <div class="card-body row">
-	            <h6 class="card-title pt-1 col-*">Training Rows:</h6>
+ 	        <div class="row mx-0">
+	            <h6 class="card-title col-*">Training Samples:&nbsp;&nbsp;&nbsp;</h6>
 	            <span class="card-label col" name="training_rows">{{ training_rows }}</span>
 	        </div>
-            <hr>
-	        <div class="card-body">
-	            <h6 class="card-title text-left">Algorithm/Method:</h6>
-	            <div class="card-label" name="training_method">{{ training_method }}</div>
+            <div class="row mx-0">
+	            <h6 class="card-title col-*">Validation Samples: </h6>
+	            <span class="card-label col" name="training_rows">{{ validation_rows }}</span>
 	        </div>
+            <hr>
+            <h6 class="card-title">Algorithm/Method:</h6>
+            <div class="card-label" name="training_method">{{ training_method }}</div>
             <hr>
             <button type="submit" class="btn m-2" name="train_btn">Train</button>
         </div>
@@ -80,7 +82,10 @@
             <i class="fa fa-clipboard-check mx-1"></i>Validation</a>
       </div>
     <div class="tab-content" id="nav-tabContent">
-      <div class="tab-pane fade show active" id="nav-explore" role="tabpanel">tab 1</div>
+      <div class="tab-pane fade show active" id="nav-explore" role="tabpanel">
+          <h5><b>DATA SOURCE: {{ data_file_name }}</b></h5>
+          <span>[Data Rows: {{ data_file_rows }}</span>, <span>Data Columns: {{ data_file_cols }}]</span>
+      </div>
       <div class="tab-pane fade" id="nav-features" role="tabpanel">tab 2</div>
       <div class="tab-pane fade" id="nav-validate" role="tabpanel">tab 3</div>
     </div>
@@ -101,4 +106,3 @@
         })
      </script>
 {% endblock javascript %}
-
