@@ -38,7 +38,7 @@ class HomeViewTestCase(SimpleTestCase):
         self.__validate_source_file_data(response, 'file2.txt', 4, 5)
         self.__validate_training_set_data(response, 'col5', 4, '80%', 3)
         self.__validate_method_data(response, "Linear Regression")
-        self.__validate_validation_set_data(response, 1, "")
+        self.__validate_tabs(response, 1)
         self.assertEquals(response.context['error_message'], None)
 
     def test_home_view_with_read_exception(self):
@@ -103,12 +103,12 @@ class HomeViewTestCase(SimpleTestCase):
         if is_enabled:
             self.assertEquals(response.context['select_btn_disabled'], '')
             self.assertEquals(response.context['change_btn_disabled'], 'disabled')
-            self.assertEquals(response.context['flow_chart_visibility'], 'invisible')
+            self.assertFalse(response.context['container_visible'])
             self.assertFalse(form.fields['data_file'].disabled)
         else:
             self.assertEquals(response.context['select_btn_disabled'], 'disabled')
             self.assertEquals(response.context['change_btn_disabled'], '')
-            self.assertEquals(response.context['flow_chart_visibility'], 'visible')
+            self.assertTrue(response.context['container_visible'])
             self.assertTrue(form.fields['data_file'].disabled)
 
     def __validate_source_file_data(self, response, file_name, rows, cols):
@@ -125,6 +125,7 @@ class HomeViewTestCase(SimpleTestCase):
     def __validate_method_data(self, response, training_method):
         self.assertEquals(training_method, response.context["training_method"])
 
-    def __validate_validation_set_data(self, response, validation_rows, validation_score):
+    def __validate_tabs(self, response, validation_rows):
         self.assertEquals(validation_rows, response.context["validation_rows"])
-        self.assertEquals(validation_score, response.context["validation_score"])
+        self.assertTrue(response.context["validation_disabled"])
+        self.assertEqual("explore", response.context["active_tab"])

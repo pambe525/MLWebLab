@@ -32,7 +32,7 @@ class HomeViewTemplateTestCase(SimpleTestCase):
 
     def test_initial_view(self):
         self.assertTrue('Machine Learning Lab' in self.browser.title)
-        self.verify_flowchart_is_visible(False)
+        self.verify_content_area_is_visible(False)
         # File Selector contains data file names
         file_list = Select(self.browser.find_element_by_name('data_file')).options
         self.assertGreater(len(file_list), 5)
@@ -42,33 +42,34 @@ class HomeViewTemplateTestCase(SimpleTestCase):
     def test_select_button_clicked_with_no_file_selected(self):
         file_select_btn = self.browser.find_element_by_name('select_btn')
         file_select_btn.click()
-        self.verify_flowchart_is_visible(False)
+        self.verify_content_area_is_visible(False)
         self.verify_file_selection_enabled(True)
 
     def test_select_button_clicked_with_file_selected(self):
         csv_data = [["col1", "col2", "col3", "col4"], [1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]]
         self.write_csvfile(csv_data)
         self.select_a_file(self.fake_datafile)
-        self.verify_flowchart_is_visible(True)
+        self.verify_content_area_is_visible(True)
         self.verify_file_selection_enabled(False, self.fake_datafile)
         self.verify_source_file_data(self.fake_datafile, 3, 4)
         self.verify_training_set_data('col4', 3, '80%', 2)
         self.verify_method_data("Linear Regression")
-        self.verify_validation_set_data(1, False)
+        self.verify_validation_set_data(1)
+        self.verify_tabs()
 
     def test_change_file_button_clicked(self):
         csv_data = [["col1", "col2", "col3", "col4"], [1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]]
         self.write_csvfile(csv_data)
         self.select_a_file(self.fake_datafile)
         self.browser.find_element_by_name('change_btn').click()
-        self.verify_flowchart_is_visible(False)
+        self.verify_content_area_is_visible(False)
         self.verify_file_selection_enabled(True)
 
     def test_message_dialog_when_bad_data_in_file(self):
         self.write_csvfile([])
         self.select_a_file(self.fake_datafile)
         self.verify_message_box_and_close("No columns to parse from file")
-        self.verify_flowchart_is_visible(False)
+        self.verify_content_area_is_visible(False)
         self.verify_file_selection_enabled(True, self.fake_datafile)
 
     def test_message_dialog_when_data_file_has_no_headers(self):
@@ -76,7 +77,7 @@ class HomeViewTemplateTestCase(SimpleTestCase):
         self.write_csvfile(csv_data)
         self.select_a_file(self.fake_datafile)
         self.verify_message_box_and_close("Data file has no headers")
-        self.verify_flowchart_is_visible(False)
+        self.verify_content_area_is_visible(False)
         self.verify_file_selection_enabled(True, self.fake_datafile)
 
     def test_train_button_clicked_with_default_settings(self):
@@ -85,12 +86,13 @@ class HomeViewTemplateTestCase(SimpleTestCase):
         self.select_a_file(self.fake_datafile)
         self.browser.find_element_by_name("train_btn").click()
         self.assertFalse(self.browser.find_element_by_id("glass_pane").is_displayed())
-        self.verify_flowchart_is_visible(True)
+        self.verify_content_area_is_visible(True)
         self.verify_file_selection_enabled(False, self.fake_datafile)
         self.verify_source_file_data(self.fake_datafile, 3, 4)
         self.verify_training_set_data('col4', 3, '80%', 2)
         self.verify_method_data("Linear Regression")
-        self.verify_validation_set_data(1, True)
+        self.verify_tabs(True)
+        self.verify_validation_score(self, score)
 
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -103,12 +105,12 @@ class HomeViewTemplateTestCase(SimpleTestCase):
             writer.writerows(csv_data)
         csv_file.close()
 
-    def verify_flowchart_is_visible(self, is_visible):
-        flow_container = self.browser.find_element_by_id('flow_container')
+    def verify_content_area_is_visible(self, is_visible):
+        container = self.browser.find_element_by_id('home_container')
         if is_visible:
-            self.assertFalse('invisible' in flow_container.get_attribute('class'))
+            self.assertFalse('invisible' in container.get_attribute('class'))
         else:
-            self.assertTrue('invisible' in flow_container.get_attribute('class'))
+            self.assertTrue('invisible' in container.get_attribute('class'))
 
     def verify_file_selection_enabled(self, is_enabled, default_selection="Choose a file..."):
         select_btn = self.browser.find_element_by_name('select_btn')
@@ -141,18 +143,19 @@ class HomeViewTemplateTestCase(SimpleTestCase):
     def verify_method_data(self, training_method):
         self.assertEquals(training_method, self.browser.find_element_by_name("training_method").text)
 
-    def verify_validation_set_data(self, validation_rows, has_validation):
+    def verify_validation_set_data(self, validation_rows):
         self.assertEquals(validation_rows, int(self.browser.find_element_by_name("validation_rows").text))
+
+    def verify_tabs(self, has_validation=False):
+        self.assertTrue("active" in self.browser.find_element_by_id("nav-explore-tab").get_attribute("class"))
         if not has_validation:
-            self.assertEquals("", self.browser.find_element_by_name("validation_score").text)
-            self.assertTrue(self.browser.find_element_by_id("warning_icon").is_displayed())
-            self.assertFalse(self.browser.find_element_by_id("check_icon").is_displayed())
-            self.assertFalse(self.browser.find_element_by_name("predict_btn").is_enabled())
+            self.assertTrue("disabled" in self.browser.find_element_by_id("nav-validate-tab").get_attribute("class"))
         else:
-            self.assertNotEqual("", self.browser.find_element_by_name("validation_score").text)
-            self.assertFalse(self.browser.find_element_by_id("warning_icon").is_displayed())
-            self.assertTrue(self.browser.find_element_by_id("check_icon").is_displayed())
-            self.assertTrue(self.browser.find_element_by_name("predict_btn").is_enabled())
+            self.assertFalse("disabled" in self.browser.find_element_by_id("nav-validate-tab").get_attribute("class"))
+            self.assertTrue("active" in self.browser.find_element_by_id("nav-validate-tab").get_attribute("class"))
+
+    def verify_validation_score(self, score):
+        self.assertNotEqual("", self.browser.find_element_by_name("validation_score").text)
 
     def verify_message_box_and_close(self, message_text):
         message = self.browser.switch_to.active_element

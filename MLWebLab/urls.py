@@ -20,5 +20,4 @@ from mlflow.views import home_view, flowchart_view
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_view, name='index'),
-    path('flowchart', flowchart_view, name="flowchart")
 ]

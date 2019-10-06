@@ -16,7 +16,7 @@
   {% load static %}
 
 <!-- File input form  -->
-<form action={% url 'index' %} method="POST">
+<form id="file_selection_form" action={% url 'index' %} method="POST">
     {% csrf_token %}
     <div class="input-group">
         <div class="input-prepend" >
@@ -35,16 +35,22 @@
  </form>
 <!-- /File input form  -->
 <hr>
-<!-- Control Panel -->
-<div class="{{ flow_chart_visibility }} row container-fluid">
+<!-- Content Area -->
+<div id="home_container" class="{% if not container_visible %}invisible{% endif %} row container-fluid">
     <form id="sidebar_form" action={% url 'index' %} method="POST">
         {% csrf_token %}
         <div class="card border-dark mt-1">
 	        <div class="card-header bg-dark text-center h5 text-white">
 	   	        <i class="fa fa-cog"></i><span class="px-2">CONTROL PANEL</span>
 	        </div>
-            <h6 class="card-title">Task: SUPERVISED LEARNING</h6>
-            <h6 class="card-title">Problem Type: REGRESSION</h6>
+            <div class="row mx-0">
+                <h6 class="card-title">Task:</h6>
+                <span class="card-label col">Supervised Learning</span>
+            </div>
+           <div class="row mx-0">
+                <h6 class="card-title">Type:</h6>
+                <span class="card-label col">Regression</span>
+            </div>
             <h6 class="card-title">Target Feature:</h6>
             <div class="card-label" name="target_feature">{{ target_feature }}</div>
  	        <div class="row mx-0">
@@ -62,7 +68,7 @@
 	        </div>
             <div class="row mx-0">
 	            <h6 class="card-title col-*">Validation Samples: </h6>
-	            <span class="card-label col" name="training_rows">{{ validation_rows }}</span>
+	            <span class="card-label col" name="validation_rows">{{ validation_rows }}</span>
 	        </div>
             <hr>
             <h6 class="card-title">Algorithm/Method:</h6>
@@ -74,17 +80,17 @@
 
     <nav class="mx-4 my-2">
       <div class="nav nav-tabs bg-light" id="nav-tab" role="tablist">
-        <a class="nav-item nav-link active" id="nav-explore-tab" data-toggle="tab" href="#nav-explore" role="tab">
+        <a class="nav-item nav-link {% if active_tab == "explore" %}active{% endif %}"
+            id="nav-explore-tab" data-toggle="tab" href="#nav-explore" role="tab">
             <i class="fa fa-database mx-1"></i>Explore Data</a>
-        <a class="nav-item nav-link" id="nav-features-tab" data-toggle="tab" href="#nav-features" role="tab">
-            <i class="fa fa-chart-line mx-1"></i>Feature Selection</a>
-        <a class="nav-item nav-link disabled" id="nav-validate-tab" data-toggle="tab" href="#nav-validate" role="tab">
-            <i class="fa fa-clipboard-check mx-1"></i>Validation</a>
+        <a class="nav-item nav-link {% if active_tab == "validate" %}active{% endif %}
+            {% if validation_disabled %} disabled {% endif %}"
+            id="nav-validate-tab" data-toggle="tab" href="#nav-validate" role="tab">
+            <i class="fa fa-clipboard-check mx-1"></i>Validate</a>
       </div>
     <div class="tab-content" id="nav-tabContent">
       <div class="tab-pane fade show active" id="nav-explore" role="tabpanel">
-          <h5><b>DATA SOURCE: {{ data_file_name }}</b></h5>
-          <span>[Data Rows: {{ data_file_rows }}</span>, <span>Data Columns: {{ data_file_cols }}]</span>
+          {% include "explore.html" %}
       </div>
       <div class="tab-pane fade" id="nav-features" role="tabpanel">tab 2</div>
       <div class="tab-pane fade" id="nav-validate" role="tabpanel">tab 3</div>
@@ -92,7 +98,7 @@
     </nav>
 
 </div>
-<!-- /Control Panel -->
+<!-- /Content Area -->
 {% endblock home_content %}
 
 {% block javascript %}
@@ -100,7 +106,10 @@
         $(document).ready(function(){
             {% if error_message is not None %} $('#messageBox').modal("show"); {% endif %}
             $("#glass_pane").hide();
-            $("#flowchart_form").on('submit', function(e) {
+            $("#file_selection_form").on('submit', function() {
+                if ( $(document.activeElement).attr('name') === "train_btn") $("#glass_pane").show();
+            })
+             $("#sidebar_form").on('submit', function(e) {
                 if ( $(document.activeElement).attr('name') === "train_btn") $("#glass_pane").show();
             })
         })

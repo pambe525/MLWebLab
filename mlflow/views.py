@@ -52,7 +52,7 @@ def train_model(request, context):
 def __set_context_for_file_selection_enabled(is_enabled, context):
     context['select_btn_disabled'] = '' if is_enabled else 'disabled'
     context['change_btn_disabled'] = 'disabled' if is_enabled else ''
-    context['flow_chart_visibility'] = 'invisible' if is_enabled else 'visible'
+    context['container_visible'] = False if is_enabled else True
 
 
 def __read_file_and_load_stats(file_name, context):
@@ -63,7 +63,7 @@ def __read_file_and_load_stats(file_name, context):
         if int(data_frame.shape[0]) < 2: raise Exception("Data file has only one row")
         if not __has_headers(data_frame): raise Exception("Data file has no headers")
         context['error_message'] = None
-        __set_default_flowchart_parameters(file_name, data_frame, context)
+        __set_default_container_state(file_name, data_frame, context)
         return True
     except Exception as e:
         context['error_message'] = str(e)
@@ -80,7 +80,7 @@ def __has_headers(dataframe):
     return True
 
 
-def __set_default_flowchart_parameters(file_name, data_frame, context):
+def __set_default_container_state(file_name, data_frame, context):
     training_ratio = 0.8
     context['data_file_name'] = file_name
     context['data_file_rows'] = int(data_frame.shape[0])
@@ -92,6 +92,5 @@ def __set_default_flowchart_parameters(file_name, data_frame, context):
     context['training_method'] = "Linear Regression"
     context['validation_rows'] = context['data_file_rows'] - context['training_rows']
     context['validation_score'] = ""
-    context['warning_icon_visibility'] = ""
-    context['check_icon_visibility'] = "hidden"
-    context['predict_btn_state'] = "disabled"
+    context['validation_disabled'] = True
+    context['active_tab'] = "explore"
