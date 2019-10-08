@@ -8,6 +8,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 
+
 @tag('selenium')
 class HomeViewTemplateTestCase(SimpleTestCase):
 
@@ -94,7 +95,6 @@ class HomeViewTemplateTestCase(SimpleTestCase):
         self.verify_tabs(True)
         self.verify_validation_score(self, score)
 
-
     # ------------------------------------------------------------------------------------------------------------------
     # HELPER METHODS
     # ------------------------------------------------------------------------------------------------------------------
@@ -154,7 +154,7 @@ class HomeViewTemplateTestCase(SimpleTestCase):
             self.assertFalse("disabled" in self.browser.find_element_by_id("nav-validate-tab").get_attribute("class"))
             self.assertTrue("active" in self.browser.find_element_by_id("nav-validate-tab").get_attribute("class"))
 
-    def verify_validation_score(self, score):
+    def verify_validation_score(self):
         self.assertNotEqual("", self.browser.find_element_by_name("validation_score").text)
 
     def verify_message_box_and_close(self, message_text):

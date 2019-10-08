@@ -1,6 +1,6 @@
 from django.test import SimpleTestCase
 from django.urls import reverse, resolve
-from mlflow.views import home_view, datafile_selected, train_model
+from mlflow.views import home_view
 
 
 class UrlsTestCase(SimpleTestCase):

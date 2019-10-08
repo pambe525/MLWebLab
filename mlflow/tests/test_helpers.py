@@ -17,7 +17,7 @@ class HelperStaticFunctionsTestCase(SimpleTestCase):
         context = {}
         form = MagicMock()
         context = set_file_selection_context(context, form, True)
-        self.assertEqual(context["file_selection_form"], form)
+        self.assertEqual(context["datafile_form"], form)
         self.assertFalse(context["select_btn_disabled"])
         self.assertTrue(context["change_btn_disabled"])
         self.assertFalse(context["container_visible"])
@@ -27,7 +27,7 @@ class HelperStaticFunctionsTestCase(SimpleTestCase):
         context = {}
         form = MagicMock()
         context = set_file_selection_context(context, form, False)
-        self.assertEqual(context["file_selection_form"], form)
+        self.assertEqual(context["datafile_form"], form)
         self.assertTrue(context["select_btn_disabled"])
         self.assertFalse(context["change_btn_disabled"])
         self.assertTrue(context["container_visible"])
@@ -110,36 +110,27 @@ class HelperStaticFunctionsTestCase(SimpleTestCase):
                 self.assertEqual(str(e), "Data file has no headers")
 
     def test_get_context_with_GET_response_loads_file_list(self):
-        with patch("mlflow.helpers.get_datafile_choices") as mock_datafile_list:
-            file_choices = [("Choose a file...", "Choose a file..."), ("a1.txt", "a1.txt"), ("a2.txt", "a2.txt")]
-            mock_datafile_list.return_value = file_choices
-            mock_response = MagicMock()
-            mock_response.method = "GET"
-            context = get_context(mock_response)
-            mock_datafile_list.assert_called_once()
-            self.__verify_file_selection_form(context, "GET", len(file_choices))
-            self.__verify_file_selection_enabled(context, True)
+        with patch("mlflow.forms.get_datafile_choices") as mock_datafile_list:
+            with patch("mlflow.helpers.read_csv_datafile") as mock_csv_read:
+                file_choices, mock_response = self.setup_mocks(mock_csv_read, mock_datafile_list, "GET")
+                context = get_context(mock_response)
+                mock_datafile_list.assert_called_once()
+                mock_csv_read.assert_not_called()
+                self.__verify_file_selection_form(context, "GET", len(file_choices))
+                self.__verify_file_selection_enabled(context, True)
 
     def test_get_context_with_POST_response_and_no_file_selected(self):
-        with patch("mlflow.helpers.get_datafile_choices") as mock_datafile_list:
-            file_choices = [("Choose a file...", "Choose a file..."), ("a1.txt", "a1.txt"), ("a2.txt", "a2.txt")]
-            mock_datafile_list.return_value = file_choices
-            mock_response = MagicMock()
-            mock_response.method = "POST"
-            mock_response.POST = {"data_file": "Choose a file..."}
-            context = get_context(mock_response)
-            self.__verify_file_selection_form(context, "POST", len(file_choices))
+        with patch("mlflow.forms.get_datafile_choices") as mock_datafile_list:
+            with patch("mlflow.helpers.read_csv_datafile") as mock_csv_read:
+                file_choices, mock_response = self.setup_mocks(mock_csv_read, mock_datafile_list, "POST")
+                mock_response.POST = {"data_file": "Choose a file..."}
+                context = get_context(mock_response)
+                self.__verify_file_selection_form(context, "POST", len(file_choices))
 
     def test_get_context_with_POST_and_file_selected(self):
-        data = {"Col1": [1, 2, 3, 4], "col2": [5, 6, 7, 8], "Col3": [9, 10, 11, 12],
-                "Col4": [13, 14, 15, 16], "Col5": [17, 18, 19, 20]}
-        with patch("mlflow.helpers.get_datafile_choices") as mock_datafile_list:
+        with patch("mlflow.forms.get_datafile_choices") as mock_datafile_list:
             with patch("mlflow.helpers.read_csv_datafile") as mock_csv_read:
-                file_choices = [("Choose a file...", "Choose a file..."), ("a1.txt", "a1.txt"), ("a2.txt", "a2.txt")]
-                mock_datafile_list.return_value = file_choices
-                mock_csv_read.return_value = DataFrame(data)
-                mock_response = MagicMock()
-                mock_response.method = "POST"
+                file_choices, mock_response = self.setup_mocks(mock_csv_read, mock_datafile_list, "POST")
                 mock_response.POST = {"data_file": "a2.txt", "select_btn": []}
                 context = get_context(mock_response)
                 mock_csv_read.assert_called_once()
@@ -148,31 +139,43 @@ class HelperStaticFunctionsTestCase(SimpleTestCase):
                 self.__verify_container_content(context, "a2.txt", mock_csv_read.return_value)
 
     def test_get_context_with_POST_and_read_exception(self):
-        with patch("mlflow.helpers.get_datafile_choices") as mock_datafile_list:
+        with patch("mlflow.forms.get_datafile_choices") as mock_datafile_list:
             with patch("mlflow.helpers.read_csv_datafile") as mock_csv_read:
-                file_choices = [("Choose a file...", "Choose a file..."), ("a1.txt", "a1.txt"), ("a2.txt", "a2.txt")]
-                mock_datafile_list.return_value = file_choices
-                mock_csv_read.side_effect = Exception("Error occurred")
-                mock_response = MagicMock()
-                mock_response.method = "POST"
+                file_choices, mock_response = self.setup_mocks(mock_csv_read, mock_datafile_list, "POST")
                 mock_response.POST = {"data_file": "a2.txt", "select_btn": []}
-                try:
+                mock_csv_read.side_effect = Exception("Error occurred")
+                with self.assertRaises(Exception) as raised:
                     context = get_context(mock_response)
-                except Exception as e:
+                    self.assertTrue("Error occurred" in str(raised.exception))
                     self.__verify_file_selection_form(context, "POST", len(file_choices), selected_file="a2.txt")
                     self.__verify_file_selection_enabled(context, True)
 
     # ------------------------------------------------------------------------------------------------------------------
+    def setup_mocks(self, mock_csv_read, mock_datafile_list, method):
+        data = {"Col1": [1, 2, 3, 4], "col2": [5, 6, 7, 8], "Col3": [9, 10, 11, 12],
+                "Col4": [13, 14, 15, 16], "Col5": [17, 18, 19, 20]}
+        file_choices = [("Choose a file...", "Choose a file..."), ("a1.txt", "a1.txt"),
+                        ("a2.txt", "a2.txt")]
+        mock_datafile_list.return_value = file_choices
+        mock_csv_read.return_value = DataFrame(data)
+        mock_response = MagicMock()
+        mock_response.method = method
+        return file_choices, mock_response
+
     def __verify_file_selection_form(self, context, response_method, n_files, selected_file="Choose a file..."):
         form = context['datafile_form']
-        if response_method == "GET" or (response_method == "POST" and selected_file == "Choose a file..."):
-            self.assertFalse(form.is_valid)
+        if response_method == "GET":
+            self.assertFalse(form.is_valid())
             self.assertFalse(form.is_bound)
             self.assertEqual(form.fields['data_file'].initial, "Choose a file...")
             self.assertEqual(len(form.fields['data_file'].choices), n_files)
-            self.assertEqual(form.fields['data_file'].choices[0], ("Choose a file...", "Choose a file..."))
+        elif response_method == "POST" and selected_file == "Choose a file...":
+            self.assertFalse(form.is_valid())
+            self.assertTrue(form.is_bound)
+            self.assertEqual(form.fields['data_file'].initial, "Choose a file...")
+            self.assertEqual(len(form.fields['data_file'].choices), n_files)
         else:
-            self.assertTrue(form.is_valid)
+            self.assertTrue(form.is_valid())
             self.assertTrue(form.is_bound)
             self.assertEqual(form.fields['data_file'].initial, selected_file)
 
@@ -195,11 +198,11 @@ class HelperStaticFunctionsTestCase(SimpleTestCase):
         self.assertEqual(context['data_file_rows'], dataframe.shape[0])
         self.assertEqual(context['data_file_cols'], dataframe.shape[1])
         self.assertEqual(context['target_feature'], dataframe.columns[-1])
-        self.assertEqual(context['base_features'], dataframe.shape[0]-1)
+        self.assertEqual(context['base_features'], dataframe.shape[1] - 1)
         self.assertEqual(context['training_ratio'], "80%")
-        self.assertEqual(context['training_rows'], int(dataframe.shape[0]*0.8))
+        self.assertEqual(context['training_rows'], int(dataframe.shape[0] * 0.8))
         self.assertEqual(context['training_method'], "Linear Regression")
-        self.assertEqual(context['validation_rows'], dataframe.shape[0]-int(dataframe.shape[0]*0.8))
+        self.assertEqual(context['validation_rows'], dataframe.shape[0] - int(dataframe.shape[0] * 0.8))
         self.assertEqual(context['validation_score'], "")
         self.assertTrue(context['validation_disabled'])
         self.assertEqual(context['active_tab'], "explore")
