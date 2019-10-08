@@ -28,7 +28,7 @@ def flowchart_view(request):
     # context['post_data'] = request.POST
     if request.method == 'POST':
         form = DataFileForm(request.POST)
-        if form.is_valid():
+        if form.is_valid:
             datafile_selected(form, context)
     else:
         form = DataFileForm()

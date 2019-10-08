@@ -91,7 +91,7 @@ class HomeViewTestCase(SimpleTestCase):
 
     def __validate_form_state(self, response, is_valid, is_bound, initial):
         form = response.context['form']
-        self.assertTrue(form.is_valid()) if is_valid else self.assertFalse(form.is_valid())
+        self.assertTrue(form.is_valid) if is_valid else self.assertFalse(form.is_valid)
         self.assertTrue(form.is_bound) if is_bound else self.assertFalse(form.is_bound)
         self.assertEqual(form.fields['data_file'].initial, initial)
         self.assertEqual(len(form.fields['data_file'].choices), len(self.datafile_choices) + 1)

@@ -24,7 +24,7 @@ class DataFileForm_TestCase(SimpleTestCase):
                 form = DataFileForm() if bound_data is None else DataFileForm(bound_data)
         datafiles_path = os.path.join(settings.BASE_DIR, 'data')
         mock_listdir.assert_called_once_with(datafiles_path)
-        self.assertTrue(form.is_valid()) if is_valid else self.assertFalse(form.is_valid())
+        self.assertTrue(form.is_valid) if is_valid else self.assertFalse(form.is_valid)
         self.assertEquals(form.fields['data_file'].initial, "Choose a file...")
         self.assertEqual(len(form.fields['data_file'].choices), 4)
         self.assertTrue(('file2.dat', 'file2.dat') in form.fields['data_file'].choices)

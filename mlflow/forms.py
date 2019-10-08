@@ -11,7 +11,7 @@ class DataFileForm(forms.Form):
         self.fields['data_file'].widget.attrs['class'] = 'input-group-text custom-select'
 
     def is_valid(self):
-        valid = super(DataFileForm, self).is_valid()
+        valid = super(DataFileForm, self).is_valid
         if valid and self.cleaned_data.get('data_file') == "Choose a file...":
             valid = False
         return valid

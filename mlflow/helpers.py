@@ -61,7 +61,7 @@ def read_csv_datafile(file_name):
 def get_context(request):
     context = {}
     datafile_form = DataFileForm() if request.method != "POST" else DataFileForm(request.POST)
-    if datafile_form.is_valid():
+    if datafile_form.is_valid:
         set_file_selection_context(context, datafile_form, False)
         file_name = datafile_form.cleaned_data['data_file']
         datafile_form.fields['data_file'].initial = file_name

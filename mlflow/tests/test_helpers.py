@@ -166,13 +166,13 @@ class HelperStaticFunctionsTestCase(SimpleTestCase):
     def __verify_file_selection_form(self, context, response_method, n_files, selected_file="Choose a file..."):
         form = context['datafile_form']
         if response_method == "GET" or (response_method == "POST" and selected_file == "Choose a file..."):
-            self.assertFalse(form.is_valid())
+            self.assertFalse(form.is_valid)
             self.assertFalse(form.is_bound)
             self.assertEqual(form.fields['data_file'].initial, "Choose a file...")
             self.assertEqual(len(form.fields['data_file'].choices), n_files)
             self.assertEqual(form.fields['data_file'].choices[0], ("Choose a file...", "Choose a file..."))
         else:
-            self.assertTrue(form.is_valid())
+            self.assertTrue(form.is_valid)
             self.assertTrue(form.is_bound)
             self.assertEqual(form.fields['data_file'].initial, selected_file)
 
