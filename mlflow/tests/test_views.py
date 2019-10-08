@@ -101,13 +101,13 @@ class HomeViewTestCase(SimpleTestCase):
     def __validate_file_selection_enabled(self, response, is_enabled):
         form = response.context['form']
         if is_enabled:
-            self.assertEquals(response.context['select_btn_disabled'], '')
-            self.assertEquals(response.context['change_btn_disabled'], 'disabled')
+            self.assertFalse(response.context['select_btn_disabled'])
+            self.assertTrue(response.context['change_btn_disabled'])
             self.assertFalse(response.context['container_visible'])
             self.assertFalse(form.fields['data_file'].disabled)
         else:
-            self.assertEquals(response.context['select_btn_disabled'], 'disabled')
-            self.assertEquals(response.context['change_btn_disabled'], '')
+            self.assertTrue(response.context['select_btn_disabled'])
+            self.assertFalse(response.context['change_btn_disabled'])
             self.assertTrue(response.context['container_visible'])
             self.assertTrue(form.fields['data_file'].disabled)
 

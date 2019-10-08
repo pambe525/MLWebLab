@@ -4,19 +4,21 @@ from django.shortcuts import render
 from pandas import read_csv
 from mlflow.forms import DataFileForm
 from django.conf import settings
+from mlflow.helpers import get_context
 
 
 def home_view(request):
-    context = {'error_message': None}
-    __set_context_for_file_selection_enabled(True, context)
-    # context['post_data'] = request.POST
-    if request.method == 'POST':
-        form = DataFileForm(request.POST)
-        if form.is_valid():
-            datafile_selected(form, context)
-    else:
-        form = DataFileForm()
-    context['form'] = form
+    context = get_context(request)
+    # context = {'error_message': None}
+    # __set_context_for_file_selection_enabled(True, context)
+    # context['request'] = request
+    # if request.method == 'POST':
+    #     form = DataFileForm(request.POST)
+    #     if form.is_valid():
+    #         datafile_selected(form, context)
+    # else:
+    #     form = DataFileForm()
+    # context['form'] = form
     return render(request, 'home.html', context)
 
 
@@ -50,8 +52,8 @@ def train_model(request, context):
 
 
 def __set_context_for_file_selection_enabled(is_enabled, context):
-    context['select_btn_disabled'] = '' if is_enabled else 'disabled'
-    context['change_btn_disabled'] = 'disabled' if is_enabled else ''
+    context['select_btn_disabled'] = False if is_enabled else True
+    context['change_btn_disabled'] = True if is_enabled else False
     context['container_visible'] = False if is_enabled else True
 
 

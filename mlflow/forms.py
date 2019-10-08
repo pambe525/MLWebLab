@@ -1,19 +1,8 @@
 from django import forms
-from django.conf import settings
-from os import listdir as current_dir
-import os.path
+from mlflow.helpers import get_datafile_choices
 
 
-def get_datafile_choices():
-    datafiles_path = os.path.join(settings.BASE_DIR, 'data')
-    dir_items = current_dir(datafiles_path)
-    choices = ["Choose a file..."]
-    for f in dir_items:
-        if os.path.isfile(os.path.join(datafiles_path, f)):
-            choices.append(f)
-    return [(filename, filename) for filename in choices]
-
-
+# DataFileForm for File Selection
 class DataFileForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super(DataFileForm, self).__init__(*args, **kwargs)
@@ -26,4 +15,3 @@ class DataFileForm(forms.Form):
         if valid and self.cleaned_data.get('data_file') == "Choose a file...":
             valid = False
         return valid
-

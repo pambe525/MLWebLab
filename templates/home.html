@@ -16,24 +16,25 @@
   {% load static %}
 
 <!-- File input form  -->
-<form id="file_selection_form" action={% url 'index' %} method="POST">
+<form id="datafile_form" action={% url 'index' %} method="POST">
     {% csrf_token %}
     <div class="input-group">
         <div class="input-prepend" >
-            <span class="input-group-text pt-1 pb-0">{{ form.data_file.label_tag }}</span>
+            <span class="input-group-text pt-1 pb-0">{{ datafile_form.data_file.label_tag }}</span>
         </div>
-        <div class="input-group-append">{{ form.data_file }}</div>
+        <div class="input-group-append">{{ datafile_form.data_file }}</div>
         <div class="input-group-append">
-            <button type="submit" name="select_btn" class="btn" {{select_btn_disabled}}>
+            <button type="submit" name="select_btn" class="btn" {% if select_btn_disabled %} disabled {%  endif %}>
                 Select
             </button>
-            <button type="submit" name="change_btn" class="btn" {{change_btn_disabled}}>
+            <button type="submit" name="change_btn" class="btn" {% if change_btn_disabled %} disabled {%  endif %}>
                 Change Data File
             </button>
         </div>
     </div>
- </form>
+</form>
 <!-- /File input form  -->
+
 <hr>
 <!-- Content Area -->
 <div id="home_container" class="{% if not container_visible %}invisible{% endif %} row container-fluid">
@@ -106,7 +107,7 @@
         $(document).ready(function(){
             {% if error_message is not None %} $('#messageBox').modal("show"); {% endif %}
             $("#glass_pane").hide();
-            $("#file_selection_form").on('submit', function() {
+            $("#datafile_form").on('submit', function() {
                 if ( $(document.activeElement).attr('name') === "train_btn") $("#glass_pane").show();
             })
              $("#sidebar_form").on('submit', function(e) {
