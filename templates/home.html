@@ -22,7 +22,7 @@
         <div class="input-prepend" >
             <span class="input-group-text pt-1 pb-0">{{ datafile_form.data_file.label_tag }}</span>
         </div>
-        <div class="input-group-append">{{ datafile_form.data_file }}</div>
+        <div class="input-group-append" name="data_file">{{ datafile_form.data_file }}</div>
         <div class="input-group-append">
             <button type="submit" name="select_btn" class="btn" {% if select_btn_disabled %} disabled {%  endif %}>
                 Select
@@ -33,6 +33,7 @@
         </div>
     </div>
 </form>
+    <h6>{{  answer }}</h6>
 <!-- /File input form  -->
 
 <hr>
@@ -40,6 +41,7 @@
 <div id="home_container" class="{% if not container_visible %}invisible{% endif %} row container-fluid">
     <form id="sidebar_form" action={% url 'index' %} method="POST">
         {% csrf_token %}
+        <div name="data_file_name">{{ control_form.data_file_name }}</div>
         <div class="card border-dark mt-1">
 	        <div class="card-header bg-dark text-center h5 text-white">
 	   	        <i class="fa fa-cog"></i><span class="px-2">CONTROL PANEL</span>
@@ -61,7 +63,8 @@
             <hr>
 	        <div class="row mx-0">
       	        <h6 class="card-title col-*">Training Set Ratio:&nbsp;&nbsp;</h6>
-	            <span class="card-label col" name="training_ratio">{{ training_ratio }}</span>
+{#	            <span class="card-label col" name="training_ratio">{{ training_ratio }}</span>#}
+                <span>{{ control_form.training_ratio }}</span>
 	        </div>
  	        <div class="row mx-0">
 	            <h6 class="card-title col-*">Training Samples:&nbsp;&nbsp;&nbsp;</h6>
@@ -73,7 +76,8 @@
 	        </div>
             <hr>
             <h6 class="card-title">Algorithm/Method:</h6>
-            <div class="card-label" name="training_method">{{ training_method }}</div>
+{#            <div class="card-label" name="training_method">{{ training_method }}</div>#}
+            <div style="width:220px">{{  control_form.training_method }}</div>
             <hr>
             <button type="submit" class="btn m-2" name="train_btn">Train</button>
         </div>
@@ -90,14 +94,14 @@
             <i class="fa fa-clipboard-check mx-1"></i>Validate</a>
       </div>
     <div class="tab-content" id="nav-tabContent">
-      <div class="tab-pane fade show active" id="nav-explore" role="tabpanel">
+      <div class="tab-pane show {% if active_tab == "explore" %}active{% endif %}" id="nav-explore" role="tabpanel">
           {% include "explore.html" %}
       </div>
-      <div class="tab-pane fade" id="nav-features" role="tabpanel">tab 2</div>
-      <div class="tab-pane fade" id="nav-validate" role="tabpanel">tab 3</div>
+      <div class="tab-pane {% if active_tab == "validate" %}active{% endif %}" id="nav-validate" role="tabpanel">
+          {% include "validate.html" %}
+      </div>
     </div>
     </nav>
-
 </div>
 <!-- /Content Area -->
 {% endblock home_content %}

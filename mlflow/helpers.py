@@ -1,7 +1,7 @@
 import os
 import os.path
 from pandas import read_csv
-from mlflow.forms import DataFileForm
+from mlflow.forms import DataFileForm, ControlPanelForm
 from django.conf import settings
 
 
@@ -58,7 +58,7 @@ def read_csv_datafile(file_name):
 
 # HomeView Context Manager to manage all page variables and state
 def get_context(request):
-    context = {}
+    context = {"answer": request.POST}
     datafile_form = DataFileForm() if request.method != "POST" else DataFileForm(request.POST)
     set_file_selection_context(context, datafile_form, True)
     if datafile_form.is_valid():

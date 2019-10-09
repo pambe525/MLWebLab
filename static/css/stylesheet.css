@@ -118,4 +118,5 @@ hr {
     border:solid 2px darkgray;
     border-top: 0;
     height: 430px;
+    min-width: 500px;
 }

@@ -1,6 +1,7 @@
 from django.test import SimpleTestCase
 from django.conf import settings
 from mlflow.forms import DataFileForm, get_datafile_choices
+from mlflow.forms import ControlPanelForm
 from unittest.mock import patch
 import os.path
 
@@ -41,3 +42,25 @@ class DataFileForm_TestCase(SimpleTestCase):
         self.assertEquals(form.fields['data_file'].initial, "Choose a file...")
         self.assertEqual(len(form.fields['data_file'].choices), 4)
         self.assertTrue(('file2.dat', 'file2.dat') in form.fields['data_file'].choices)
+
+
+class ControlPanelForm_TestCase(SimpleTestCase):
+
+    def test_instantiation(self):
+        form = ControlPanelForm()
+        self.assertFalse(form.is_valid())
+        self.assertFalse(form.is_bound)
+        self.assertEqual(len(form.fields['training_method'].choices), 1)
+        self.assertEqual(form.fields['training_method'].choices[0][1], "Linear Regression")
+        self.assertEqual(len(form.fields['training_ratio'].choices), 1)
+        self.assertEqual(form.fields['training_ratio'].choices[0][1], "80%")
+
+    def test_instantiation_with_POST_data(self):
+        post_data = {"training_ratio": 0.8, "training_method": "linear_reg"}
+        form = ControlPanelForm(post_data)
+        self.assertTrue(form.is_bound)
+        self.assertTrue(form.is_valid())
+        self.assertEqual(form.cleaned_data.get('training_ratio'), "0.8")
+        self.assertEqual(form.cleaned_data.get('training_method'), "linear_reg")
+
+
