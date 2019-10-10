@@ -89,11 +89,11 @@ class HomeViewTemplateTestCase(SimpleTestCase):
         self.assertFalse(self.browser.find_element_by_id("glass_pane").is_displayed())
         self.verify_content_area_is_visible(True)
         self.verify_file_selection_enabled(False, self.fake_datafile)
-        self.verify_source_file_data(self.fake_datafile, 3, 4)
         self.verify_training_set_data('col4', 3, '80%', 2)
         self.verify_method_data("Linear Regression")
         self.verify_tabs(True)
-        self.verify_validation_score(self, score)
+        self.verify_validation_tab()
+        self.verify_source_file_data(self.fake_datafile, 3, 4)
 
     # ------------------------------------------------------------------------------------------------------------------
     # HELPER METHODS
@@ -130,6 +130,7 @@ class HomeViewTemplateTestCase(SimpleTestCase):
         file_select_btn.click()
 
     def verify_source_file_data(self, file_name, rows, cols):
+        self.browser.find_element_by_id("nav-explore-tab").click()
         self.assertEquals(file_name, self.browser.find_element_by_name("source_file").text)
         self.assertEquals(rows, int(self.browser.find_element_by_name("source_rows").text))
         self.assertEquals(cols, int(self.browser.find_element_by_name("source_cols").text))
@@ -147,15 +148,16 @@ class HomeViewTemplateTestCase(SimpleTestCase):
         self.assertEquals(validation_rows, int(self.browser.find_element_by_name("validation_rows").text))
 
     def verify_tabs(self, has_validation=False):
-        self.assertTrue("active" in self.browser.find_element_by_id("nav-explore-tab").get_attribute("class"))
         if not has_validation:
+            self.assertTrue("active" in self.browser.find_element_by_id("nav-explore-tab").get_attribute("class"))
             self.assertTrue("disabled" in self.browser.find_element_by_id("nav-validate-tab").get_attribute("class"))
         else:
             self.assertFalse("disabled" in self.browser.find_element_by_id("nav-validate-tab").get_attribute("class"))
             self.assertTrue("active" in self.browser.find_element_by_id("nav-validate-tab").get_attribute("class"))
 
-    def verify_validation_score(self):
-        self.assertNotEqual("", self.browser.find_element_by_name("validation_score").text)
+    def verify_validation_tab(self):
+        self.assertGreater(float(self.browser.find_element_by_name("validation_score").text), 0)
+        self.assertGreater(float(self.browser.find_element_by_name("training_score").text), 0)
 
     def verify_message_box_and_close(self, message_text):
         message = self.browser.switch_to.active_element

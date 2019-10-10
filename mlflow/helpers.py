@@ -3,6 +3,7 @@ import os.path
 from pandas import read_csv
 from mlflow.forms import DataFileForm, ControlPanelForm
 from django.conf import settings
+from pandas import DataFrame, read_json
 
 
 # Sets context dict parameters when file selection is enabled or disabled
@@ -17,16 +18,15 @@ def set_file_selection_context(context, form, is_enabled):
 
 
 # Sets default context dict parameters for home page content container
-def set_default_container_context(context, file_name, data_frame):
-    training_ratio = 0.8
+def set_default_container_context(context, form, file_name, data_frame):
+    context['control_form'] = form
+    training_ratio = form.fields['training_ratio'].initial
     context['data_file_name'] = file_name
     context['data_file_rows'] = int(data_frame.shape[0])
     context['data_file_cols'] = int(data_frame.shape[1])
     context['target_feature'] = data_frame.columns[-1]
     context['base_features'] = data_frame.shape[1] - 1
-    context['training_ratio'] = str(int(training_ratio * 100)) + "%"
     context['training_rows'] = int(data_frame.shape[0] * training_ratio)
-    context['training_method'] = "Linear Regression"
     context['validation_rows'] = context['data_file_rows'] - context['training_rows']
     context['validation_score'] = ""
     context['validation_disabled'] = True
@@ -58,8 +58,9 @@ def read_csv_datafile(file_name):
 
 # HomeView Context Manager to manage all page variables and state
 def get_context(request):
-    context = {"answer": request.POST}
+    context = {"error_message": None}
     datafile_form = DataFileForm() if request.method != "POST" else DataFileForm(request.POST)
+    control_form = ControlPanelForm() if request.method != "POST" else ControlPanelForm(request.POST)
     set_file_selection_context(context, datafile_form, True)
     if datafile_form.is_valid():
         file_name = datafile_form.cleaned_data['data_file']
@@ -67,7 +68,20 @@ def get_context(request):
         try:
             data_frame = read_csv_datafile(file_name)
             set_file_selection_context(context, datafile_form, False)
-            set_default_container_context(context, file_name, data_frame)
+            set_default_container_context(context, control_form, file_name, data_frame)
+            request.session['datafile'] = file_name
+            request.session['dataframe'] = data_frame.to_json()
         except Exception as e:
             context['error_message'] = str(e)
+    elif "train_btn" in request.POST:
+        #     try:
+        file_name = request.session['datafile']
+        data_frame = read_json(request.session['dataframe'])
+        datafile_form.fields['data_file'].initial = file_name
+        set_file_selection_context(context, datafile_form, False)
+        set_default_container_context(context, control_form, file_name, data_frame)
+        context["validation_disabled"] = False
+        context["active_tab"] = "validate"
+        context["validation_score"] = 0.87
+        context["training_score"] = 0.75
     return context

@@ -9,29 +9,26 @@ from mlflow.helpers import read_csv_datafile
 from django.conf import settings
 from pandas import DataFrame
 from pandas.errors import EmptyDataError
+from mlflow.forms import ControlPanelForm
 
 
 class HelperStaticFunctionsTestCase(SimpleTestCase):
+    mock_data = data = {"Col1": [1, 2, 3, 4], "col2": [5, 6, 7, 8], "Col3": [9, 10, 11, 12],
+                        "Col4": [13, 14, 15, 16], "Col5": [17, 18, 19, 20]}
 
-    def test_set_file_selection_context_with_enabled(self):
+    def test_set_file_selection_context_as_enabled(self):
         context = {}
         form = MagicMock()
         context = set_file_selection_context(context, form, True)
         self.assertEqual(context["datafile_form"], form)
-        self.assertFalse(context["select_btn_disabled"])
-        self.assertTrue(context["change_btn_disabled"])
-        self.assertFalse(context["container_visible"])
-        self.assertIsNone(context["error_message"])
+        self._verify_file_selection_enabled(context, True)
 
-    def test_set_file_selection_context_with_disabled(self):
+    def test_set_file_selection_context_as_disabled(self):
         context = {}
         form = MagicMock()
         context = set_file_selection_context(context, form, False)
         self.assertEqual(context["datafile_form"], form)
-        self.assertTrue(context["select_btn_disabled"])
-        self.assertFalse(context["change_btn_disabled"])
-        self.assertTrue(context["container_visible"])
-        self.assertIsNone(context["error_message"])
+        self._verify_file_selection_enabled(context, False)
 
     def test_dataframe_has_headers_with_proper_headers(self):
         data = {"Col1": [1, 2, 3, 4], "col2": [5, 6, 7, 8], "Col3": [9, 10, 11, 12],
@@ -54,19 +51,10 @@ class HelperStaticFunctionsTestCase(SimpleTestCase):
         context = {}
         filename = "somefile.dat"
         data_frame = DataFrame(data)
-        context = set_default_container_context(context, filename, data_frame)
-        self.assertEqual(context['data_file_name'], filename)
-        self.assertEqual(context['data_file_rows'], 4)
-        self.assertEqual(context['data_file_cols'], 5)
-        self.assertEqual(context['target_feature'], "Col5")
-        self.assertEqual(context['base_features'], 4)
-        self.assertEqual(context['training_ratio'], "80%")
-        self.assertEqual(context['training_rows'], 3)
-        self.assertEqual(context['training_method'], "Linear Regression")
-        self.assertEqual(context['validation_rows'], 1)
-        self.assertEqual(context['validation_score'], "")
-        self.assertTrue(context['validation_disabled'])
-        self.assertEqual(context['active_tab'], "explore")
+        form = ControlPanelForm()
+        context = set_default_container_context(context, form, filename, data_frame)
+        self.assertEqual(context['control_form'], form)
+        self._verify_container_content(context, filename, data_frame)
 
     def test_read_csv_data_file(self):
         data = {"col1": [1, 2, 3, 4], "col2": [5, 6, 7, 8], "col3": [9, 10, 11, 12],
@@ -112,57 +100,75 @@ class HelperStaticFunctionsTestCase(SimpleTestCase):
     def test_get_context_with_GET_response_loads_file_list(self):
         with patch("mlflow.forms.get_datafile_choices") as mock_datafile_list:
             with patch("mlflow.helpers.read_csv_datafile") as mock_csv_read:
-                file_choices, mock_response = self.setup_mocks(mock_csv_read, mock_datafile_list, "GET")
-                context = get_context(mock_response)
+                file_choices, mock_request = self._setup_mocks(mock_csv_read, mock_datafile_list, "GET")
+                context = get_context(mock_request)
                 mock_datafile_list.assert_called_once()
                 mock_csv_read.assert_not_called()
-                self.__verify_file_selection_form(context, "GET", len(file_choices))
-                self.__verify_file_selection_enabled(context, True)
+                self._verify_file_selection_form(context, "GET", len(file_choices))
+                self._verify_file_selection_enabled(context, True)
 
-    def test_get_context_with_POST_response_and_no_file_selected(self):
+    def test_get_context_with_SELECT_button_and_no_file_selected(self):
         with patch("mlflow.forms.get_datafile_choices") as mock_datafile_list:
             with patch("mlflow.helpers.read_csv_datafile") as mock_csv_read:
-                file_choices, mock_response = self.setup_mocks(mock_csv_read, mock_datafile_list, "POST")
-                mock_response.POST = {"data_file": "Choose a file..."}
-                context = get_context(mock_response)
-                self.__verify_file_selection_form(context, "POST", len(file_choices))
+                file_choices, mock_request = self._setup_mocks(mock_csv_read, mock_datafile_list, "POST")
+                mock_request.POST = {"data_file": "Choose a file..."}
+                context = get_context(mock_request)
+                self._verify_file_selection_form(context, "POST", len(file_choices))
 
-    def test_get_context_with_POST_and_file_selected(self):
+    def test_get_context_with_SELECT_button_and_file_selected(self):
         with patch("mlflow.forms.get_datafile_choices") as mock_datafile_list:
             with patch("mlflow.helpers.read_csv_datafile") as mock_csv_read:
-                file_choices, mock_response = self.setup_mocks(mock_csv_read, mock_datafile_list, "POST")
-                mock_response.POST = {"data_file": "a2.txt", "select_btn": []}
-                context = get_context(mock_response)
+                file_choices, mock_request = self._setup_mocks(mock_csv_read, mock_datafile_list, "POST")
+                mock_request.POST = {"data_file": "a2.txt", "select_btn": []}
+                mock_request.session = {"datafile": None, "dataframe": None}
+                context = get_context(mock_request)
                 mock_csv_read.assert_called_once()
-                self.__verify_file_selection_form(context, "POST", len(file_choices), selected_file="a2.txt")
-                self.__verify_file_selection_enabled(context, False)
-                self.__verify_container_content(context, "a2.txt", mock_csv_read.return_value)
+                self._verify_file_selection_form(context, "POST", len(file_choices), selected_file="a2.txt")
+                self._verify_file_selection_enabled(context, False)
+                self._verify_container_content(context, "a2.txt", mock_csv_read.return_value)
+                self._verify_validation_content(context, False)
+                # Verify session variables are saved
+                json_dataframe = mock_csv_read.return_value.to_json()
+                self.assertEqual(mock_request.session['datafile'], "a2.txt")
+                self.assertEqual(mock_request.session['dataframe'], json_dataframe)
 
-    def test_get_context_with_POST_and_read_exception(self):
+    def test_get_context_with_SELECT_button_and_read_exception(self):
         with patch("mlflow.forms.get_datafile_choices") as mock_datafile_list:
             with patch("mlflow.helpers.read_csv_datafile") as mock_csv_read:
-                file_choices, mock_response = self.setup_mocks(mock_csv_read, mock_datafile_list, "POST")
-                mock_response.POST = {"data_file": "a2.txt", "select_btn": []}
+                file_choices, mock_request = self._setup_mocks(mock_csv_read, mock_datafile_list, "POST")
+                mock_request.POST = {"data_file": "a2.txt", "select_btn": []}
                 mock_csv_read.side_effect = Exception("Error occurred")
                 with self.assertRaises(Exception) as raised:
-                    context = get_context(mock_response)
+                    context = get_context(mock_request)
                     self.assertTrue("Error occurred" in str(raised.exception))
-                    self.__verify_file_selection_form(context, "POST", len(file_choices), selected_file="a2.txt")
-                    self.__verify_file_selection_enabled(context, True)
+                    self._verify_file_selection_form(context, "POST", len(file_choices), selected_file="a2.txt")
+                    self._verify_file_selection_enabled(context, True)
+
+    def test_get_context_with_TRAIN_button_clicked(self):
+        with patch("mlflow.forms.get_datafile_choices") as mock_datafile_list:
+            with patch("mlflow.helpers.read_csv_datafile") as mock_csv_read:
+                file_choices, mock_request = self._setup_mocks(mock_csv_read, mock_datafile_list, "POST")
+                mock_request.POST = {"training_method": "linear_reg", "training_ratio": 0.8, "train_btn": []}
+                json_data = DataFrame(self.mock_data).to_json()
+                mock_request.session = {'datafile': "a2.txt", 'dataframe': json_data}
+                context = get_context(mock_request)
+                mock_csv_read.assert_not_called()
+                self._verify_file_selection_form(context, "POST", len(file_choices), selected_file="a2.txt")
+                self._verify_file_selection_enabled(context, False)
+                self._verify_container_content(context, "a2.txt", DataFrame(self.mock_data))
+                self._verify_validation_content(context, True)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def setup_mocks(self, mock_csv_read, mock_datafile_list, method):
-        data = {"Col1": [1, 2, 3, 4], "col2": [5, 6, 7, 8], "Col3": [9, 10, 11, 12],
-                "Col4": [13, 14, 15, 16], "Col5": [17, 18, 19, 20]}
+    def _setup_mocks(self, mock_csv_read, mock_datafile_list, method):
         file_choices = [("Choose a file...", "Choose a file..."), ("a1.txt", "a1.txt"),
                         ("a2.txt", "a2.txt")]
         mock_datafile_list.return_value = file_choices
-        mock_csv_read.return_value = DataFrame(data)
-        mock_response = MagicMock()
-        mock_response.method = method
-        return file_choices, mock_response
+        mock_csv_read.return_value = DataFrame(self.mock_data)
+        mock_request = MagicMock()
+        mock_request.method = method
+        return file_choices, mock_request
 
-    def __verify_file_selection_form(self, context, response_method, n_files, selected_file="Choose a file..."):
+    def _verify_file_selection_form(self, context, response_method, n_files, selected_file="Choose a file..."):
         form = context['datafile_form']
         if response_method == "GET":
             self.assertFalse(form.is_valid())
@@ -175,11 +181,11 @@ class HelperStaticFunctionsTestCase(SimpleTestCase):
             self.assertEqual(form.fields['data_file'].initial, "Choose a file...")
             self.assertEqual(len(form.fields['data_file'].choices), n_files)
         else:
-            self.assertTrue(form.is_valid())
+            # self.assertTrue(form.is_valid())
             self.assertTrue(form.is_bound)
             self.assertEqual(form.fields['data_file'].initial, selected_file)
 
-    def __verify_file_selection_enabled(self, context, is_enabled):
+    def _verify_file_selection_enabled(self, context, is_enabled):
         form = context['datafile_form']
         self.assertEquals(context['error_message'], None)
         if is_enabled:
@@ -193,16 +199,21 @@ class HelperStaticFunctionsTestCase(SimpleTestCase):
             self.assertTrue(context['container_visible'])
             self.assertTrue(form.fields['data_file'].disabled)
 
-    def __verify_container_content(self, context, filename, dataframe):
+    def _verify_container_content(self, context, filename, dataframe):
         self.assertEqual(context['data_file_name'], filename)
         self.assertEqual(context['data_file_rows'], dataframe.shape[0])
         self.assertEqual(context['data_file_cols'], dataframe.shape[1])
         self.assertEqual(context['target_feature'], dataframe.columns[-1])
         self.assertEqual(context['base_features'], dataframe.shape[1] - 1)
-        self.assertEqual(context['training_ratio'], "80%")
         self.assertEqual(context['training_rows'], int(dataframe.shape[0] * 0.8))
-        self.assertEqual(context['training_method'], "Linear Regression")
         self.assertEqual(context['validation_rows'], dataframe.shape[0] - int(dataframe.shape[0] * 0.8))
-        self.assertEqual(context['validation_score'], "")
-        self.assertTrue(context['validation_disabled'])
-        self.assertEqual(context['active_tab'], "explore")
+
+    def _verify_validation_content(self, context, is_enabled):
+        if not is_enabled:
+            self.assertTrue(context['validation_disabled'])
+            self.assertEqual(context['active_tab'], "explore")
+        else:
+            self.assertFalse(context['validation_disabled'])
+            self.assertEqual(context['active_tab'], "validate")
+            self.assertGreater(float(context['validation_score']), 0)
+            self.assertGreater(float(context['training_score']), 0)
