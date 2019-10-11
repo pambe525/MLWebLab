@@ -95,6 +95,20 @@ class HomeViewTemplateTestCase(SimpleTestCase):
         self.verify_validation_tab()
         self.verify_source_file_data(self.fake_datafile, 6, 3)
 
+    def test_train_button_clicked_with_exception(self):
+        csv_data = [["X1", "X2", "Y"], [0, None, 15], [1, 4, 16], [2, 3, 17], [3, None, 18], [4, 1, 19], [5, 0, 20]]
+        self.write_csvfile(csv_data)
+        self.select_a_file(self.fake_datafile)
+        self.browser.find_element_by_name("train_btn").click()
+        self.assertFalse(self.browser.find_element_by_id("glass_pane").is_displayed())
+        self.verify_message_box_and_close("Input contains NaN")
+        self.verify_content_area_is_visible(True)
+        self.verify_file_selection_enabled(False, self.fake_datafile)
+        self.verify_training_set_data('Y', 2, '80%', 4)
+        self.verify_method_data("Linear Regression")
+        self.verify_tabs(False)
+        self.verify_source_file_data(self.fake_datafile, 6, 3)
+
     # ------------------------------------------------------------------------------------------------------------------
     # HELPER METHODS
     # ------------------------------------------------------------------------------------------------------------------
@@ -165,5 +179,5 @@ class HomeViewTemplateTestCase(SimpleTestCase):
         self.assertTrue(message.is_displayed())
         btnXPath = "//button[contains(text(),'Close')]"
         close_button = WebDriverWait(self.browser, 10).until(EC.element_to_be_clickable((By.XPATH, btnXPath)))
-        self.assertEqual(self.browser.find_element_by_class_name("modal-body").text, message_text)
+        self.assertTrue(message_text in self.browser.find_element_by_class_name("modal-body").text)
         close_button.click()
