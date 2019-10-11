@@ -2,7 +2,7 @@ from django.shortcuts import render
 from mlflow.helpers import get_context
 from mlflow.helpers import set_file_selection_context
 from mlflow.helpers import read_csv_datafile
-from mlflow.helpers import set_default_container_context
+from mlflow.helpers import set_control_panel_context
 from mlflow.forms import ControlPanelForm
 
 

@@ -37,9 +37,9 @@ class ControlPanelForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super(ControlPanelForm, self).__init__(*args, **kwargs)
         # self.fields['data_file_name'] = forms.CharField(widget=forms.HiddenInput)
-        self.fields['training_method'] = forms.ChoiceField(choices=[("linear_reg", "Linear Regression")])
+        self.fields['training_method'] = forms.ChoiceField(choices=[("Linear Regression", "Linear Regression")])
         self.fields['training_ratio'] = forms.ChoiceField(choices=[(0.8, "80%")])
         self.fields['training_method'].widget.attrs['class'] = 'card-label custom-select'
         self.fields['training_ratio'].widget.attrs['class'] = 'card-label col custom-select'
-        self.fields['training_method'].initial = "linear_reg"
+        self.fields['training_method'].initial = "Linear Regression"
         self.fields['training_ratio'].initial = 0.8

@@ -19,7 +19,7 @@ def set_file_selection_context(context, form, is_enabled):
 
 
 # Sets default context dict parameters for home page content container
-def set_default_container_context(context, form, file_name, data_frame):
+def set_control_panel_context(context, form, file_name, data_frame):
     context['control_form'] = form
     training_ratio = form.fields['training_ratio'].initial
     context['data_file_name'] = file_name
@@ -29,10 +29,18 @@ def set_default_container_context(context, form, file_name, data_frame):
     context['base_features'] = data_frame.shape[1] - 1
     context['training_rows'] = int(data_frame.shape[0] * training_ratio)
     context['validation_rows'] = context['data_file_rows'] - context['training_rows']
-    context['validation_score'] = ""
     context['validation_disabled'] = True
     context['active_tab'] = "explore"
+    context['training_method'] = form.fields['training_method'].initial
     return context
+
+
+# Sets validation content
+def set_validation_context(context, fit_result):
+    context["validation_score"] = round(fit_result['validation_score'], 2)
+    context["training_score"] = round(fit_result['training_score'], 2)
+    context["validation_disabled"] = False
+    context["active_tab"] = "validate"
 
 
 # Finds if a pandas data frame has headers
@@ -69,7 +77,7 @@ def get_context(request):
         try:
             data_frame = read_csv_datafile(file_name)
             set_file_selection_context(context, datafile_form, False)
-            set_default_container_context(context, control_form, file_name, data_frame)
+            set_control_panel_context(context, control_form, file_name, data_frame)
             request.session['datafile'] = file_name
             request.session['dataframe'] = data_frame.to_json()
         except Exception as e:
@@ -79,13 +87,10 @@ def get_context(request):
         data_frame = read_json(request.session['dataframe'])
         datafile_form.fields['data_file'].initial = file_name
         set_file_selection_context(context, datafile_form, False)
-        set_default_container_context(context, control_form, file_name, data_frame)
+        set_control_panel_context(context, control_form, file_name, data_frame)
         try:
             fit_result = fit_linear_regression(data_frame, control_form.fields['training_ratio'].initial)
-            context["validation_score"] = round(fit_result['validation_score'], 2)
-            context["training_score"] = round(fit_result['training_score'], 2)
-            context["validation_disabled"] = False
-            context["active_tab"] = "validate"
+            set_validation_context(context, fit_result)
         except Exception as e:
             context["error_message"] = str(e)
     return context

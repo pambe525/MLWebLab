@@ -82,18 +82,18 @@ class HomeViewTemplateTestCase(SimpleTestCase):
         self.verify_file_selection_enabled(True, self.fake_datafile)
 
     def test_train_button_clicked_with_default_settings(self):
-        csv_data = [["col1", "col2", "col3", "col4"], [1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]]
+        csv_data = [["X1", "X2", "Y"], [0, 5, 15], [1, 4, 16], [2, 3, 17], [3, 2, 18], [4, 1, 19], [5, 0, 20]]
         self.write_csvfile(csv_data)
         self.select_a_file(self.fake_datafile)
         self.browser.find_element_by_name("train_btn").click()
         self.assertFalse(self.browser.find_element_by_id("glass_pane").is_displayed())
         self.verify_content_area_is_visible(True)
         self.verify_file_selection_enabled(False, self.fake_datafile)
-        self.verify_training_set_data('col4', 3, '80%', 2)
+        self.verify_training_set_data('Y', 2, '80%', 4)
         self.verify_method_data("Linear Regression")
         self.verify_tabs(True)
         self.verify_validation_tab()
-        self.verify_source_file_data(self.fake_datafile, 3, 4)
+        self.verify_source_file_data(self.fake_datafile, 6, 3)
 
     # ------------------------------------------------------------------------------------------------------------------
     # HELPER METHODS
@@ -135,7 +135,7 @@ class HomeViewTemplateTestCase(SimpleTestCase):
         self.assertEquals(rows, int(self.browser.find_element_by_name("source_rows").text))
         self.assertEquals(cols, int(self.browser.find_element_by_name("source_cols").text))
 
-    def verata(self, target_feature, base_features, training_ratio, training_rows):
+    def verify_training_set_data(self, target_feature, base_features, training_ratio, training_rows):
         self.assertEquals(target_feature, self.browser.find_element_by_name("target_feature").text)
         self.assertEquals(base_features, int(self.browser.find_element_by_name("base_features").text))
         self.assertEquals(training_ratio, self.browser.find_element_by_name("training_ratio").text)
@@ -156,6 +156,7 @@ class HomeViewTemplateTestCase(SimpleTestCase):
             self.assertTrue("active" in self.browser.find_element_by_id("nav-validate-tab").get_attribute("class"))
 
     def verify_validation_tab(self):
+        self.assertEqual(self.browser.find_element_by_name("training_method").text, "Linear Regression")
         self.assertGreater(float(self.browser.find_element_by_name("validation_score").text), 0)
         self.assertGreater(float(self.browser.find_element_by_name("training_score").text), 0)
 

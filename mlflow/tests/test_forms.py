@@ -54,16 +54,13 @@ class ControlPanelForm_TestCase(SimpleTestCase):
         self.assertEqual(form.fields['training_method'].choices[0][1], "Linear Regression")
         self.assertEqual(len(form.fields['training_ratio'].choices), 1)
         self.assertEqual(form.fields['training_ratio'].choices[0][1], "80%")
-        self.assertEqual(form.fields['training_method'].initial, "linear_reg")
+        self.assertEqual(form.fields['training_method'].initial, "Linear Regression")
         self.assertEqual(form.fields['training_ratio'].initial, 0.8)
 
-
     def test_instantiation_with_POST_data(self):
-        post_data = {"training_ratio": 0.8, "training_method": "linear_reg"}
+        post_data = {"training_ratio": 0.8, "training_method": "Linear Regression"}
         form = ControlPanelForm(post_data)
         self.assertTrue(form.is_bound)
         self.assertTrue(form.is_valid())
         self.assertEqual(form.cleaned_data.get('training_ratio'), "0.8")
-        self.assertEqual(form.cleaned_data.get('training_method'), "linear_reg")
-
-
+        self.assertEqual(form.cleaned_data.get('training_method'), "Linear Regression")

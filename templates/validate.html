@@ -1,5 +1,12 @@
-<h6><b>MODEL VALIDATION RESULTS</b></h6><br>
+<div class="tab-title" name="training_method">Model fit using {{ training_method }}</div>
 <span class="card-title">Training Score: </span>
     <span class="card-label" name="training_score">{{  training_score }}</span>
 <span class="card-title">Validation Score: </span>
     <span class="card-label" name="validation_score">{{  validation_score  }}</span>
+<div class="note-text">
+    NOTE: Score is a measure of accuracy of the predicted fit. The best possible score is 1.0 and it can be negative
+    (because the model can be arbitrarily worse). A constant model that always predicts the expected value of y,
+    disregarding the input features, would get a score of 0.0. Training and Validation scores are computed
+    on the respective data sets.  The training set contains randomly selected data points respecting the training ratio,
+    hence the scores vary for each predicted fit.
+</div>

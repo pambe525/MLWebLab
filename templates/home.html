@@ -47,17 +47,17 @@
 	        </div>
             <div class="row mx-0">
                 <h6 class="card-title">Task:</h6>
-                <span class="card-label col">Supervised Learning</span>
+                <span class="card-label static-field col">Supervised Learning</span>
             </div>
            <div class="row mx-0">
                 <h6 class="card-title">Type:</h6>
-                <span class="card-label col">Regression</span>
+                <span class="card-label static-field col">Regression</span>
             </div>
             <h6 class="card-title">Target Feature:</h6>
-            <div class="card-label" name="target_feature">{{ target_feature }}</div>
+            <div class="card-label static-field" name="target_feature">{{ target_feature }}</div>
  	        <div class="row mx-0">
 	            <h6 class="card-title col-*">Base Features:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h6>
-	            <span class="card-label col" name="base_features">{{  base_features }}</span>
+	            <span class="card-label static-field col" name="base_features">{{  base_features }}</span>
 	        </div>
             <hr>
 	        <div class="row mx-0">
@@ -67,11 +67,11 @@
 	        </div>
  	        <div class="row mx-0">
 	            <h6 class="card-title col-*">Training Samples:&nbsp;&nbsp;&nbsp;</h6>
-	            <span class="card-label col" name="training_rows">{{ training_rows }}</span>
+	            <span class="card-label static-field col" name="training_rows">{{ training_rows }}</span>
 	        </div>
             <div class="row mx-0">
 	            <h6 class="card-title col-*">Validation Samples: </h6>
-	            <span class="card-label col" name="validation_rows">{{ validation_rows }}</span>
+	            <span class="card-label static-field col" name="validation_rows">{{ validation_rows }}</span>
 	        </div>
             <hr>
             <h6 class="card-title">Algorithm/Method:</h6>
@@ -83,7 +83,7 @@
     </form>
 
     <nav class="mx-4 my-2">
-      <div class="nav nav-tabs bg-light" id="nav-tab" role="tablist">
+      <div class="nav nav-tabs" id="nav-tab" role="tablist">
         <a class="nav-item nav-link {% if active_tab == "explore" %}active{% endif %}"
             id="nav-explore-tab" data-toggle="tab" href="#nav-explore" role="tab">
             <i class="fa fa-database mx-1"></i>Explore Data</a>

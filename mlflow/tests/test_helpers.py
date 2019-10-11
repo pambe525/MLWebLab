@@ -3,7 +3,7 @@ from django.test import SimpleTestCase
 from unittest.mock import MagicMock, patch
 from mlflow.helpers import set_file_selection_context
 from mlflow.helpers import dataframe_has_headers
-from mlflow.helpers import set_default_container_context
+from mlflow.helpers import set_control_panel_context
 from mlflow.helpers import get_context
 from mlflow.helpers import read_csv_datafile
 from django.conf import settings
@@ -53,7 +53,7 @@ class HelperStaticFunctionsTestCase(SimpleTestCase):
         filename = "somefile.dat"
         data_frame = DataFrame(data)
         form = ControlPanelForm()
-        context = set_default_container_context(context, form, filename, data_frame)
+        context = set_control_panel_context(context, form, filename, data_frame)
         self.assertEqual(context['control_form'], form)
         self._verify_container_content(context, filename, data_frame)
 
@@ -151,7 +151,7 @@ class HelperStaticFunctionsTestCase(SimpleTestCase):
         with patch("mlflow.forms.get_datafile_choices") as mock_datafile_list:
             with patch("mlflow.helpers.read_csv_datafile") as mock_csv_read:
                 file_choices, mock_request = self._setup_mocks(mock_csv_read, mock_datafile_list, "POST")
-                mock_request.POST = {"training_method": "linear_reg", "training_ratio": 0.8, "train_btn": []}
+                mock_request.POST = {"training_method": "Linear Regression", "training_ratio": 0.8, "train_btn": []}
                 json_data = DataFrame(self.mock_data).to_json()
                 mock_request.session = {'datafile': "a2.txt", 'dataframe': json_data}
                 context = get_context(mock_request)
@@ -218,5 +218,6 @@ class HelperStaticFunctionsTestCase(SimpleTestCase):
         else:
             self.assertFalse(context['validation_disabled'])
             self.assertEqual(context['active_tab'], "validate")
+            self.assertEqual(context['training_method'], "Linear Regression")
             self.assertGreater(float(context['validation_score']), 0)
             self.assertGreater(float(context['training_score']), 0)

@@ -71,6 +71,12 @@ hr {
     text-overflow: ellipsis;
     color: navy;
 }
+
+.static-field {
+    color: #333;
+    background-color: #ddd;
+}
+
 .btn {
     color: white;
     background-color: dodgerblue;
@@ -89,7 +95,6 @@ hr {
 
 .tabbed_content_area {
     height: auto;
-    width: auto;
     margin: 6px 20px 0px 30px;
     border-radius: 4px;
 }
@@ -101,10 +106,10 @@ hr {
 }
 .nav-tabs .nav-link.active {
     color: black;
-    background-color: #efefef;
     border: 2px solid darkgray;
     border-bottom: transparent;
     border-radius: 10px 10px 0 0;
+    background-color: #eee;
 }
 .nav-tabs .nav-link:hover {
     border-bottom-color: darkgray;
@@ -119,4 +124,17 @@ hr {
     border-top: 0;
     height: 430px;
     min-width: 500px;
+    max-width: 600px;
+    border-radius: 0 0 5px 5px;
+}
+.tab-title {
+    font-size: 18px;
+    margin: 0 10px 15px 10px;
+    font-weight: bold;
+    color: #444;
+}
+.note-text {
+    font-size: 10px;
+    color: #666;
+    padding: 10px;
 }
