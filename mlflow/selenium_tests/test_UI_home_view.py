@@ -135,7 +135,7 @@ class HomeViewTemplateTestCase(SimpleTestCase):
         self.assertEquals(rows, int(self.browser.find_element_by_name("source_rows").text))
         self.assertEquals(cols, int(self.browser.find_element_by_name("source_cols").text))
 
-    def verify_training_set_data(self, target_feature, base_features, training_ratio, training_rows):
+    def verata(self, target_feature, base_features, training_ratio, training_rows):
         self.assertEquals(target_feature, self.browser.find_element_by_name("target_feature").text)
         self.assertEquals(base_features, int(self.browser.find_element_by_name("base_features").text))
         self.assertEquals(training_ratio, self.browser.find_element_by_name("training_ratio").text)

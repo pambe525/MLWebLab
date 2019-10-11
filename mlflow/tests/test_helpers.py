@@ -10,6 +10,7 @@ from django.conf import settings
 from pandas import DataFrame
 from pandas.errors import EmptyDataError
 from mlflow.forms import ControlPanelForm
+from mlflow.methods import fit_linear_regression
 
 
 class HelperStaticFunctionsTestCase(SimpleTestCase):
@@ -145,6 +146,8 @@ class HelperStaticFunctionsTestCase(SimpleTestCase):
                     self._verify_file_selection_enabled(context, True)
 
     def test_get_context_with_TRAIN_button_clicked(self):
+        self.mock_data = {"X1": list(range(6)), "X2": list(reversed(range(6))), "y": list(range(15, 21))}
+        print(self.mock_data)
         with patch("mlflow.forms.get_datafile_choices") as mock_datafile_list:
             with patch("mlflow.helpers.read_csv_datafile") as mock_csv_read:
                 file_choices, mock_request = self._setup_mocks(mock_csv_read, mock_datafile_list, "POST")
