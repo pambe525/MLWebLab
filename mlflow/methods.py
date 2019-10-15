@@ -2,6 +2,10 @@ from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import cross_validate
 from statistics import mean, stdev
 from sklearn.utils import shuffle
+import base64
+import matplotlib.pyplot as plt
+import numpy as np
+from io import BytesIO
 
 
 # TRAINING METHODS AND ALGORITHMS
@@ -22,5 +26,13 @@ def fit_linear_regression(dataframe, training_ratio):
     return fit_result
 
 
-def plot_fit():
-    pass
+def plot_fit(y, y_predict, context):
+    plt.scatter(y, y_predict, color="green")
+    plt.plot([min(y), max(y)], [min(y_predict), max(y_predict)], color="gray")
+    plt.xlabel("Y Actual")
+    plt.ylabel("Y Predicted")
+    plt.tight_layout()
+    buf = BytesIO()
+    plt.savefig(buf, format='png', dpi=300)
+    context['graphic'] = base64.b64encode(buf.getvalue()).decode('utf-8').replace('\n', '')
+    buf.close()

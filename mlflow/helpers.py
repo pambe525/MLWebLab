@@ -4,7 +4,7 @@ from pandas import read_csv
 from mlflow.forms import DataFileForm, ControlPanelForm
 from django.conf import settings
 from pandas import read_json
-from mlflow.methods import fit_linear_regression
+from mlflow.methods import fit_linear_regression, plot_fit
 
 
 # Sets context dict parameters when file selection is enabled or disabled
@@ -101,6 +101,7 @@ def get_context(request):
             set_validation_context(context, fit_result)
             context['train_scores_stdev'] = round(fit_result['train_scores_stdev'],2)
             context['test_scores_stdev'] = round(fit_result['test_scores_stdev'], 2)
+            plot_fit(fit_result['y'], fit_result['y_predict'], context)
         except Exception as e:
             context["error_message"] = str(e)
     return context
