@@ -29,7 +29,7 @@ def fit_linear_regression(dataframe, training_ratio):
 def plot_fit(y, y_predict, context):
     plt.figure(figsize=(5, 3), dpi=100)
     plt.scatter(y, y_predict, color="darkred", s=5)
-    plt.plot([min(y), max(y)], [min(y_predict), max(y_predict)], color="lightgray")
+    plt.plot([min(y), max(y)], [min(y), max(y)], color="lightgray")
     target = context['target_feature']
     plt.xlabel("Actual " + target, fontsize=9)
     plt.ylabel("Predicted " + target, fontsize=9)
