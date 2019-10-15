@@ -18,8 +18,8 @@ class DataFileForm_TestCase(SimpleTestCase):
         file_names = get_datafile_choices()
         mock_current_dir.assert_called_once_with(datafiles_path)
         self.assertEqual(len(file_names), 4)
-        self.assertEqual(file_names[0], ("Choose a file...", "Choose a file..."))
-        self.assertEqual(file_names[3], ("file3.dat", "file3.dat"))
+        self.assertEqual(file_names[0], ("<Choose a file>", "<Choose a file>"))
+        self.assertEqual(file_names[3], ("file3.dat", "file3"))
 
     def test_Unbound_DataFileForm(self):
         self.__verify_form(None, False)
@@ -39,9 +39,9 @@ class DataFileForm_TestCase(SimpleTestCase):
         datafiles_path = os.path.join(settings.BASE_DIR, 'data')
         mock_listdir.assert_called_once_with(datafiles_path)
         self.assertTrue(form.is_valid()) if is_valid else self.assertFalse(form.is_valid())
-        self.assertEquals(form.fields['data_file'].initial, "Choose a file...")
+        self.assertEquals(form.fields['data_file'].initial, "<Choose a file>")
         self.assertEqual(len(form.fields['data_file'].choices), 4)
-        self.assertTrue(('file2.dat', 'file2.dat') in form.fields['data_file'].choices)
+        self.assertTrue(('file2.dat', 'file2') in form.fields['data_file'].choices)
 
 
 class ControlPanelForm_TestCase(SimpleTestCase):

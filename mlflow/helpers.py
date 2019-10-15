@@ -58,18 +58,26 @@ def dataframe_has_headers(data_frame):
 def read_csv_datafile(file_name):
     file_path = os.path.join(settings.BASE_DIR, 'data/' + file_name)
     dataFrame = read_csv(file_path)
-    if int(dataFrame.shape[1]) < 2: raise Exception("Data file has only one column")
-    if int(dataFrame.shape[0]) < 2: raise Exception("Data file has only one row")
+    if int(dataFrame.shape[1]) < 2:
+        raise Exception("Data file has only one column. Add at least one more column.")
+    if int(dataFrame.shape[0]) < 2:
+        raise Exception("Data file has only one row. Add at least one more row of data.")
     if not dataframe_has_headers(dataFrame):
-        raise Exception("Data file has no headers")
+        raise Exception("Data file has no headers. Add non-numeric column headers.")
     return dataFrame
+
+
+# Returns forms based on request
+def initialize_forms(request):
+    datafile_form = DataFileForm() if request.method != "POST" else DataFileForm(request.POST)
+    control_form = ControlPanelForm() if request.method != "POST" else ControlPanelForm(request.POST)
+    return control_form, datafile_form
 
 
 # HomeView Context Manager to manage all page variables and state
 def get_context(request):
     context = {"error_message": None}
-    datafile_form = DataFileForm() if request.method != "POST" else DataFileForm(request.POST)
-    control_form = ControlPanelForm() if request.method != "POST" else ControlPanelForm(request.POST)
+    control_form, datafile_form = initialize_forms(request)
     set_file_selection_context(context, datafile_form, True)
     if datafile_form.is_valid():
         file_name = datafile_form.cleaned_data['data_file']
@@ -91,6 +99,8 @@ def get_context(request):
         try:
             fit_result = fit_linear_regression(data_frame, control_form.fields['training_ratio'].initial)
             set_validation_context(context, fit_result)
+            context['train_scores_stdev'] = round(fit_result['train_scores_stdev'],2)
+            context['test_scores_stdev'] = round(fit_result['test_scores_stdev'], 2)
         except Exception as e:
             context["error_message"] = str(e)
     return context

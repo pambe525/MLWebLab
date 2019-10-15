@@ -17,7 +17,7 @@ class HomeViewTemplateTestCase(SimpleTestCase):
         super().setUpClass()
         cls.browser = webdriver.Firefox()
         # Create a empty fake data file so it appears in selection list
-        cls.fake_datafile = "fake_data.csv"
+        cls.fake_datafile = "fake_data"
         cls.datafile_path = os.path.join(settings.BASE_DIR, "data/" + cls.fake_datafile)
         open(cls.datafile_path, 'a+').close()
 
@@ -82,18 +82,19 @@ class HomeViewTemplateTestCase(SimpleTestCase):
         self.verify_file_selection_enabled(True, self.fake_datafile)
 
     def test_train_button_clicked_with_default_settings(self):
-        csv_data = [["X1", "X2", "Y"], [0, 5, 15], [1, 4, 16], [2, 3, 17], [3, 2, 18], [4, 1, 19], [5, 0, 20]]
+        csv_data = [["X1", "X2", "Y"], [0, 9, 24], [1, 8, 23], [2, 7, 22], [3, 6, 21], [4, 5, 20], [5, 4, 19],
+                    [6, 3, 18], [7, 2, 17], [8, 1, 16], [9, 0, 15]]
         self.write_csvfile(csv_data)
         self.select_a_file(self.fake_datafile)
         self.browser.find_element_by_name("train_btn").click()
         self.assertFalse(self.browser.find_element_by_id("glass_pane").is_displayed())
         self.verify_content_area_is_visible(True)
         self.verify_file_selection_enabled(False, self.fake_datafile)
-        self.verify_training_set_data('Y', 2, '80%', 4)
+        self.verify_training_set_data('Y', 2, '80%', 8)
         self.verify_method_data("Linear Regression")
         self.verify_tabs(True)
         self.verify_validation_tab()
-        self.verify_source_file_data(self.fake_datafile, 6, 3)
+        self.verify_source_file_data(self.fake_datafile, 10, 3)
 
     def test_train_button_clicked_with_exception(self):
         csv_data = [["X1", "X2", "Y"], [0, None, 15], [1, 4, 16], [2, 3, 17], [3, None, 18], [4, 1, 19], [5, 0, 20]]
@@ -126,7 +127,7 @@ class HomeViewTemplateTestCase(SimpleTestCase):
         else:
             self.assertTrue('invisible' in container.get_attribute('class'))
 
-    def verify_file_selection_enabled(self, is_enabled, default_selection="Choose a file..."):
+    def verify_file_selection_enabled(self, is_enabled, default_selection="<Choose a file>"):
         select_btn = self.browser.find_element_by_name('select_btn')
         change_btn = self.browser.find_element_by_name('change_btn')
         file_selector = self.browser.find_element_by_name('data_file')
