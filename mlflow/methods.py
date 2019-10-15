@@ -27,10 +27,13 @@ def fit_linear_regression(dataframe, training_ratio):
 
 
 def plot_fit(y, y_predict, context):
-    plt.scatter(y, y_predict, color="green")
-    plt.plot([min(y), max(y)], [min(y_predict), max(y_predict)], color="gray")
-    plt.xlabel("Y Actual")
-    plt.ylabel("Y Predicted")
+    plt.figure(figsize=(5, 3), dpi=100)
+    plt.scatter(y, y_predict, color="darkred", s=5)
+    plt.plot([min(y), max(y)], [min(y_predict), max(y_predict)], color="lightgray")
+    plt.xlabel("Y Actual", fontsize=10)
+    plt.ylabel("Y Predicted", fontsize=10)
+    plt.xticks(fontsize=8)
+    plt.yticks(fontsize=8)
     plt.tight_layout()
     buf = BytesIO()
     plt.savefig(buf, format='png', dpi=300)
