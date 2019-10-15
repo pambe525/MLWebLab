@@ -1,4 +1,4 @@
-<div class="tab-title" name="training_method">Model fit using {{ training_method }}</div>
+<div class="tab-title" name="training_method">Model fit using {{ training_method }} and k-Folds Cross-Validation</div>
 <span class="card-title">Training Score: </span>
     <span class="card-label" name="training_score">{{  training_score }}</span>
     <span>+/- ({{ train_scores_stdev }})</span>
@@ -8,7 +8,6 @@
 <div class="note-text">
     NOTE: Score is a measure of goodness of the predicted fit. The best possible score is 1.0 and it can be negative
     (because the model can be arbitrarily worse). A constant model that always predicts the expected value of y,
-    disregarding the input features, would get a score of 0.0. K-fold cross-validation is used to compute Training
-    and Validation scores which are then averaged for the respective data sets.
+    disregarding the input features, would get a score of 0.0.
 </div>
 <img width=550 id="validation_plot" src="data:image/png;base64,{{graphic|safe}}">
