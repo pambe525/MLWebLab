@@ -7,6 +7,7 @@ from django.conf import settings
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
+from mlflow import constants
 
 
 @tag('selenium')
@@ -18,7 +19,7 @@ class HomeViewTemplateTestCase(SimpleTestCase):
         cls.browser = webdriver.Firefox()
         # Create a empty fake data file so it appears in selection list
         cls.fake_datafile = "fake_data"
-        cls.datafile_path = os.path.join(settings.BASE_DIR, "data/" + cls.fake_datafile)
+        cls.datafile_path = os.path.join(constants.DATA_FILE_PATH, cls.fake_datafile)
         open(cls.datafile_path, 'a+').close()
 
     def setUp(self):
@@ -127,7 +128,7 @@ class HomeViewTemplateTestCase(SimpleTestCase):
         else:
             self.assertTrue('invisible' in container.get_attribute('class'))
 
-    def verify_file_selection_enabled(self, is_enabled, default_selection="<Choose a file>"):
+    def verify_file_selection_enabled(self, is_enabled, default_selection=constants.FILE_SELECT_DEFAULT):
         select_btn = self.browser.find_element_by_name('select_btn')
         change_btn = self.browser.find_element_by_name('change_btn')
         file_selector = self.browser.find_element_by_name('data_file')

@@ -29,7 +29,6 @@ ALLOWED_HOSTS = ['pambe.pythonanywhere.com','localhost']
 
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',

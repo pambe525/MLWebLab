@@ -1,15 +1,17 @@
 import os
-from django.test import SimpleTestCase
 from unittest.mock import MagicMock, patch
-from mlflow.helpers import set_file_selection_context
-from mlflow.helpers import dataframe_has_headers
-from mlflow.helpers import set_control_panel_context
-from mlflow.helpers import get_context
-from mlflow.helpers import read_csv_datafile
-from django.conf import settings
+
+from django.test import SimpleTestCase
 from pandas import DataFrame
 from pandas.errors import EmptyDataError
+
+from mlflow import constants
 from mlflow.forms import ControlPanelForm
+from mlflow.helpers import dataframe_has_headers
+from mlflow.helpers import get_context
+from mlflow.helpers import read_csv_datafile
+from mlflow.helpers import set_control_panel_context
+from mlflow.helpers import set_file_selection_context
 
 
 class HelperStaticFunctionsTestCase(SimpleTestCase):
@@ -60,7 +62,7 @@ class HelperStaticFunctionsTestCase(SimpleTestCase):
         data = {"col1": [1, 2, 3, 4], "col2": [5, 6, 7, 8], "col3": [9, 10, 11, 12],
                 "col4": [13, 14, 15, 16], "col5": [17, 18, 19, 20]}
         filename = "test.csv"
-        filepath = os.path.join(settings.BASE_DIR, 'data/' + filename)
+        filepath = os.path.join(constants.DATA_FILE_PATH, filename)
         with patch("mlflow.helpers.read_csv") as mock_read_csv:
             mock_read_csv.return_value = DataFrame(data)
             dataframe = read_csv_datafile(filename)
@@ -111,7 +113,7 @@ class HelperStaticFunctionsTestCase(SimpleTestCase):
         with patch("mlflow.forms.get_datafile_choices") as mock_datafile_list:
             with patch("mlflow.helpers.read_csv_datafile") as mock_csv_read:
                 file_choices, mock_request = self._setup_mocks(mock_csv_read, mock_datafile_list, "POST")
-                mock_request.POST = {"data_file": "<Choose a file>"}
+                mock_request.POST = {"data_file": constants.FILE_SELECT_DEFAULT}
                 context = get_context(mock_request)
                 self._verify_file_selection_form(context, "POST", len(file_choices))
 
@@ -162,7 +164,7 @@ class HelperStaticFunctionsTestCase(SimpleTestCase):
 
     # ------------------------------------------------------------------------------------------------------------------
     def _setup_mocks(self, mock_csv_read, mock_datafile_list, method):
-        file_choices = [("<Choose a file>", "<Choose a file>"), ("a1.txt", "a1.txt"),
+        file_choices = [(constants.FILE_SELECT_DEFAULT, constants.FILE_SELECT_DEFAULT), ("a1.txt", "a1.txt"),
                         ("a2.txt", "a2.txt")]
         mock_datafile_list.return_value = file_choices
         mock_csv_read.return_value = DataFrame(self.mock_data)
@@ -170,17 +172,17 @@ class HelperStaticFunctionsTestCase(SimpleTestCase):
         mock_request.method = method
         return file_choices, mock_request
 
-    def _verify_file_selection_form(self, context, response_method, n_files, selected_file="<Choose a file>"):
+    def _verify_file_selection_form(self, context, response_method, n_files, selected_file=constants.FILE_SELECT_DEFAULT):
         form = context['datafile_form']
         if response_method == "GET":
             self.assertFalse(form.is_valid())
             self.assertFalse(form.is_bound)
-            self.assertEqual(form.fields['data_file'].initial, "<Choose a file>")
+            self.assertEqual(form.fields['data_file'].initial, constants.FILE_SELECT_DEFAULT)
             self.assertEqual(len(form.fields['data_file'].choices), n_files)
-        elif response_method == "POST" and selected_file == "<Choose a file>":
+        elif response_method == "POST" and selected_file == constants.FILE_SELECT_DEFAULT:
             self.assertFalse(form.is_valid())
             self.assertTrue(form.is_bound)
-            self.assertEqual(form.fields['data_file'].initial, "<Choose a file>")
+            self.assertEqual(form.fields['data_file'].initial, constants.FILE_SELECT_DEFAULT)
             self.assertEqual(len(form.fields['data_file'].choices), n_files)
         else:
             # self.assertTrue(form.is_valid())

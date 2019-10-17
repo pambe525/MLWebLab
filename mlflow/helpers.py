@@ -1,9 +1,11 @@
 import os
 import os.path
+
 from pandas import read_csv
-from mlflow.forms import DataFileForm, ControlPanelForm
-from django.conf import settings
 from pandas import read_json
+
+from mlflow import constants
+from mlflow.forms import DataFileForm, ControlPanelForm
 from mlflow.methods import fit_linear_regression, plot_fit
 
 
@@ -56,7 +58,7 @@ def dataframe_has_headers(data_frame):
 
 # Reads csv data file and returns a pandas DataFrame object (also checks for date file errors)
 def read_csv_datafile(file_name):
-    file_path = os.path.join(settings.BASE_DIR, 'data/' + file_name)
+    file_path = os.path.join(constants.DATA_FILE_PATH, file_name)
     dataFrame = read_csv(file_path)
     if int(dataFrame.shape[1]) < 2:
         raise Exception("Data file has only one column. Add at least one more column.")
@@ -99,7 +101,7 @@ def get_context(request):
         try:
             fit_result = fit_linear_regression(data_frame, control_form.fields['training_ratio'].initial)
             set_validation_context(context, fit_result)
-            context['train_scores_stdev'] = round(fit_result['train_scores_stdev'],2)
+            context['train_scores_stdev'] = round(fit_result['train_scores_stdev'], 2)
             context['test_scores_stdev'] = round(fit_result['test_scores_stdev'], 2)
             plot_fit(fit_result['y'], fit_result['y_predict'], context)
         except Exception as e:

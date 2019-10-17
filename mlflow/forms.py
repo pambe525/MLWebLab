@@ -1,17 +1,18 @@
-from django import forms
 import os
 from os import listdir as current_dir
 from os.path import isfile
-from django.conf import settings
+
+from django import forms
+
+from mlflow import constants
 
 
 # Static function to read data files from data directory
 def get_datafile_choices():
-    datafiles_path = os.path.join(settings.BASE_DIR, 'data')
-    dir_items = current_dir(datafiles_path)
-    choices = ["<Choose a file>"]
+    dir_items = current_dir(constants.DATA_FILE_PATH)
+    choices = [constants.FILE_SELECT_DEFAULT]
     for f in dir_items:
-        if isfile(os.path.join(datafiles_path, f)):
+        if isfile(os.path.join(constants.DATA_FILE_PATH, f)):
             choices.append(f)
     return [(filename, filename.rsplit('.', 1)[0]) for filename in choices]
 
@@ -22,12 +23,12 @@ class DataFileForm(forms.Form):
         super(DataFileForm, self).__init__(*args, **kwargs)
         file_choices = get_datafile_choices()
         self.fields['data_file'] = forms.ChoiceField(label="Data File", choices=file_choices)
-        self.fields['data_file'].initial = "<Choose a file>"
-        self.fields['data_file'].widget.attrs['class'] = 'input-group-text custom-select'
+        self.fields['data_file'].initial = file_choices[0][0]
+        self.fields['data_file'].widget.attrs['class'] = constants.FILE_SELECT_WIDGET_CLASS
 
     def is_valid(self):
         valid = super(DataFileForm, self).is_valid()
-        if valid and self.cleaned_data.get('data_file') == "<Choose a file>":
+        if valid and self.cleaned_data.get('data_file') == self.fields['data_file'].choices[0][0]:
             valid = False
         return valid
 
@@ -37,9 +38,9 @@ class ControlPanelForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super(ControlPanelForm, self).__init__(*args, **kwargs)
         # self.fields['data_file_name'] = forms.CharField(widget=forms.HiddenInput)
-        self.fields['training_method'] = forms.ChoiceField(choices=[("Linear Regression", "Linear Regression")])
-        self.fields['training_ratio'] = forms.ChoiceField(choices=[(0.8, "80%")])
-        self.fields['training_method'].widget.attrs['class'] = 'card-label custom-select'
-        self.fields['training_ratio'].widget.attrs['class'] = 'card-label col custom-select'
-        self.fields['training_method'].initial = "Linear Regression"
-        self.fields['training_ratio'].initial = 0.8
+        self.fields['training_method'] = forms.ChoiceField(choices=constants.TRAINING_METHOD_CHOICES)
+        self.fields['training_ratio'] = forms.ChoiceField(choices=constants.TRAINING_RATIO_CHOICES)
+        self.fields['training_method'].widget.attrs['class'] = constants.CONTROL_PANEL_WIDGET_CLASS
+        self.fields['training_ratio'].widget.attrs['class'] = constants.CONTROL_PANEL_WIDGET_CLASS
+        self.fields['training_method'].initial = constants.TRAINING_METHOD_INITIAL
+        self.fields['training_ratio'].initial = constants.TRAINING_RATIO_INITIAL
