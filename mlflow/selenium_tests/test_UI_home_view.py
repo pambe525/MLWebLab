@@ -177,9 +177,9 @@ class HomeViewTemplateTestCase(SimpleTestCase):
         self.assertGreater(float(self.browser.find_element_by_name("training_score").text), 0)
 
     def verify_message_box_and_close(self, message_text):
-        message = self.browser.switch_to.active_element
-        self.assertTrue(message.is_displayed())
-        btnXPath = "//button[contains(text(),'Close')]"
-        close_button = WebDriverWait(self.browser, 10).until(EC.element_to_be_clickable((By.XPATH, btnXPath)))
-        self.assertTrue(message_text in self.browser.find_element_by_class_name("modal-body").text)
+        message_box = self.browser.find_element_by_id("msg_box")
+        self.assertTrue(message_box.is_displayed())
+        close_button = self.browser.find_element_by_id("msg_box_close")
+        self.assertTrue(message_text in self.browser.find_element_by_id("msg_text").text)
         close_button.click()
+        self.assertFalse(message_box.is_displayed())

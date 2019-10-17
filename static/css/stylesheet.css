@@ -11,12 +11,22 @@
     opacity: 0.3;
     background-color:gray;
 }
-.error_message {
-    font-size: 16px;
-    color: #444;
+.message-box {
+    font-size: 14px;
+    font-weight: bold;
+    color: darkred;
+    background-color: lightpink;
+    border: 1px solid red;
+    box-shadow: 3px 3px 3px #ccc;
+    border-radius: 5px;
+    width: 500px;
+    height: 60px;
+    padding: 10px;
+    border-left: 5px solid red;
+    margin-left: 20px;
 }
 hr {
-    margin: 8px 0px;
+    margin: 8px 0;
     border: 1px groove lightgray;
 }
 .h5 {
@@ -95,7 +105,7 @@ hr {
 
 .tabbed_content_area {
     height: auto;
-    margin: 6px 20px 0px 30px;
+    margin: 6px 20px 0 30px;
     border-radius: 4px;
 }
 .nav-tabs {

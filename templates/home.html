@@ -12,30 +12,36 @@
           integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
           crossorigin="anonymous">
   </script>
-
   {% load static %}
 
-<!-- File input form  -->
-<form id="datafile_form" action={% url 'index' %} method="POST">
-    {% csrf_token %}
-    <div class="input-group">
-        <div class="input-prepend" >
-            <span class="input-group-text pt-1 pb-0 bg-white">{{ datafile_form.data_file.label_tag }}</span>
+  <div class="row mx-1">
+    <!-- File input form  -->
+    <form class="my-3" id="datafile_form" action={% url 'index' %} method="POST">
+        {% csrf_token %}
+        <div class="input-group">
+            <div class="input-prepend" >
+                <span class="input-group-text pt-1 pb-0 bg-white">{{ datafile_form.data_file.label_tag }}</span>
+            </div>
+            <div class="input-group-append">{{ datafile_form.data_file }}</div>
+            <div class="input-group-append">
+                <button type="submit" name="select_btn" class="btn" {% if select_btn_disabled %} disabled {% endif %}>
+                    Select
+                </button>
+                <button type="submit" name="change_btn" class="btn" {% if change_btn_disabled %} disabled {% endif %}>
+                    Change Data File
+                </button>
+            </div>
         </div>
-        <div class="input-group-append">{{ datafile_form.data_file }}</div>
-        <div class="input-group-append">
-            <button type="submit" name="select_btn" class="btn" {% if select_btn_disabled %} disabled {%  endif %}>
-                Select
-            </button>
-            <button type="submit" name="change_btn" class="btn" {% if change_btn_disabled %} disabled {%  endif %}>
-                Change Data File
-            </button>
-        </div>
+    </form>
+    <!-- /File input form  -->
+    <!-- Message box -->
+    <div id="msg_box" class="message-box row mx-3">
+        <span id="msg_text" class="col">{{  error_message }}</span>
+        <button id="msg_box_close" type="button" class="close col-*">&times;</button>
     </div>
-</form>
-<!-- /File input form  -->
+    <!-- /Message box -->
+    </div>
 
-<hr>
 <!-- Content Area -->
 <div id="home_container" class="{% if not container_visible %}invisible{% endif %} row container-fluid">
     <form id="sidebar_form" action={% url 'index' %} method="POST">
@@ -105,15 +111,22 @@
 
 {% block javascript %}
       <script type="text/javascript">
-        $(document).ready(function(){
-            {% if error_message is not None %} $('#messageBox').modal("show"); {% endif %}
-            $("#glass_pane").hide();
-            $("#datafile_form").on('submit', function() {
-                if ( $(document.activeElement).attr('name') === "train_btn") $("#glass_pane").show();
-            })
-             $("#sidebar_form").on('submit', function(e) {
-                if ( $(document.activeElement).attr('name') === "train_btn") $("#glass_pane").show();
-            })
-        })
-     </script>
+          $(document).ready(function(){
+              let errorMessage = "{{ error_message }}";
+              if (errorMessage != "None") $('#msg_box').show();
+              else $("#msg_box").hide();
+              $("#glass_pane").hide();
+
+              $("#msg_box_close").on('click', function() {
+                  $("#msg_box").hide();
+              });
+              $("#datafile_form").on('submit', function() {
+                  if ( $(document.activeElement).attr('name') === "train_btn") $("#glass_pane").show();
+              });
+              $("#sidebar_form").on('submit', function(e) {
+                  if ( $(document.activeElement).attr('name') === "train_btn") $("#glass_pane").show();
+              });
+          })
+      </script>
+
 {% endblock javascript %}
