@@ -22,7 +22,7 @@
             <div class="input-prepend" >
                 <span class="input-group-text pt-1 pb-0 bg-white">{{ datafile_form.data_file.label_tag }}</span>
             </div>
-            <div class="input-group-append">{{ datafile_form.data_file }}</div>
+            <div id = "data_file_select" class="input-group-append">{{ datafile_form.data_file }}</div>
             <div class="input-group-append">
                 <button type="submit" name="select_btn" class="btn" {% if select_btn_disabled %} disabled {% endif %}>
                     Select
@@ -110,23 +110,5 @@
 {% endblock home_content %}
 
 {% block javascript %}
-      <script type="text/javascript">
-          $(document).ready(function(){
-              let errorMessage = "{{ error_message }}";
-              if (errorMessage != "None") $('#msg_box').show();
-              else $("#msg_box").hide();
-              $("#glass_pane").hide();
-
-              $("#msg_box_close").on('click', function() {
-                  $("#msg_box").hide();
-              });
-              $("#datafile_form").on('submit', function() {
-                  if ( $(document.activeElement).attr('name') === "train_btn") $("#glass_pane").show();
-              });
-              $("#sidebar_form").on('submit', function(e) {
-                  if ( $(document.activeElement).attr('name') === "train_btn") $("#glass_pane").show();
-              });
-          })
-      </script>
-
+    <script type="text/javascript" src="{% static 'js/utilities.js' %}"></script>
 {% endblock javascript %}

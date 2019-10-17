@@ -1,12 +1,10 @@
-from selenium import webdriver
-from django.test import tag, SimpleTestCase
-from selenium.webdriver.support.ui import Select
 import csv
 import os
-from django.conf import settings
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
+
+from django.test import tag, SimpleTestCase
+from selenium import webdriver
+from selenium.webdriver.support.ui import Select
+
 from mlflow import constants
 
 
