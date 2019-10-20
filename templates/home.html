@@ -1,17 +1,9 @@
 {% extends 'base.html' %}
 {% block home_content %}
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-          integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-          crossorigin="anonymous">
-  </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-          integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-          crossorigin="anonymous">
-  </script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-          integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-          crossorigin="anonymous">
-  </script>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   {% load static %}
 
   <div class="row mx-1">
@@ -44,7 +36,7 @@
 
 <!-- Content Area -->
 <div id="home_container" class="{% if not container_visible %}invisible{% endif %} row container-fluid">
-    <form id="sidebar_form" action={% url 'index' %} method="POST">
+    <form id="sidebar_form" action={% url 'train_model' %} method="GET">
         {% csrf_token %}
         <div name="data_file_name">{{ control_form.data_file_name }}</div>
         <div class="card border-dark mt-1">
@@ -60,7 +52,7 @@
                 <span class="card-label static-field col">Regression</span>
             </div>
             <h6 class="card-title">Target Feature:</h6>
-            <div class="card-label static-field" name="target_feature">{{ target_feature }}</div>
+            <div class="card-label static-field" id="target_feature">{{ target_feature }}</div>
  	        <div class="row mx-0">
 	            <h6 class="card-title col-*">Base Features:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h6>
 	            <span class="card-label static-field col" name="base_features">{{  base_features }}</span>
@@ -68,7 +60,7 @@
             <hr>
 	        <div class="row mx-0">
       	        <h6 class="card-title col-*">Training Set Ratio:&nbsp;&nbsp;</h6>
-                <span>{{ control_form.training_ratio }}</span>
+                <span id="training_ratio_select">{{ control_form.training_ratio }}</span>
 	        </div>
  	        <div class="row mx-0">
 	            <h6 class="card-title col-*">Training Samples:&nbsp;&nbsp;&nbsp;</h6>
@@ -82,7 +74,7 @@
             <h6 class="card-title">Algorithm/Method:</h6>
             <div style="width:220px">{{  control_form.training_method }}</div>
             <hr>
-            <button type="submit" class="btn m-2" name="train_btn">Train</button>
+            <button type="button" class="btn m-2" onclick="ajaxTrainRequest()" name="train_btn">Train</button>
         </div>
     </form>
 
@@ -110,5 +102,8 @@
 {% endblock home_content %}
 
 {% block javascript %}
-    <script type="text/javascript" src="{% static 'js/utilities.js' %}"></script>
+    <script type="text/javascript">
+        var token = '{{csrf_token}}';
+    </script>
+    <script type="text/javascript" src="{% static 'js/home-view-controller.js' %}"></script>
 {% endblock javascript %}

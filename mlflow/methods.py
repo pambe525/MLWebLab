@@ -18,11 +18,11 @@ def fit_linear_regression(dataframe, training_ratio):
     cv_results = cross_validate(estimator, X, y, cv=k_folds, return_train_score=True)
     linreg = estimator.fit(X, y)
     y_predict = linreg.predict(X)
-    fit_result = {"training_score": mean(cv_results['train_score']),
-                  "validation_score": mean(cv_results['test_score']),
+    fit_result = {"train_score": mean(cv_results['train_score']),
+                  "test_score": mean(cv_results['test_score']),
                   'train_scores_stdev': stdev(cv_results['train_score']),
                   'test_scores_stdev': stdev(cv_results['test_score']),
-                  'y': y, 'y_predict': y_predict}
+                  'y': y.tolist(), 'y_predict': y_predict.tolist()}
     return fit_result
 
 
