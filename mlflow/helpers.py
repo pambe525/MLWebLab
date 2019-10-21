@@ -2,11 +2,9 @@ import os
 import os.path
 
 from pandas import read_csv
-from pandas import read_json
 
 from mlflow import constants
 from mlflow.forms import DataFileForm, ControlPanelForm
-from mlflow.methods import fit_linear_regression, plot_fit
 
 
 # Sets context dict parameters when file selection is enabled or disabled
@@ -92,18 +90,4 @@ def get_context(request):
             request.session['dataframe'] = data_frame.to_json()
         except Exception as e:
             context['error_message'] = str(e)
-    elif "train_btn" in request.POST:
-        file_name = request.session['datafile']
-        data_frame = read_json(request.session['dataframe'])
-        datafile_form.fields['data_file'].initial = file_name
-        set_file_selection_context(context, datafile_form, False)
-        set_control_panel_context(context, control_form, file_name, data_frame)
-        try:
-            fit_result = fit_linear_regression(data_frame, control_form.fields['training_ratio'].initial)
-            set_validation_context(context, fit_result)
-            context['train_scores_stdev'] = round(fit_result['train_scores_stdev'], 2)
-            context['test_scores_stdev'] = round(fit_result['test_scores_stdev'], 2)
-            plot_fit(fit_result['y'], fit_result['y_predict'], context)
-        except Exception as e:
-            context["error_message"] = str(e)
     return context

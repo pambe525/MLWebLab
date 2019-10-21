@@ -85,21 +85,22 @@ class HomeViewTemplateTestCase(SimpleTestCase):
                     [6, 3, 18], [7, 2, 17], [8, 1, 16], [9, 0, 15]]
         self.write_csvfile(csv_data)
         self.select_a_file(self.fake_datafile)
-        self.browser.find_element_by_name("train_btn").click()
+        self.browser.find_element_by_id("train_btn").click()
         self.assertFalse(self.browser.find_element_by_id("glass_pane").is_displayed())
         self.verify_content_area_is_visible(True)
         self.verify_file_selection_enabled(False, self.fake_datafile)
         self.verify_training_set_data('Y', 2, '80%', 8)
         self.verify_method_data("Linear Regression")
         self.verify_tabs(True)
-        self.verify_validation_tab()
+        self.verify_validation_metrics()
+        self.verify_validation_plots()
         self.verify_source_file_data(self.fake_datafile, 10, 3)
 
     def test_train_button_clicked_with_exception(self):
         csv_data = [["X1", "X2", "Y"], [0, None, 15], [1, 4, 16], [2, 3, 17], [3, None, 18], [4, 1, 19], [5, 0, 20]]
         self.write_csvfile(csv_data)
         self.select_a_file(self.fake_datafile)
-        self.browser.find_element_by_name("train_btn").click()
+        self.browser.find_element_by_id("train_btn").click()
         self.assertFalse(self.browser.find_element_by_id("glass_pane").is_displayed())
         self.verify_message_box_and_close("Input contains NaN")
         self.verify_content_area_is_visible(True)
@@ -150,16 +151,16 @@ class HomeViewTemplateTestCase(SimpleTestCase):
         self.assertEquals(cols, int(self.browser.find_element_by_name("source_cols").text))
 
     def verify_training_set_data(self, target_feature, base_features, training_ratio, training_rows):
-        self.assertEquals(target_feature, self.browser.find_element_by_name("target_feature").text)
-        self.assertEquals(base_features, int(self.browser.find_element_by_name("base_features").text))
-        self.assertEquals(training_ratio, self.browser.find_element_by_name("training_ratio").text)
-        self.assertEquals(training_rows, int(self.browser.find_element_by_name("training_rows").text))
+        self.assertEquals(target_feature, self.browser.find_element_by_id("target_feature").text)
+        self.assertEquals(base_features, int(self.browser.find_element_by_id("base_features").text))
+        self.assertEquals(training_ratio, self.browser.find_element_by_id("training_ratio_select").text)
+        self.assertEquals(training_rows, int(self.browser.find_element_by_id("training_rows").text))
 
     def verify_method_data(self, training_method):
         self.assertEquals(training_method, self.browser.find_element_by_name("training_method").text)
 
     def verify_validation_set_data(self, validation_rows):
-        self.assertEquals(validation_rows, int(self.browser.find_element_by_name("validation_rows").text))
+        self.assertEquals(validation_rows, int(self.browser.find_element_by_id("validation_rows").text))
 
     def verify_tabs(self, has_validation=False):
         if not has_validation:
@@ -169,10 +170,16 @@ class HomeViewTemplateTestCase(SimpleTestCase):
             self.assertFalse("disabled" in self.browser.find_element_by_id("nav-validate-tab").get_attribute("class"))
             self.assertTrue("active" in self.browser.find_element_by_id("nav-validate-tab").get_attribute("class"))
 
-    def verify_validation_tab(self):
+    def verify_validation_metrics(self):
         self.assertEqual(self.browser.find_element_by_name("training_method").text, "Linear Regression")
-        self.assertGreater(float(self.browser.find_element_by_name("validation_score").text), 0)
-        self.assertGreater(float(self.browser.find_element_by_name("training_score").text), 0)
+        self.assertGreater(float(self.browser.find_element_by_id("test_score").text), 0)
+        self.assertGreater(float(self.browser.find_element_by_id("train_score").text), 0)
+        self.assertGreaterEqual(float(self.browser.find_element_by_id("train_scores_stdev").text), 0.0)
+        self.assertGreaterEqual(float(self.browser.find_element_by_id("test_scores_stdev").text), 0.0)
+
+    def verify_validation_plots(self):
+        self.assertIsNotNone(self.browser.find_element_by_class_name("plotly"))
+        self.assertIsNotNone(self.browser.find_element_by_class_name("svg-container"))
 
     def verify_message_box_and_close(self, message_text):
         message_box = self.browser.find_element_by_id("msg_box")

@@ -146,22 +146,6 @@ class HelperStaticFunctionsTestCase(SimpleTestCase):
                     self._verify_file_selection_form(context, "POST", len(file_choices), selected_file="a2.txt")
                     self._verify_file_selection_enabled(context, True)
 
-    def test_get_context_with_TRAIN_button_clicked(self):
-        self.mock_data = {"X1": list(range(10)), "X2": list(reversed(range(10))), "y": list(range(15, 25))}
-        print(self.mock_data)
-        with patch("mlflow.forms.get_datafile_choices") as mock_datafile_list:
-            with patch("mlflow.helpers.read_csv_datafile") as mock_csv_read:
-                file_choices, mock_request = self._setup_mocks(mock_csv_read, mock_datafile_list, "POST")
-                mock_request.POST = {"training_method": "Linear Regression", "training_ratio": 0.8, "train_btn": []}
-                json_data = DataFrame(self.mock_data).to_json()
-                mock_request.session = {'datafile': "a2.txt", 'dataframe': json_data}
-                context = get_context(mock_request)
-                mock_csv_read.assert_not_called()
-                self._verify_file_selection_form(context, "POST", len(file_choices), selected_file="a2.txt")
-                self._verify_file_selection_enabled(context, False)
-                self._verify_container_content(context, "a2.txt", DataFrame(self.mock_data))
-                self._verify_validation_content(context, True)
-
     # ------------------------------------------------------------------------------------------------------------------
     def _setup_mocks(self, mock_csv_read, mock_datafile_list, method):
         file_choices = [(constants.FILE_SELECT_DEFAULT, constants.FILE_SELECT_DEFAULT), ("a1.txt", "a1.txt"),

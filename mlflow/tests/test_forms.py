@@ -1,7 +1,5 @@
-import os.path
 from unittest.mock import patch
 
-from django.conf import settings
 from django.test import SimpleTestCase
 
 from mlflow import constants

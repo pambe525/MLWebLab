@@ -55,7 +55,7 @@
             <div class="card-label static-field" id="target_feature">{{ target_feature }}</div>
  	        <div class="row mx-0">
 	            <h6 class="card-title col-*">Base Features:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h6>
-	            <span class="card-label static-field col" name="base_features">{{  base_features }}</span>
+	            <span class="card-label static-field col" id="base_features">{{  base_features }}</span>
 	        </div>
             <hr>
 	        <div class="row mx-0">
@@ -64,17 +64,17 @@
 	        </div>
  	        <div class="row mx-0">
 	            <h6 class="card-title col-*">Training Samples:&nbsp;&nbsp;&nbsp;</h6>
-	            <span class="card-label static-field col" name="training_rows">{{ training_rows }}</span>
+	            <span class="card-label static-field col" id="training_rows">{{ training_rows }}</span>
 	        </div>
             <div class="row mx-0">
 	            <h6 class="card-title col-*">Validation Samples: </h6>
-	            <span class="card-label static-field col" name="validation_rows">{{ validation_rows }}</span>
+	            <span class="card-label static-field col" id="validation_rows">{{ validation_rows }}</span>
 	        </div>
             <hr>
             <h6 class="card-title">Algorithm/Method:</h6>
             <div style="width:220px">{{  control_form.training_method }}</div>
             <hr>
-            <button type="button" class="btn m-2" onclick="ajaxTrainRequest()" name="train_btn">Train</button>
+            <button type="button" class="btn m-2" onclick="ajaxTrainRequest()" id="train_btn">Train</button>
         </div>
     </form>
 
@@ -102,8 +102,6 @@
 {% endblock home_content %}
 
 {% block javascript %}
-    <script type="text/javascript">
-        var token = '{{csrf_token}}';
-    </script>
+    <script type="text/javascript" src="{% static 'js/plotly-plots.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/home-view-controller.js' %}"></script>
 {% endblock javascript %}

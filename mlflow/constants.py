@@ -1,5 +1,6 @@
-from django.conf import settings
 import os.path
+
+from django.conf import settings
 
 # Application constants
 FILE_SELECT_DEFAULT = "< Choose a file >"
