@@ -24,7 +24,6 @@ class DataFileForm(forms.Form):
         file_choices = get_datafile_choices()
         self.fields['data_file'] = forms.ChoiceField(label="Data File", choices=file_choices)
         self.fields['data_file'].initial = file_choices[0][0]
-        self.fields['data_file'].widget.attrs['class'] = constants.FILE_SELECT_WIDGET_CLASS
 
     def is_valid(self):
         valid = super(DataFileForm, self).is_valid()

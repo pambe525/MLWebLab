@@ -6,23 +6,19 @@
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   {% load static %}
 
-  <div class="row mx-1">
+  <div class="row mx-0 p-4 bg-dark">
     <!-- File input form  -->
-    <form class="my-3" id="datafile_form" action={% url 'index' %} method="POST">
+    <form class="" id="datafile_form" action={% url 'index' %} method="POST">
         {% csrf_token %}
-        <div class="input-group">
-            <div class="input-prepend" >
-                <span class="input-group-text pt-1 pb-0 bg-white">{{ datafile_form.data_file.label_tag }}</span>
-            </div>
-            <div id = "data_file_select" class="input-group-append">{{ datafile_form.data_file }}</div>
-            <div class="input-group-append">
-                <button type="submit" name="select_btn" class="btn" {% if select_btn_disabled %} disabled {% endif %}>
+        <div class="row mx-0">
+            <span class="label-dark m-2">{{ datafile_form.data_file.label_tag }}</span>
+            <span id = "data_file_select" class="m-2 select-dark">{{ datafile_form.data_file }}</span>
+            <button type="submit" name="select_btn" class="btn btn-dark m-2" {% if select_btn_disabled %} disabled {% endif %}>
                     Select
-                </button>
-                <button type="submit" name="change_btn" class="btn" {% if change_btn_disabled %} disabled {% endif %}>
+            </button>
+            <button type="submit" name="change_btn" class="btn btn-dark m-2" {% if change_btn_disabled %} disabled {% endif %}>
                     Change Data File
-                </button>
-            </div>
+            </button>
         </div>
     </form>
     <!-- /File input form  -->
