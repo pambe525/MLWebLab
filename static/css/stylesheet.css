@@ -40,18 +40,11 @@ hr {
     font-size: 14px;
     font-weight: bold;
     color: white;
-    height: 36px;
-    lineheight: 19px;
-    padding: 8px 0 5px 6px;
+    padding: 4px;
 }
-.select-dark > select {
-    font-size: 14px !important;
-    font-weight: bold !important;
-    border: 1px solid silver !important;
-    background-color: #292b2c !important;
-    color: white !important;
-    padding: 6px !important;
-    border-radius: 5px;
+.select-override {
+    height: 36px !important;
+    background-color: black !important;
 }
 /** END FILE SELECTOR STYLING **/
 
@@ -76,7 +69,7 @@ hr {
 }
 /** END BUTTONS STYLING **/
 
-/** TABS STYLINS **/
+/** TABS STYLING **/
 .nav-tabs {
     font-size: 16px;
     font-weight: bold;
@@ -94,7 +87,7 @@ hr {
     font-size: 14px;
     padding: 20px 20px;
 }
-/** END TABS STYLINS **/
+/** END TABS STYLING **/
 
 /*===========*/
 .card {

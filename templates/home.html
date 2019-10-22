@@ -6,24 +6,28 @@
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   {% load static %}
 
-  <div class="row mx-0 p-4 bg-dark">
+  <div class="row mx-0 p-1 bg-dark">
     <!-- File input form  -->
     <form class="" id="datafile_form" action={% url 'index' %} method="POST">
         {% csrf_token %}
         <div class="row mx-0">
-            <span class="label-dark m-2">{{ datafile_form.data_file.label_tag }}</span>
-            <span id = "data_file_select" class="m-2 select-dark">{{ datafile_form.data_file }}</span>
-            <button type="submit" name="select_btn" class="btn m-2" {% if select_btn_disabled %} disabled {% endif %}>
+        <div class="input-group m-3">
+            <span class="input-group-append label-dark m-2">{{ datafile_form.data_file.label_tag }}</span>
+            <span id = "data_file_select" class="input-group-append">{{ datafile_form.data_file }}</span>
+            <button type="submit" name="select_btn" class="btn input-group-append"
+                    {% if select_btn_disabled %} disabled {% endif %}>
                     Select
             </button>
-            <button type="submit" name="change_btn" class="btn m-2" {% if change_btn_disabled %} disabled {% endif %}>
+            <button type="submit" name="change_btn" class="btn input-group-append"
+                    {% if change_btn_disabled %} disabled {% endif %}>
                     Change Data File
             </button>
+        </div>
         </div>
     </form>
     <!-- /File input form  -->
     <!-- Message box -->
-    <div id="msg_box" class="message-box row mx-3">
+    <div id="msg_box" class="message-box row m-1 hidden">
         <span id="msg_text" class="col">{{  error_message }}</span>
         <button id="msg_box_close" type="button" class="close col-*">&times;</button>
     </div>
