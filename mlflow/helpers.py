@@ -29,8 +29,7 @@ def set_control_panel_context(context, form, file_name, data_frame):
     context['base_features'] = data_frame.shape[1] - 1
     context['training_rows'] = int(data_frame.shape[0] * training_ratio)
     context['validation_rows'] = context['data_file_rows'] - context['training_rows']
-    context['validation_disabled'] = True
-    context['active_tab'] = "explore"
+    context['active_tab'] = "data_summary"
     context['training_method'] = form.fields['training_method'].initial
     return context
 
@@ -39,8 +38,7 @@ def set_control_panel_context(context, form, file_name, data_frame):
 def set_validation_context(context, fit_result):
     context["validation_score"] = round(fit_result['validation_score'], 2)
     context["training_score"] = round(fit_result['training_score'], 2)
-    context["validation_disabled"] = False
-    context["active_tab"] = "validate"
+    context["active_tab"] = "train"
 
 
 # Finds if a pandas data frame has headers

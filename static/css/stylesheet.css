@@ -34,6 +34,8 @@ hr {
 .h6{
     font-size: 12px;
 }
+
+/** FILE SELECTOR STYLING **/
 .label-dark {
     font-size: 14px;
     font-weight: bold;
@@ -51,14 +53,50 @@ hr {
     padding: 6px !important;
     border-radius: 5px;
 }
-.btn-dark {
+/** END FILE SELECTOR STYLING **/
+
+/** BUTTONS STYLING **/
+.btn {
+    color: white;
+    background-color: dodgerblue;
+    font-weight: bold;
     height: 36px !important;
     border: 1px solid white !important;
     font-size: 14px !important;
 }
-.btn-dark:disabled {
-    color: #fff !important;
+
+.btn:hover {
+    background-color: royalblue;
 }
+
+.btn:disabled {
+    background-color: silver;
+    color: white;
+    border: 1px solid lightgray;
+}
+/** END BUTTONS STYLING **/
+
+/** TABS STYLINS **/
+.nav-tabs {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0 25px 0 25px;
+}
+.nav-tabs .nav-link.active {
+    color: #444;
+    border-bottom: transparent;
+    border-radius: 10px 10px 0 0;
+}
+.nav-tabs .nav-link {
+    color: lightgray;
+}
+.tab-pane {
+    font-size: 14px;
+    padding: 20px 20px;
+}
+/** END TABS STYLINS **/
+
+/*===========*/
 .card {
     width:240px;
     box-shadow:2px 20px 20px #ccc;
@@ -66,7 +104,6 @@ hr {
     border: 1px solid black;
     text-align: left;
 }
-
 .card-body {
     margin: 5px;
     padding:3px;
@@ -110,60 +147,17 @@ hr {
     background-color: #ddd;
 }
 
-.btn {
-    color: white;
-    background-color: dodgerblue;
-    font-weight: bold;
-}
 
-.btn:hover {
-    background-color: royalblue;
-}
 
-.btn:disabled {
-    background-color: silver;
-    color: navy;
-    border: 1px solid darkgray;
-}
 
-.tabbed_content_area {
-    height: auto;
-    margin: 6px 20px 0 30px;
-    border-radius: 4px;
-}
-.nav-tabs {
-    font-size: 16px;
-}
-.nav-tabs {
-    border-bottom: 2px solid darkgray;
-}
-.nav-tabs .nav-link.active {
-    color: black;
-    border: 2px solid darkgray;
-    border-bottom: transparent;
-    border-radius: 10px 10px 0 0;
-    background-color: #eee;
-}
-.nav-tabs .nav-link:hover {
-    border-bottom-color: darkgray;
-}
-.nav-tabs .nav-link.active:hover {
-    border-bottom: transparent;
-}
-.tab-pane {
-    font-size: 14px;
-    padding: 20px 10px;
-    border:solid 2px darkgray;
-    border-top: 0;
-    min-width: 500px;
-    max-width: 600px;
-    border-radius: 0 0 5px 5px;
-}
+
+
+
 .tab-title {
-    font-size: 18px;
-    margin: 0 10px 15px 10px;
+    font-size: 16px;
     font-weight: bold;
     color: #444;
+    margin-bottom: 25px;
 }
 .note-text {
     font-size: 10px;

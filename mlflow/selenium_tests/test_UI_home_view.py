@@ -51,11 +51,13 @@ class HomeViewTemplateTestCase(SimpleTestCase):
         self.select_a_file(self.fake_datafile)
         self.verify_content_area_is_visible(True)
         self.verify_file_selection_enabled(False, self.fake_datafile)
+        self.verify_tabs()
         self.verify_source_file_data(self.fake_datafile, 3, 4)
+        self.browser.find_element_by_id("nav-train-tab").click()
         self.verify_training_set_data('col4', 3, '80%', 2)
         self.verify_method_data("Linear Regression")
         self.verify_validation_set_data(1)
-        self.verify_tabs()
+
 
     def test_change_file_button_clicked(self):
         csv_data = [["col1", "col2", "col3", "col4"], [1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]]
@@ -85,14 +87,15 @@ class HomeViewTemplateTestCase(SimpleTestCase):
                     [6, 3, 18], [7, 2, 17], [8, 1, 16], [9, 0, 15]]
         self.write_csvfile(csv_data)
         self.select_a_file(self.fake_datafile)
+        self.browser.find_element_by_id("nav-train-tab").click()
         self.browser.find_element_by_id("train_btn").click()
         self.browser.implicitly_wait(1)
         self.assertFalse(self.browser.find_element_by_id("glass_pane").is_displayed())
         self.verify_content_area_is_visible(True)
         self.verify_file_selection_enabled(False, self.fake_datafile)
+        self.verify_tabs(True)
         self.verify_training_set_data('Y', 2, '80%', 8)
         self.verify_method_data("Linear Regression")
-        self.verify_tabs(True)
         self.verify_validation_metrics()
         self.verify_validation_plots()
         self.verify_source_file_data(self.fake_datafile, 10, 3)
@@ -101,16 +104,17 @@ class HomeViewTemplateTestCase(SimpleTestCase):
         csv_data = [["X1", "X2", "Y"], [0, None, 15], [1, 4, 16], [2, 3, 17], [3, None, 18], [4, 1, 19], [5, 0, 20]]
         self.write_csvfile(csv_data)
         self.select_a_file(self.fake_datafile)
+        self.browser.find_element_by_id("nav-train-tab").click()
         self.browser.find_element_by_id("train_btn").click()
         self.browser.implicitly_wait(1)
         self.assertFalse(self.browser.find_element_by_id("glass_pane").is_displayed())
         self.verify_message_box_and_close("Input contains NaN")
         self.verify_content_area_is_visible(True)
         self.verify_file_selection_enabled(False, self.fake_datafile)
+        self.verify_tabs(True)
         self.verify_training_set_data('Y', 2, '80%', 4)
         self.verify_method_data("Linear Regression")
-        self.verify_tabs(False)
-        self.verify_source_file_data(self.fake_datafile, 6, 3)
+
 
     # ------------------------------------------------------------------------------------------------------------------
     # HELPER METHODS
@@ -147,7 +151,7 @@ class HomeViewTemplateTestCase(SimpleTestCase):
         file_select_btn.click()
 
     def verify_source_file_data(self, file_name, rows, cols):
-        self.browser.find_element_by_id("nav-explore-tab").click()
+        self.browser.find_element_by_id("nav-summary-tab").click()
         self.assertEquals(file_name, self.browser.find_element_by_name("source_file").text)
         self.assertEquals(rows, int(self.browser.find_element_by_name("source_rows").text))
         self.assertEquals(cols, int(self.browser.find_element_by_name("source_cols").text))
@@ -166,13 +170,14 @@ class HomeViewTemplateTestCase(SimpleTestCase):
 
     def verify_tabs(self, has_validation=False):
         if not has_validation:
-            self.assertTrue("active" in self.browser.find_element_by_id("nav-explore-tab").get_attribute("class"))
-            self.assertTrue("disabled" in self.browser.find_element_by_id("nav-validate-tab").get_attribute("class"))
+            self.assertTrue("active" in self.browser.find_element_by_id("nav-summary-tab").get_attribute("class"))
+            self.assertFalse("disabled" in self.browser.find_element_by_id("nav-train-tab").get_attribute("class"))
         else:
-            self.assertFalse("disabled" in self.browser.find_element_by_id("nav-validate-tab").get_attribute("class"))
-            self.assertTrue("active" in self.browser.find_element_by_id("nav-validate-tab").get_attribute("class"))
+            self.assertFalse("disabled" in self.browser.find_element_by_id("nav-train-tab").get_attribute("class"))
+            self.assertTrue("active" in self.browser.find_element_by_id("nav-train-tab").get_attribute("class"))
 
     def verify_validation_metrics(self):
+        self.browser.find_element_by_id("nav-train-tab").click()
         self.assertEqual(self.browser.find_element_by_name("training_method").text, "Linear Regression")
         self.assertGreater(float(self.browser.find_element_by_id("test_score").text), 0)
         self.assertGreater(float(self.browser.find_element_by_id("train_score").text), 0)

@@ -13,10 +13,10 @@
         <div class="row mx-0">
             <span class="label-dark m-2">{{ datafile_form.data_file.label_tag }}</span>
             <span id = "data_file_select" class="m-2 select-dark">{{ datafile_form.data_file }}</span>
-            <button type="submit" name="select_btn" class="btn btn-dark m-2" {% if select_btn_disabled %} disabled {% endif %}>
+            <button type="submit" name="select_btn" class="btn m-2" {% if select_btn_disabled %} disabled {% endif %}>
                     Select
             </button>
-            <button type="submit" name="change_btn" class="btn btn-dark m-2" {% if change_btn_disabled %} disabled {% endif %}>
+            <button type="submit" name="change_btn" class="btn m-2" {% if change_btn_disabled %} disabled {% endif %}>
                     Change Data File
             </button>
         </div>
@@ -31,65 +31,22 @@
     </div>
 
 <!-- Content Area -->
-<div id="home_container" class="{% if not container_visible %}invisible{% endif %} row container-fluid">
-    <form id="sidebar_form" action={% url 'train_model' %} method="GET">
-        {% csrf_token %}
-        <div name="data_file_name">{{ control_form.data_file_name }}</div>
-        <div class="card border-dark mt-1">
-	        <div class="card-header bg-dark text-center h5 text-white">
-	   	        <i class="fa fa-cog"></i><span class="px-2">CONTROL PANEL</span>
-	        </div>
-            <div class="row mx-0">
-                <h6 class="card-title">Task:</h6>
-                <span class="card-label static-field col">Supervised Learning</span>
-            </div>
-           <div class="row mx-0">
-                <h6 class="card-title">Type:</h6>
-                <span class="card-label static-field col">Regression</span>
-            </div>
-            <h6 class="card-title">Target Feature:</h6>
-            <div class="card-label static-field" id="target_feature">{{ target_feature }}</div>
- 	        <div class="row mx-0">
-	            <h6 class="card-title col-*">Base Features:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h6>
-	            <span class="card-label static-field col" id="base_features">{{  base_features }}</span>
-	        </div>
-            <hr>
-	        <div class="row mx-0">
-      	        <h6 class="card-title col-*">Training Set Ratio:&nbsp;&nbsp;</h6>
-                <span id="training_ratio_select">{{ control_form.training_ratio }}</span>
-	        </div>
- 	        <div class="row mx-0">
-	            <h6 class="card-title col-*">Training Samples:&nbsp;&nbsp;&nbsp;</h6>
-	            <span class="card-label static-field col" id="training_rows">{{ training_rows }}</span>
-	        </div>
-            <div class="row mx-0">
-	            <h6 class="card-title col-*">Validation Samples: </h6>
-	            <span class="card-label static-field col" id="validation_rows">{{ validation_rows }}</span>
-	        </div>
-            <hr>
-            <h6 class="card-title">Algorithm/Method:</h6>
-            <div style="width:220px">{{  control_form.training_method }}</div>
-            <hr>
-            <button type="button" class="btn m-2" onclick="ajaxTrainRequest()" id="train_btn">Train</button>
-        </div>
-    </form>
-
-    <nav class="mx-4 my-2">
-      <div class="nav nav-tabs" id="nav-tab" role="tablist">
-        <a class="nav-item nav-link {% if active_tab == "explore" %}active{% endif %}"
-            id="nav-explore-tab" data-toggle="tab" href="#nav-explore" role="tab">
-            <i class="fa fa-database mx-1"></i>Explore Data</a>
-        <a class="nav-item nav-link {% if active_tab == "validate" %}active{% endif %}
-            {% if validation_disabled %} disabled {% endif %}"
-            id="nav-validate-tab" data-toggle="tab" href="#nav-validate" role="tab">
-            <i class="fa fa-clipboard-check mx-1"></i>Validate</a>
+<div id="home_container" class="{% if not container_visible %}invisible{% endif %} container-fluid px-0">
+    <nav class="bg-dark">
+      <div class="nav nav-tabs bg-dark" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link {% if active_tab == "data_summary" %}active{% endif %}"
+            id="nav-summary-tab" data-toggle="tab" href="#nav-summary" role="tab">
+            <i class="fa fa-database mx-1"></i> Data Summary</a>
+        <a class="nav-item nav-link {% if active_tab == "train" %}active{% endif %}"
+            id="nav-train-tab" data-toggle="tab" href="#nav-train" role="tab">
+            <i class="fa fa-clipboard-check mx-1"></i> Train Model</a>
       </div>
-    <div class="tab-content" id="nav-tabContent">
-      <div class="tab-pane show {% if active_tab == "explore" %}active{% endif %}" id="nav-explore" role="tabpanel">
-          {% include "explore.html" %}
+    <div class="tab-content bg-white" id="nav-tabContent">
+      <div class="tab-pane show {% if active_tab == "data_summary" %}active{% endif %}" id="nav-summary" role="tabpanel">
+          {% include "data_summary.html" %}
       </div>
-      <div class="tab-pane {% if active_tab == "validate" %}active{% endif %}" id="nav-validate" role="tabpanel">
-          {% include "validate.html" %}
+      <div class="tab-pane {% if active_tab == "train" %}active{% endif %}" id="nav-train" role="tabpanel">
+          {% include "train.html" %}
       </div>
     </div>
     </nav>

@@ -198,11 +198,9 @@ class HelperStaticFunctionsTestCase(SimpleTestCase):
 
     def _verify_validation_content(self, context, is_enabled):
         if not is_enabled:
-            self.assertTrue(context['validation_disabled'])
-            self.assertEqual(context['active_tab'], "explore")
+            self.assertEqual(context['active_tab'], "data_summary")
         else:
-            self.assertFalse(context['validation_disabled'])
-            self.assertEqual(context['active_tab'], "validate")
+            self.assertEqual(context['active_tab'], "train")
             self.assertEqual(context['training_method'], "Linear Regression")
             self.assertGreater(float(context['validation_score']), 0)
             self.assertGreater(float(context['training_score']), 0)
