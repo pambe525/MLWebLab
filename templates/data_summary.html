@@ -1,5 +1,50 @@
-<div class="tab-title">Data Source: <span name="source_file">{{ data_file_name }}</span></div>
-<span class="card-title">Data Records: </span>
-    <span class="card-label" name="source_rows">{{  data_file_rows }}</span>
-<span class="card-title">Data Columns: </span>
-    <span class="card-label" name="source_cols">{{  data_file_cols  }}</span>
+<div class="h4">Data Source: <span id="source_file">{{  data_file_name }}</span></div>
+<div class="row mx-0">
+    <div class="tile">
+        <div class="tile-text" id="source_rows">{{  data_file_rows }}</div>
+        <div class="tile-title">Data Records</div>
+    </div>
+    <div class="tile">
+        <div class="tile-text" id="source_cols">{{  data_file_cols  }}</div>
+        <div class="tile-title">Data Columns</div>
+    </div>
+</div>
+<br>
+<div class="h5 my-2">SUMMARY BY DATA COLUMNS</div>
+<div class="input-group mt-3">
+    <div class="input-group-append m-2 h5 text-dark" style="padding:4px">Select Data Column:</div>
+    <div class="inout-group-append" style="width:auto">
+        <select id="column_name_select" class="custom-select h5 text-primary">
+            {% for item in features_summary %}
+            <option value={{ forloop.counter0 }}>{{ item.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+</div>
+<div class="row mx-0">
+    <div class="mx-2">
+        <div class="h5 p-2 text-dark">Column Stats</div>
+        <table id="column_stats_table" class="table table-sm" style="width:200px; border:2px solid darkgray">
+            <tr><td class="label-cell" width="80">Data Type</td><td id="column_type" class="info-cell"></td></tr>
+            <tr><td class="label-cell">Minimum</td><td id="column_min" class="info-cell"></td></tr>
+            <tr><td class="label-cell">Maximum</td><td id="column_max" class="info-cell"></td></tr>
+            <tr><td class="label-cell">Mean</td><td id="column_mean" class="info-cell"></td></tr>
+            <tr><td class="label-cell">Std Dev</td><td id="column_std" class="info-cell"></td></tr>
+        </table>
+    </div>
+    <div class="mx-2">
+        <div class="h5 p-2 text-dark" style="width:300px; text-align:center">Histogram of Column Values</div>
+        <div id="column_histogram" style="width:300px; height:160px"></div>
+    </div>
+    <div class="mx-2">
+        <div class="h5 p-2 text-dark">First 5 column values</div>
+        <table id="column_values_table" class="table table-sm" style="width:160px; border:2px solid darkgray">
+            <tr><td class="label-cell" width="70">Row #1</td><td class="info-cell" id="col_row1"></td></tr>
+            <tr><td class="label-cell">Row #2</td><td class="info-cell" id="col_row2"></td></tr>
+            <tr><td class="label-cell">Row #3</td><td class="info-cell" id="col_row3"></td></tr>
+            <tr><td class="label-cell">Row #4</td><td class="info-cell" id="col_row4"></td></tr>
+            <tr><td class="label-cell">Row #5</td><td class="info-cell" id="col_row5"></td></tr>
+        </table>
+    </div>
+</div>
+

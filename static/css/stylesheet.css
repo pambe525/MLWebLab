@@ -27,6 +27,12 @@ hr {
     margin: 8px 0;
     border: 1px groove lightgray;
 }
+/** TEXT STYLING **/
+.h4 {
+    font-size: 20px;
+    /* font-weight: bold; */
+    margin-bottom: 20px;
+}
 .h5 {
     font-size: 14px;
     font-weight: bold;
@@ -34,6 +40,25 @@ hr {
 .h6{
     font-size: 12px;
 }
+.note-text {
+    font-size: 10px;
+    color: #666;
+    padding: 10px;
+}
+.label-cell {
+    font-size: 14px;
+    font-weight: bold;
+    color: #777;
+}
+.info-cell {
+    font-size: 14px;
+    text-align: left;
+    font-weight: bold;
+    color: navy;
+    background-color: lightyellow;
+    width: auto;
+}
+/** END TEXT STYLING **/
 
 /** FILE SELECTOR STYLING **/
 .label-dark {
@@ -89,51 +114,32 @@ hr {
 }
 /** END TABS STYLING **/
 
-/*===========*/
-.card {
-    width:240px;
-    box-shadow:2px 20px 20px #ccc;
-    background-color: lightyellow;
-    border: 1px solid black;
-    text-align: left;
+/** TILE STYLING **/
+.tile {
+    box-shadow:2px 2px 3px #777;
+    margin: 8px;
+    display: flex;
+    background-color: #2874a6;
 }
-.card-body {
-    margin: 5px;
-    padding:3px;
-    background-color: white;
-    border-radius: 3px;
-    border-top: groove black 2px;
-    border-left: groove black 2px;
-    border-right: solid silver 1px;
-    border-bottom: solid silver 1px;
+.tile-text {
+    font-size: 24px;
+    background-color: #273473;
+    padding: 10px;
+    color: white;
+}
+.tile-title {
+    font-size: 16px;
+    color: white;
+    padding: 10px;
+    margin: auto;
+}
+.title-subtitle {
     font-size: 12px;
+    color: white;
+    padding: 6px;
+    margin: auto;
 }
-.card-title {
-    font-size: 14px;
-    padding: 10px 2px 2px 10px;
-    height: 26px;
-    color: #444;
-    font-weight: bold;
-    margin: 0 0 5px 0;
-}
-.card-label {
-    border-top: groove black 2px;
-    border-left: groove black 2px;
-    border-right: solid silver 1px;
-    border-bottom: solid silver 1px;
-    border-radius: 3px;
-    background-color: white;
-    padding: 2px 3px 2px 5px;
-    font-size: 14px;
-    text-align: left;
-    font-weight: bold;
-    margin: 4px 10px 2px 10px;
-    height: 26px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    color: navy;
-}
+/** TILE STYLING **/
 
 .static-field {
     color: #333;
@@ -146,14 +152,4 @@ hr {
 
 
 
-.tab-title {
-    font-size: 16px;
-    font-weight: bold;
-    color: #444;
-    margin-bottom: 25px;
-}
-.note-text {
-    font-size: 10px;
-    color: #666;
-    padding: 10px;
-}
+

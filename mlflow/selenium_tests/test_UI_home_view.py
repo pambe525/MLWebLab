@@ -45,55 +45,56 @@ class HomeViewTemplateTestCase(SimpleTestCase):
         self.verify_content_area_is_visible(False)
         self.verify_file_selection_enabled(True)
 
-    def test_select_button_clicked_with_file_selected(self):
-        csv_data = [["col1", "col2", "col3", "col4"], [1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]]
-        self.write_csvfile(csv_data)
-        self.select_a_file(self.fake_datafile)
-        self.verify_content_area_is_visible(True)
-        self.verify_file_selection_enabled(False, self.fake_datafile)
-        self.verify_tabs()
-        self.verify_source_file_data(self.fake_datafile, 3, 4)
-        self.browser.find_element_by_id("nav-train-tab").click()
-        self.verify_training_set_data('col4', 3, '80%', 2)
-        self.verify_method_data("Linear Regression")
-        self.verify_validation_set_data(1)
-
-
-    def test_change_file_button_clicked(self):
-        csv_data = [["col1", "col2", "col3", "col4"], [1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]]
-        self.write_csvfile(csv_data)
-        self.select_a_file(self.fake_datafile)
-        self.browser.find_element_by_name('change_btn').click()
-        self.verify_content_area_is_visible(False)
-        self.verify_file_selection_enabled(True)
-
     def test_message_dialog_when_bad_data_in_file(self):
-        self.write_csvfile([])
-        self.select_a_file(self.fake_datafile)
+        self.select_a_file([], self.fake_datafile)
         self.verify_message_box_and_close("No columns to parse from file")
         self.verify_content_area_is_visible(False)
         self.verify_file_selection_enabled(True, self.fake_datafile)
 
     def test_message_dialog_when_data_file_has_no_headers(self):
-        csv_data = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]]
-        self.write_csvfile(csv_data)
-        self.select_a_file(self.fake_datafile)
+        csv_data = self.get_fake_data()
+        del csv_data[0]  # remove headers
+        self.select_a_file(csv_data, self.fake_datafile)
         self.verify_message_box_and_close("Data file has no headers")
         self.verify_content_area_is_visible(False)
         self.verify_file_selection_enabled(True, self.fake_datafile)
 
+    def test_select_button_clicked_with_file_selected(self):
+        self.select_a_file(self.get_fake_data(), self.fake_datafile)
+        self.verify_content_area_is_visible(True)
+        self.verify_file_selection_enabled(False, self.fake_datafile)
+        self.verify_active_tab("nav-summary-tab")
+
+    def test_change_file_button_clicked(self):
+        self.select_a_file(self.get_fake_data(), self.fake_datafile)
+        self.browser.find_element_by_name('change_btn').click()
+        self.verify_content_area_is_visible(False)
+        self.verify_file_selection_enabled(True)
+
+    def test_data_summary_on_selected_file(self):
+        csv_data = self.get_fake_data()
+        self.select_a_file(csv_data, self.fake_datafile)
+        self.verify_source_file_data(self.fake_datafile, 10, 4)
+        self.verify_column_name_selector(csv_data[0])
+        self.verify_selected_column_stats(['int64', 1, 37, 19, 12.11])
+        self.verify_selected_column_values(list(range(1, 18, 4)))
+        self.verify_histogram_plot()
+        self.select_column_name("col3")
+        self.verify_selected_column_stats(['int64', 3, 39, 21, 12.11])
+        self.verify_selected_column_values(list(range(3, 20, 4)))
+        self.verify_histogram_plot()
+
     def test_train_button_clicked_with_default_settings(self):
         csv_data = [["X1", "X2", "Y"], [0, 9, 24], [1, 8, 23], [2, 7, 22], [3, 6, 21], [4, 5, 20], [5, 4, 19],
                     [6, 3, 18], [7, 2, 17], [8, 1, 16], [9, 0, 15]]
-        self.write_csvfile(csv_data)
-        self.select_a_file(self.fake_datafile)
+        self.select_a_file(csv_data, self.fake_datafile)
         self.browser.find_element_by_id("nav-train-tab").click()
         self.browser.find_element_by_id("train_btn").click()
         self.browser.implicitly_wait(1)
         self.assertFalse(self.browser.find_element_by_id("glass_pane").is_displayed())
         self.verify_content_area_is_visible(True)
         self.verify_file_selection_enabled(False, self.fake_datafile)
-        self.verify_tabs(True)
+        self.verify_active_tab("nav-train-tab")
         self.verify_training_set_data('Y', 2, '80%', 8)
         self.verify_method_data("Linear Regression")
         self.verify_validation_metrics()
@@ -102,8 +103,7 @@ class HomeViewTemplateTestCase(SimpleTestCase):
 
     def test_train_button_clicked_with_exception(self):
         csv_data = [["X1", "X2", "Y"], [0, None, 15], [1, 4, 16], [2, 3, 17], [3, None, 18], [4, 1, 19], [5, 0, 20]]
-        self.write_csvfile(csv_data)
-        self.select_a_file(self.fake_datafile)
+        self.select_a_file(csv_data, self.fake_datafile)
         self.browser.find_element_by_id("nav-train-tab").click()
         self.browser.find_element_by_id("train_btn").click()
         self.browser.implicitly_wait(1)
@@ -111,20 +111,32 @@ class HomeViewTemplateTestCase(SimpleTestCase):
         self.verify_message_box_and_close("Input contains NaN")
         self.verify_content_area_is_visible(True)
         self.verify_file_selection_enabled(False, self.fake_datafile)
-        self.verify_tabs(True)
+        self.verify_active_tab("nav-train-tab")
         self.verify_training_set_data('Y', 2, '80%', 4)
         self.verify_method_data("Linear Regression")
-
 
     # ------------------------------------------------------------------------------------------------------------------
     # HELPER METHODS
     # ------------------------------------------------------------------------------------------------------------------
+
+    def get_fake_data(self):
+        data_list = [["col1", "col2", "col3", "col4"]]
+        for i in range(1, 40, 4):
+            data_list.append(list(range(i,i+4)))
+        return data_list
 
     def write_csvfile(self, csv_data):
         with open(self.datafile_path, mode='w+') as csv_file:
             writer = csv.writer(csv_file, delimiter=',', quoting=csv.QUOTE_NONNUMERIC)
             writer.writerows(csv_data)
         csv_file.close()
+
+    def select_a_file(self, csv_data, file_name):
+        self.write_csvfile(csv_data)
+        file_selector = self.browser.find_element_by_name('data_file')
+        Select(file_selector).select_by_visible_text(file_name)
+        file_select_btn = self.browser.find_element_by_name('select_btn')
+        file_select_btn.click()
 
     def verify_content_area_is_visible(self, is_visible):
         container = self.browser.find_element_by_id('home_container')
@@ -144,17 +156,36 @@ class HomeViewTemplateTestCase(SimpleTestCase):
         else:
             self.assertTrue(not select_btn.is_enabled() and change_btn.is_enabled() and not file_selector.is_enabled())
 
-    def select_a_file(self, file_name):
-        file_selector = self.browser.find_element_by_name('data_file')
-        Select(file_selector).select_by_visible_text(file_name)
-        file_select_btn = self.browser.find_element_by_name('select_btn')
-        file_select_btn.click()
-
     def verify_source_file_data(self, file_name, rows, cols):
         self.browser.find_element_by_id("nav-summary-tab").click()
-        self.assertEquals(file_name, self.browser.find_element_by_name("source_file").text)
-        self.assertEquals(rows, int(self.browser.find_element_by_name("source_rows").text))
-        self.assertEquals(cols, int(self.browser.find_element_by_name("source_cols").text))
+        self.assertEquals(file_name, self.browser.find_element_by_id("source_file").text)
+        self.assertEquals(rows, int(self.browser.find_element_by_id("source_rows").text))
+        self.assertEquals(cols, int(self.browser.find_element_by_id("source_cols").text))
+
+    def verify_column_name_selector(self, col_names):
+        column_selector = self.browser.find_element_by_id("column_name_select")
+        options = [x.text for x in column_selector.find_elements_by_tag_name("option")]
+        self.assertEqual(options, col_names)
+        selected_option = Select(column_selector).first_selected_option.text
+        self.assertEqual(selected_option, col_names[0])
+
+    def select_column_name(self, col_name):
+        column_selector = self.browser.find_element_by_id("column_name_select")
+        Select(column_selector).select_by_visible_text(col_name)
+
+    def verify_selected_column_stats(self, col_stats):
+        col_stats = [str(x) for x in col_stats]
+        stats_table = self.browser.find_element_by_id("column_stats_table")
+        rows = stats_table.find_elements_by_tag_name("tr")
+        metrics = [row.find_elements_by_tag_name("td")[1].text for row in rows]
+        self.assertEqual(metrics, col_stats)
+
+    def verify_selected_column_values(self, col_values):
+        col_values = [str(x) for x in col_values]
+        values_table = self.browser.find_element_by_id("column_values_table")
+        rows = values_table.find_elements_by_tag_name("tr")
+        values = [row.find_elements_by_tag_name("td")[1].text for row in rows]
+        self.assertEqual(values, col_values)
 
     def verify_training_set_data(self, target_feature, base_features, training_ratio, training_rows):
         self.assertEquals(target_feature, self.browser.find_element_by_id("target_feature").text)
@@ -168,13 +199,8 @@ class HomeViewTemplateTestCase(SimpleTestCase):
     def verify_validation_set_data(self, validation_rows):
         self.assertEquals(validation_rows, int(self.browser.find_element_by_id("validation_rows").text))
 
-    def verify_tabs(self, has_validation=False):
-        if not has_validation:
-            self.assertTrue("active" in self.browser.find_element_by_id("nav-summary-tab").get_attribute("class"))
-            self.assertFalse("disabled" in self.browser.find_element_by_id("nav-train-tab").get_attribute("class"))
-        else:
-            self.assertFalse("disabled" in self.browser.find_element_by_id("nav-train-tab").get_attribute("class"))
-            self.assertTrue("active" in self.browser.find_element_by_id("nav-train-tab").get_attribute("class"))
+    def verify_active_tab(self, tab_id):
+        self.assertTrue("active" in self.browser.find_element_by_id(tab_id).get_attribute("class"))
 
     def verify_validation_metrics(self):
         self.browser.find_element_by_id("nav-train-tab").click()
@@ -185,8 +211,8 @@ class HomeViewTemplateTestCase(SimpleTestCase):
         self.assertGreaterEqual(float(self.browser.find_element_by_id("test_scores_stdev").text), 0.0)
 
     def verify_validation_plots(self):
-        self.assertIsNotNone(self.browser.find_element_by_class_name("plotly"))
-        self.assertIsNotNone(self.browser.find_element_by_class_name("svg-container"))
+        plot = self.browser.find_element_by_id("validation_plot").find_element_by_class_name("plotly")
+        self.assertIsNotNone(plot)
 
     def verify_message_box_and_close(self, message_text):
         message_box = self.browser.find_element_by_id("msg_box")
@@ -195,3 +221,7 @@ class HomeViewTemplateTestCase(SimpleTestCase):
         self.assertTrue(message_text in self.browser.find_element_by_id("msg_text").text)
         close_button.click()
         self.assertFalse(message_box.is_displayed())
+
+    def verify_histogram_plot(self):
+        plot = self.browser.find_element_by_id("column_histogram").find_element_by_class_name("plotly")
+        self.assertIsNotNone(plot)

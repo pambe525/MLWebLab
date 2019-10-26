@@ -17,6 +17,11 @@ from mlflow.helpers import set_file_selection_context
 class HelperStaticFunctionsTestCase(SimpleTestCase):
     mock_data = data = {"Col1": [1, 2, 3, 4], "col2": [5, 6, 7, 8], "Col3": [9, 10, 11, 12],
                         "Col4": [13, 14, 15, 16], "Col5": [17, 18, 19, 20]}
+    mock_data_summary = [{"name": "Col1", "type": "int64", "min": 1, "max": 4, "mean": 2.5, "stdev": 1.29},
+                         {"name": "col2", "type": "int64", "min": 5, "max": 8, "mean": 6.5, "stdev": 1.29},
+                         {"name": "Col3", "type": "int64", "min": 9, "max": 12, "mean": 10.5, "stdev": 1.29},
+                         {"name": "Col4", "type": "int64", "min": 13, "max": 16, "mean": 14.5, "stdev": 1.29},
+                         {"name": "Col5", "type": "int64", "min": 17, "max": 20, "mean": 18.5, "stdev": 1.29}]
 
     def test_set_file_selection_context_as_enabled(self):
         context = {}
@@ -129,6 +134,8 @@ class HelperStaticFunctionsTestCase(SimpleTestCase):
                 self._verify_file_selection_enabled(context, False)
                 self._verify_container_content(context, "a2.txt", mock_csv_read.return_value)
                 self._verify_validation_content(context, False)
+                self._verify_features_summary(context, self.mock_data_summary)
+                self._verify_dataframe_values(context, self.mock_data)
                 # Verify session variables are saved
                 json_dataframe = mock_csv_read.return_value.to_json()
                 self.assertEqual(mock_request.session['datafile'], "a2.txt")
@@ -195,6 +202,12 @@ class HelperStaticFunctionsTestCase(SimpleTestCase):
         self.assertEqual(context['base_features'], dataframe.shape[1] - 1)
         self.assertEqual(context['training_rows'], int(dataframe.shape[0] * 0.8))
         self.assertEqual(context['validation_rows'], dataframe.shape[0] - int(dataframe.shape[0] * 0.8))
+
+    def _verify_features_summary(self, context, stat_table):
+        self.assertEqual(context['features_summary'], stat_table)
+
+    def _verify_dataframe_values(self, context, data_table):
+        self.assertEqual(context['data_frame'], DataFrame(data_table).to_json())
 
     def _verify_validation_content(self, context, is_enabled):
         if not is_enabled:

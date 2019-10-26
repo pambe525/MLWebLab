@@ -1,5 +1,6 @@
 import os
 import os.path
+import json
 
 from pandas import read_csv
 
@@ -34,11 +35,25 @@ def set_control_panel_context(context, form, file_name, data_frame):
     return context
 
 
-# Sets validation content
-def set_validation_context(context, fit_result):
-    context["validation_score"] = round(fit_result['validation_score'], 2)
-    context["training_score"] = round(fit_result['training_score'], 2)
-    context["active_tab"] = "train"
+# Compute features summary
+def set_features_summary(context, data_frame):
+    summary = []
+    for feature_name in data_frame.columns:
+        feature_stats = {
+            'name': feature_name, 'type': str(data_frame.dtypes[feature_name]),
+            'min': round(data_frame[feature_name].min(), 2),
+            'max': round(data_frame[feature_name].max(), 2),
+            'mean': round(data_frame[feature_name].mean(), 2),
+            'stdev': round(data_frame[feature_name].std(), 2)
+        }
+        summary.append(feature_stats)
+    context['features_summary'] = summary
+
+
+# Set data_frame
+def set_data_frame(context, data_frame):
+    context['data_frame'] = data_frame.to_json()
+    print(data_frame.to_json())
 
 
 # Finds if a pandas data frame has headers
@@ -84,6 +99,8 @@ def get_context(request):
             data_frame = read_csv_datafile(file_name)
             set_file_selection_context(context, datafile_form, False)
             set_control_panel_context(context, control_form, file_name, data_frame)
+            set_features_summary(context, data_frame)
+            set_data_frame(context, data_frame)
             request.session['datafile'] = file_name
             request.session['dataframe'] = data_frame.to_json()
         except Exception as e:

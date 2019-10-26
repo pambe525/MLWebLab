@@ -5178,4 +5178,774 @@ JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't fin
 [Ch
 ###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
 
+[GP1571942106146	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Prashant\\AppData\\Local\\Temp\\rust_mozprofileFRoOGJ"
+1571942107541	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1571942107542	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1571942107542	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1571942107542	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+1571942114118	Marionette	INFO	Listening on port 50814
+1571942114906	Marionette	WARN	TLS certificate errors will be ignored for this session
+1571942149078	Marionette	INFO	Stopped listening on port 50814
+[Child 5220, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1570640083/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[C[Chi[Child 6796, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1570640083/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Ch
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+
+1571942283277	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Prashant\\AppData\\Local\\Temp\\rust_mozprofileK4CGcp"
+1571942284460	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1571942284460	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1571942284461	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1571942284461	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+1571942289649	Marionette	INFO	Listening on port 50873
+1571942289743	Marionette	WARN	TLS certificate errors will be ignored for this session
+1571942312137	Marionette	INFO	Stopped listening on port 50873
+[Parent 8152, Gecko_IOThread] WARNING: pipe error: 109: file z:/task_1570640083/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 1392, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1570640083/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[[Child 1544, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1570640083/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 1544, Chrome
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
 [GP
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+
+1572100449483	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Prashant\\AppData\\Local\\Temp\\rust_mozprofilepxKP6u"
+1572100679427	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Prashant\\AppData\\Local\\Temp\\rust_mozprofilepQcb1Z"
+1572100682608	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1572100682609	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1572100682609	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1572100682609	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+1572100688675	Marionette	INFO	Listening on port 63384
+1572100689242	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+1572100725320	Marionette	INFO	Stopped listening on port 63384
+[Child 9732, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Ch[Child 2592, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 2592, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+[GP
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+
+1572100892740	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Prashant\\AppData\\Local\\Temp\\rust_mozprofileSBX3y8"
+1572100895498	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1572100895498	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1572100895498	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1572100895498	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+console.error: "Could not write session state file " (new Error("_initWorker called too early! Please read the session file from disk first.", "resource:///modules/sessionstore/SessionFile.jsm", 375)) "_initWorker/<@resource:///modules/sessionstore/SessionFile.jsm:375:15\n_initWorker@resource:///modules/sessionstore/SessionFile.jsm:368:12\n_postToWorker@resource:///modules/sessionstore/SessionFile.jsm:410:16\nwrite@resource:///modules/sessionstore/SessionFile.jsm:448:24\nwrite@resource:///modules/sessionstore/SessionFile.jsm:75:32\n_writeState@resource:///modules/sessionstore/SessionSaver.jsm:360:24\n_saveState@resource:///modules/sessionstore/SessionSaver.jsm:294:17\n_saveStateAsync@resource:///modules/sessionstore/SessionSaver.jsm:344:10\nsaveStateAsyncWhenIdle@resource:///modules/sessionstore/SessionSaver.jsm:191:14\ncallback@resource://gre/modules/Timer.jsm:125:16\n"
+1572100902057	Marionette	INFO	Listening on port 63478
+1572100902355	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+1572100910292	Marionette	INFO	Stopped listening on port 63478
+[Parent 5756, Gecko_IOThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 528, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[ChiJavaScript error: resource://gre/modules/UrlClassifierListManager.jsm, line 680: TypeError: this.tablesData[table] is undefined
+[Parent 5756, Gecko_IOThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 7092, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[C
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+[GPU 1572100963508	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Prashant\\AppData\\Local\\Temp\\rust_mozprofiletg88Ml"
+1572100964585	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1572100964585	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1572100964586	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1572100964586	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+[Child 11776, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[C1572100969771	Marionette	INFO	Listening on port 63543
+1572100969895	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+1572100974532	Marionette	INFO	Stopped listening on port 63543
+[Child 4684, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 4684, Ch[Child 2428, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[ChJavaScript error: resource://gre/modules/UrlClassifierListManager.jsm, line 680: TypeError: this.tablesData[table] is undefined
+[Parent 10560, Gecko_IOThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 9224, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Ch
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+[GPU
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+
+1572101263521	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Prashant\\AppData\\Local\\Temp\\rust_mozprofileoga9yc"
+1572101264611	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1572101264611	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1572101264611	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1572101264611	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+[Child 11240, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[1572101270075	Marionette	INFO	Listening on port 63681
+1572101270507	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+1572101277309	Marionette	INFO	Stopped listening on port 63681
+[Child 3944, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 3[Child 10960, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 10960, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/JavaScript error: resource://gre/modules/UrlClassifierListManager.jsm, line 680: TypeError: this.tablesData[table] is undefined
+[Parent 11044, Gecko_IOThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 6056, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Ch
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+[GPU 1
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+
+1572101464544	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Prashant\\AppData\\Local\\Temp\\rust_mozprofileFp6OUi"
+1572101465614	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1572101465614	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1572101465614	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1572101465614	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+1572101472131	Marionette	INFO	Listening on port 63762
+1572101472520	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+1572101480664	Marionette	INFO	Stopped listening on port 63762
+[Child 2064, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[ChildJavaScript error: resource://gre/modules/UrlClassifierListManager.jsm, line 680: TypeError: this.tablesData[table] is undefined
+[Parent 11792, Gecko_IOThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 228, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Ch
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+[GP
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+
+1572101556280	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Prashant\\AppData\\Local\\Temp\\rust_mozprofilesEzZ37"
+1572101557512	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1572101557513	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1572101557513	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1572101557513	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+1572101563102	Marionette	INFO	Listening on port 63832
+1572101563246	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+1572101570510	Marionette	INFO	Stopped listening on port 63832
+[Child 8024, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Ch[Child 9348, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[ChiJavaScript error: resource://gre/modules/UrlClassifierListManager.jsm, line 680: TypeError: this.tablesData[table] is undefined
+[Parent 7524, Gecko_IOThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 7620, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Ch
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+[GP1572101614404	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Prashant\\AppData\\Local\\Temp\\rust_mozprofile3fahab"
+1572101615455	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1572101615455	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1572101615455	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1572101615456	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+1572101620251	Marionette	INFO	Listening on port 63900
+1572101620272	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+1572101628774	Marionette	INFO	Stopped listening on port 63900
+[Child 2064, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 2064, Chrome_ChildThread] WARNING: pipe error: 109: fi[Child 548, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/cJavaScript error: resource://gre/modules/UrlClassifierListManager.jsmh,r olmien/ec o6m8m0o:n /Tiyppce_Ecrhraonrn:e lt_hwiisn..tcacb,l elsiDnaet a[table] is undefined3
+41
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+[GP1572101816095	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Prashant\\AppData\\Local\\Temp\\rust_mozprofileREZALp"
+1572101817270	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1572101817270	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1572101817271	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1572101817271	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+1572101822041	Marionette	INFO	Listening on port 63974
+1572101822463	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+1572101829579	Marionette	INFO	Stopped listening on port 63974
+[Child 11652, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 11652, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 10564, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+JavaScript error: resource://gre/modules/UrlClassifierListManager.jsm, line 680: TypeError: this.tablesData[table] is undefined
+[Parent 11396, Gecko_IOThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 10560, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 10560, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+[GPU 
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+
+1572102714983	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Prashant\\AppData\\Local\\Temp\\rust_mozprofile8augqu"
+1572102716223	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1572102716224	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1572102716224	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1572102716224	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+1572102722615	Marionette	INFO	Listening on port 64136
+1572102723019	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+1572102730326	Marionette	INFO	Stopped listening on port 64136
+[Parent 10684, Gecko_IOThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 2288, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[[Child 10252, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[ChiJavaScript error: resource://gre/modules/UrlClassifierListManager.jsm, line 680: TypeError: this.tablesData[table] is undefined
+[Parent 10684, Gecko_IOThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+[G1572102855017	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Prashant\\AppData\\Local\\Temp\\rust_mozprofilevQaWUR"
+1572102856193	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1572102856193	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1572102856194	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1572102856194	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+[Parent 4688, Gecko_IOThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 5612, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 5612, Chrome_ChildThread1572102861363	Marionette	INFO	Listening on port 64210
+1572102861408	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+1572102869803	Marionette	INFO	Stopped listening on port 64210
+[Child 8196, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 8196, Chrome_C[Child 11260, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[ChilJavaScript error: resource://gre/modules/UrlClassifierListManager.jsm, line 680: TypeError: this.tablesData[table] is undefined
+[Parent 4688, Gecko_IOThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+[GPU 6[Parent 4688, Gecko_IOThread] WARNING: pipe error: 232: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 502
+1572102908380	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Prashant\\AppData\\Local\\Temp\\rust_mozprofileB5lpCz"
+1572102909456	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1572102909456	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1572102909456	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1572102909456	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+1572102914562	Marionette	INFO	Listening on port 64275
+1572102914736	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+1572102920050	Marionette	INFO	Stopped listening on port 64275
+[Child 9860, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[C[Child 7860, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[ChilJavaScript error: resource://gre/modules/UrlClassifierListManager.jsm, line 680: TypeError: this.tablesData[table] is undefined
+[Parent 10212, Gecko_IOThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 12176, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Ch
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+[GPU
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+
+1572106093793	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Prashant\\AppData\\Local\\Temp\\rust_mozprofileghzenM"
+1572113903278	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Prashant\\AppData\\Local\\Temp\\rust_mozprofileSvsDFQ"
+1572113904568	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1572113904568	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1572113904569	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1572113904569	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+1572113912346	Marionette	INFO	Listening on port 50502
+1572113912668	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+1572113939601	Marionette	INFO	Stopped listening on port 50502
+[Child 11408, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_15712447[C0h7i/lbuild/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+d 37[68, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 3768, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Parent 9604, Gecko_IOThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 11976, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 11976, Chrome_ChildThread
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+[GP1572114444178	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Prashant\\AppData\\Local\\Temp\\rust_mozprofileWw3L4q"
+1572114450191	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1572114450191	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1572114450191	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1572114450191	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+1572114456296	Marionette	INFO	Listening on port 50620
+1572114456504	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+1572114481160	Marionette	INFO	Stopped listening on port 50620
+[Parent 2036, Gecko_IOThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 10008, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[C[Child 4936, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 4936, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Parent 2036, Gecko_IOThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 5520, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Ch
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+[GPU 
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+
+1572114648110	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Prashant\\AppData\\Local\\Temp\\rust_mozprofile06Rn9L"
+1572114649320	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1572114649320	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1572114649321	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1572114649321	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+1572114654509	Marionette	INFO	Listening on port 50693
+1572114654604	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+1572114679813	Marionette	INFO	Stopped listening on port 50693
+[Parent 11300, Gecko_IOThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 11932, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chro[mPiaum/src/chrome/common/ipc_channel_win.cc, line 341
+rent 11300, Gecko_IOThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 9960, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 9960, Ch[Parent 11300, Gecko_IOThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 10140, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Ch
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+[GPU [Parent 11300, Gecko_IOThread] WARNING: pipe error: 232: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 502
+1572114733726	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Prashant\\AppData\\Local\\Temp\\rust_mozprofile0jZZaF"
+1572114734845	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1572114734846	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1572114734846	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1572114734846	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+1572114739698	Marionette	INFO	Listening on port 50749
+1572114740116	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+1572114745858	Marionette	INFO	Stopped listening on port 50749
+[Child 11716, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[[Parent 7280, Gecko_IOThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 10600, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 10600, Chrome_ChildThreaJavaScript error: resource://gre/modules/UrlClassifierListManager.jsm, line 680: TypeError: this.tablesData[table] is undefined
+[Parent 7280, Gecko_IOThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 8724, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Ch
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+[GPU 10332, Ch
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+
+1572114884191	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Prashant\\AppData\\Local\\Temp\\rust_mozprofileNPBxFC"
+1572114885278	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1572114885278	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1572114885278	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1572114885278	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+1572114889529	Marionette	INFO	Listening on port 50809
+1572114890037	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+1572114895277	Marionette	INFO	Stopped listening on port 50809
+[Child 6604, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Ch[Child 12268, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Chil[Parent 11976, Gecko_IOThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[[GPU 
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1572114910514	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Prashant\\AppData\\Local\\Temp\\rust_mozprofilePhPAw7"
+1572114911793	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1572114911794	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1572114911794	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1572114911794	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+[Parent 11464, Gecko_IOThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+1572114916822	Marionette	INFO	Listening on port 50860
+1572114916866	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+1572114940792	Marionette	INFO	Stopped listening on port 50860
+[Parent 11464, Gecko_IOThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 912, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[C[Child 9124, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child [Parent 11464, Gecko_IOThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 10096, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[C
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+[GPU 
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+
+1572115666561	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Prashant\\AppData\\Local\\Temp\\rust_mozprofileaS8t8I"
+1572115667642	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1572115667642	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1572115667642	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1572115667642	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+[Child 2400, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[1572115672765	Marionette	INFO	Listening on port 50994
+1572115672944	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+1572115696629	Marionette	INFO	Stopped listening on port 50994
+[Parent 9788, Gecko_IOThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 1736, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[[Child 5896, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 5896, Chrome_Chi[Parent 9788, Gecko_IOThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 10180, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Ch
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+[GPU
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+
+1572118482117	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Prashant\\AppData\\Local\\Temp\\rust_mozprofilepDf9VF"
+1572118483143	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1572118483144	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1572118483144	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1572118483144	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+1572118489330	Marionette	INFO	Listening on port 51701
+1572118489615	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+1572118514470	Marionette	INFO	Stopped listening on port 51701
+[Child 12172, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Ch[Parent 7744, Gecko_IOThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 8052, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 805[Parent 7744, Gecko_IOThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 6616, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 6616,[GPU
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1572118558056	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Prashant\\AppData\\Local\\Temp\\rust_mozprofilexKtEoV"
+1572118559538	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1572118559539	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1572118559539	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1572118559539	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+1572118564659	Marionette	INFO	Listening on port 51757
+1572118565058	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+1572118589926	Marionette	INFO	Stopped listening on port 51757
+[Parent 1932, Gecko_IOThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Parent 1932, Gecko_IOThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 11784, Chrome_ChildThread] WA[Parent 1932, Gecko_IOThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 2064, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[C
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1572118661364	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Prashant\\AppData\\Local\\Temp\\rust_mozprofile8Dv421"
+1572118662545	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1572118662546	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1572118662546	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1572118662546	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+1572118667978	Marionette	INFO	Listening on port 51814
+1572118668358	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+1572118673679	Marionette	INFO	Stopped listening on port 51814
+[Child 11644, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[C[Child 1780, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Chi[Parent 10096, Gecko_IOThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 11704, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[C
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+[GPU 
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+
+1572118710569	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Prashant\\AppData\\Local\\Temp\\rust_mozprofileoby849"
+1572118711545	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1572118711546	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1572118711546	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1572118711546	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+[Child 120, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 120, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+1572118717055	Marionette	INFO	Listening on port 51863
+1572118717576	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+1572118722925	Marionette	INFO	Stopped listening on port 51863
+[Parent 8052, Gecko_IOThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Parent 8052, Gecko_IOThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 3288, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 3288, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/[Child 8276, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Ch[Child 1180, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[C
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+[GP
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+
+1572118806161	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Prashant\\AppData\\Local\\Temp\\rust_mozprofileaGpnb4"
+1572118807194	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1572118807194	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1572118807194	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1572118807194	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+[Child 3876, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[C1572118812680	Marionette	INFO	Listening on port 51923
+1572118813137	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+1572118818606	Marionette	INFO	Stopped listening on port 51923
+[Child 6896, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 6896, Ch[Child 8636, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 8636, Chrome_[Parent 5552, Gecko_IOThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 3364, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Ch
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+[GPU1572118862573	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Prashant\\AppData\\Local\\Temp\\rust_mozprofileZ2KiPq"
+1572118863778	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1572118863778	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1572118863779	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1572118863779	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+1572118868877	Marionette	INFO	Listening on port 51982
+1572118868916	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+1572118874672	Marionette	INFO	Stopped listening on port 51982
+[Parent 5652, Gecko_IOThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Parent 5652, Gecko_IOThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 9452, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[ChJavaScript error: resource://gre/modules/UrlClassifierListManager.jsm, line 680: TypeError: this.tablesData[table] is undefined
+[Child 1952, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Ch
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+[GP[Parent 5652, Gecko_IOThread] WARNING: pipe error: 232: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 502
+1572124049077	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Prashant\\AppData\\Local\\Temp\\rust_mozprofilecfUU0u"
+1572124050119	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1572124050119	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1572124050120	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1572124050120	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+
+###!!! [Child][MessageChannel] Error: (msgtype=0x370120,name=PContent::Msg_AsyncMessage) Channel closing: too late to send/recv, messages will be lost
+
+[C1572124056101	Marionette	INFO	Listening on port 53401
+1572124056576	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+1572124082392	Marionette	INFO	Stopped listening on port 53401
+[Parent 4508, Gecko_IOThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Parent 4508, Gecko_IOThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 2024, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 2024, Chrome_ChildThread] WARNING[Parent 4508, Gecko_IOThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 216, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[C
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+[GPU1572124493293	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Prashant\\AppData\\Local\\Temp\\rust_mozprofileed7aFY"
+1572124494590	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1572124494590	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1572124494590	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1572124494590	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+1572124500059	Marionette	INFO	Listening on port 53518
+1572124500335	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+1572124536323	Marionette	INFO	Stopped listening on port 53518
+[Child 508, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child[Child 11256, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 11256, Chrome_ChildThread] WARNING: pipe error[Parent 3796, Gecko_IOThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 8504, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Ch
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+[GP
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+
+1572124891098	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Prashant\\AppData\\Local\\Temp\\rust_mozprofile6jGDpP"
+1572124892166	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1572124892167	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1572124892167	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1572124892167	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+1572124897461	Marionette	INFO	Listening on port 53606
+1572124897594	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+1572124923228	Marionette	INFO	Stopped listening on port 53606
+[Child 8676, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line [3C4h1i
+ld[ 6744, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 6[Parent 11524, Gecko_IOThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 12112, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Ch
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+[GP[Parent 11524, Gecko_IOThread] WARNING: pipe error: 232: file z:/task_1571244707/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 502

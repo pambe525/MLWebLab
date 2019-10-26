@@ -4,6 +4,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"></script>
+  <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
   {% load static %}
 
   <div class="row mx-0 p-1 bg-dark">
@@ -27,7 +29,7 @@
     </form>
     <!-- /File input form  -->
     <!-- Message box -->
-    <div id="msg_box" class="message-box row m-1 hidden">
+    <div id="msg_box" class="message-box row m-1 invisible">
         <span id="msg_text" class="col">{{  error_message }}</span>
         <button id="msg_box_close" type="button" class="close col-*">&times;</button>
     </div>
@@ -61,4 +63,11 @@
 {% block javascript %}
     <script type="text/javascript" src="{% static 'js/plotly-plots.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/home-view-controller.js' %}"></script>
+    <script type="text/javascript">
+    {% if features_summary %}
+        var data_summary = {{ features_summary|safe }};
+        var data_frame = {{ data_frame|safe }}
+        update_selected_column_summaries(data_summary, data_frame);
+    {% endif %}
+    </script>
 {% endblock javascript %}
