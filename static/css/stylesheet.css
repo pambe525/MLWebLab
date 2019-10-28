@@ -117,35 +117,72 @@ hr {
 /** TILE STYLING **/
 .tile {
     box-shadow:2px 2px 3px #777;
-    margin: 8px;
     display: flex;
     background-color: #2874a6;
 }
 .tile-text {
-    font-size: 24px;
+    font-size: 26px;
     background-color: #273473;
-    padding: 10px;
     color: white;
+    text-align: center;
+    top: auto;
+    bottom: auto;
+    padding:10px;
 }
 .tile-title {
     font-size: 16px;
+    text-align: left;
     color: white;
     padding: 10px;
-    margin: auto;
+    margin-top: auto;
+    margin-bottom: auto;
 }
-.title-subtitle {
+.tile-subtitle {
     font-size: 12px;
     color: white;
-    padding: 6px;
-    margin: auto;
+    padding-top: 3px;
+    text-align: left;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 /** TILE STYLING **/
 
+/** CONTROL PANEL STYLING **/
+.card-header {
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    background-color: #555;
+    color: white;
+    padding: 4px;
+    height: auto;
+}
+.card-title {
+    color: #666;
+    padding: 3px 3px 3px 5px;
+    height: auto;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 6px 0 0 0;
+}
+.card-label {
+    color: navy;
+    font-size: 14px;
+    padding: 3px;
+    font-weight: bold;
+    border: 2px inset black;
+    height: 30px;
+    border-radius: 3px;
+    margin: 6px;
+}
 .static-field {
     color: #333;
     background-color: #ddd;
 }
-
+.spacer {
+    margin: 6px 0 0 0;
+}
+/** END CONTROL PANEL STYLING **/
 
 
 
