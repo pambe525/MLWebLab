@@ -64,15 +64,15 @@ class HelperStaticFunctionsTestCase(SimpleTestCase):
         self._verify_container_content(context, filename, data_frame)
 
     def test_read_csv_data_file(self):
-        data = {"col1": [1, 2, 3, 4], "col2": [5, 6, 7, 8], "col3": [9, 10, 11, 12],
-                "col4": [13, 14, 15, 16], "col5": [17, 18, 19, 20]}
+        data = {"col1": list(range(10)), "col2": list(range(10, 20)), "col3": list(range(20, 30)),
+                "col4": list(range(30, 40)), "col5": list(range(40,50))}
         filename = "test.csv"
         filepath = os.path.join(constants.DATA_FILE_PATH, filename)
         with patch("mlflow.helpers.read_csv") as mock_read_csv:
             mock_read_csv.return_value = DataFrame(data)
             dataframe = read_csv_datafile(filename)
             mock_read_csv.assert_called_once_with(filepath)
-        self.assertEqual(dataframe.shape[0], 4)
+        self.assertEqual(dataframe.shape[0], 10)
         self.assertEqual(dataframe.shape[1], 5)
 
     def test_read_csv_data_file_with_read_exception(self):
@@ -103,6 +103,17 @@ class HelperStaticFunctionsTestCase(SimpleTestCase):
             except Exception as e:
                 mock_read_csv.assert_called_once()
                 self.assertTrue("Data file has no headers" in str(e))
+
+    def test_read_csv_data_file_with_less_than_10_records(self):
+        data = {"col1": list(range(9)), "col2": list(range(10, 19)), "col3": list(range(20, 29)),
+                "col4": list(range(30, 39)), "col5": list(range(40, 49))}
+        with patch("mlflow.helpers.read_csv") as mock_read_csv:
+            mock_read_csv.return_value = DataFrame(data)
+            try:
+                read_csv_datafile("test.csv")
+            except Exception as e:
+                mock_read_csv.assert_called_once()
+                self.assertTrue("Data file has fewer than 10 records" in str(e))
 
     def test_get_context_with_GET_response_loads_file_list(self):
         with patch("mlflow.forms.get_datafile_choices") as mock_datafile_list:
@@ -199,9 +210,6 @@ class HelperStaticFunctionsTestCase(SimpleTestCase):
         self.assertEqual(context['data_file_rows'], dataframe.shape[0])
         self.assertEqual(context['data_file_cols'], dataframe.shape[1])
         self.assertEqual(context['target_feature'], dataframe.columns[-1])
-        self.assertEqual(context['base_features'], dataframe.shape[1] - 1)
-        self.assertEqual(context['training_rows'], int(dataframe.shape[0] * 0.8))
-        self.assertEqual(context['validation_rows'], dataframe.shape[0] - int(dataframe.shape[0] * 0.8))
 
     def _verify_features_summary(self, context, stat_table):
         self.assertEqual(context['features_summary'], stat_table)

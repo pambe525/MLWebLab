@@ -7,7 +7,7 @@ from mlflow.views import home_view, train_model
 
 def _setup_mock_request(json_data):
     mock_request = MagicMock()
-    mock_request.GET = {"training_ratio": "0.7", "datafile": "file.dat"}
+    mock_request.GET = {"n_splits": "3", "datafile": "file.dat"}
     mock_request.session = {"dataframe": json_data}
     return mock_request
 
@@ -34,13 +34,13 @@ class HomeViewTestCase(SimpleTestCase):
         mock_fit.side_effect = Exception("Error occurred")
         json_response = train_model(mock_request)
         self.assertJSONEqual(json_response.content, {"error_message": "Error occurred"})
-        mock_fit.assert_called_once_with(self.json_data, 0.7)
+        mock_fit.assert_called_once_with(self.json_data, 3)
 
     @patch("mlflow.views.fit_linear_regression")
     def test_train_model_returns_fit_results(self, mock_fit):
         mock_request = _setup_mock_request(self.json_data)
-        mock_fit.return_value = {"train_score": 0.8}
+        mock_fit.return_value = {"n_splits": 5}
         json_response = train_model(mock_request)
-        mock_fit.assert_called_once_with(self.json_data, 0.7)
-        self.assertJSONEqual(json_response.content, {"error_message": "None", "train_score": 0.8})
+        mock_fit.assert_called_once_with(self.json_data, 3)
+        self.assertJSONEqual(json_response.content, {"error_message": "None", "n_splits": 5})
 

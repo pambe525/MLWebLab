@@ -10,9 +10,9 @@ class MethodsTestCase(SimpleTestCase):
         # Y = 3*X1 + 2*X2 + 5
         data = {"X1": list(range(10)), "X2": list(reversed(range(10))), "Y": list(range(15, 25))}
         json_data = DataFrame(data).to_json()
-        fit_result = fit_linear_regression(json_data, 0.8)
-        self.assertEqual(fit_result['train_score'], 1.0)
-        self.assertEqual(fit_result['test_score'], 1.0)
+        fit_result = fit_linear_regression(json_data, 5)
+        self.assertEqual(fit_result['mean_train_score'], 1.0)
+        self.assertEqual(fit_result['mean_test_score'], 1.0)
         self.assertEqual(fit_result['train_scores_stdev'], 0)
         self.assertEqual(fit_result['test_scores_stdev'], 0)
         y = [round(x, 2) for x in fit_result['y']]
@@ -24,11 +24,15 @@ class MethodsTestCase(SimpleTestCase):
         data = {"X1": [1.0, 2.0, 3.0, 4.0, 5.0, 6.0], "X2": [3.0, 2.0, 5.0, 1.0, 4.0, 6.0],
                 "Y": [12.0, 15.0, 26.0, 16.0, 31.0, 40.0]}
         json_data = DataFrame(data).to_json()
-        fit_result = fit_linear_regression(json_data, 0.7)
-        self.assertGreater(round(fit_result['train_score'], 2), 0.9)
-        self.assertGreater(round(fit_result['test_score'], 2), 0.1)
+        fit_result = fit_linear_regression(json_data, 3)
+        self.assertNotEqual(round(fit_result['mean_train_score'], 2), 0.0)
+        self.assertNotEqual(round(fit_result['mean_test_score'], 2), 0.0)
         self.assertGreaterEqual(round(fit_result['train_scores_stdev'], 2), 0.0)
         self.assertGreaterEqual(round(fit_result['test_scores_stdev'], 2), 0.0)
+        self.assertEqual(len(fit_result['train_scores']), 3)
+        self.assertTrue(all(fit_result['train_scores']))
+        self.assertEqual(len(fit_result['test_scores']), 3)
+        self.assertTrue(all(fit_result['test_scores']))
         y = [round(x, 2) for x in fit_result['y']]
         y_predict = [round(x, 2) for x in fit_result['y_predict']]
         self.assertNotEqual(y, y_predict)

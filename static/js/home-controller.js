@@ -16,7 +16,7 @@ $().ready(function() {
         $("#glass_pane").show();
     });
 
-})
+});
 
 function ajaxTrainRequest() {
     var form = $("#sidebar_form");
@@ -32,11 +32,12 @@ function ajaxTrainRequest() {
                 $("#msg_box").removeClass("invisible");
             } else {
                 target_name = $("#target_feature").text();
-                $("#train_score").text(response["train_score"].toFixed(2));
-                $("#test_score").text(response["test_score"].toFixed(2));
+                $("#train_score").text(response["mean_train_score"].toFixed(2));
+                $("#test_score").text(response["mean_test_score"].toFixed(2));
                 $("#train_scores_stdev").text(response["train_scores_stdev"].toFixed(2));
                 $("#test_scores_stdev").text(response["test_scores_stdev"].toFixed(2));
-                plot_validation("validation_plot", target_name, response["y"], response["y_predict"]);
+                plot_split_scores("cv_scores_plot", 5, response["train_scores"], response["test_scores"]);
+                plot_validation("validation_plot", target_name, response["y"], response["y_predict"], false);
                 $("#nav-validate-tab").removeClass('disabled');
                 $("#nav-validate-tab").click();
             }
@@ -49,7 +50,7 @@ function update_selected_column_summaries(data_summary, data_frame) {
     var column_name = $("#column_name_select option:selected").text();
     load_selected_column_stats(column_index, data_summary);
     load_selected_column_head(column_name, data_frame);
-    plot_column_histogram("column_histogram", column_name, data_frame)
+    plot_column_histogram("column_histogram", column_name, data_frame);
 }
 
 function load_selected_column_stats(column_index, data_summary) {
@@ -66,4 +67,11 @@ function load_selected_column_head(column_name, data_frame) {
     $("#col_row3").text(data_frame[column_name][2]);
     $("#col_row4").text(data_frame[column_name][3]);
     $("#col_row5").text(data_frame[column_name][4]);
+}
+
+function set_training_summaries(initial) {
+    plot_split_scores("cv_scores_plot", 5, null, null);
+    var target_name = $("#target_feature").text();
+    var y_actual = [data_summary[data_summary.length-1]['min'], data_summary[data_summary.length-1]['max']];
+    plot_validation("validation_plot", target_name, y_actual, [], true)
 }

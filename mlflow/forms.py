@@ -39,8 +39,8 @@ class ControlPanelForm(forms.Form):
         super(ControlPanelForm, self).__init__(*args, **kwargs)
         # self.fields['data_file_name'] = forms.CharField(widget=forms.HiddenInput)
         self.fields['training_method'] = forms.ChoiceField(choices=constants.TRAINING_METHOD_CHOICES)
-        self.fields['training_ratio'] = forms.ChoiceField(choices=constants.TRAINING_RATIO_CHOICES)
+        self.fields['n_splits'] = forms.ChoiceField(choices=constants.SPLITS_CHOICES)
         self.fields['training_method'].widget.attrs['class'] = constants.CONTROL_PANEL_WIDGET_CLASS
-        self.fields['training_ratio'].widget.attrs['class'] = constants.CONTROL_PANEL_WIDGET_CLASS
+        self.fields['n_splits'].widget.attrs['class'] = constants.CONTROL_PANEL_WIDGET_CLASS
         self.fields['training_method'].initial = constants.TRAINING_METHOD_INITIAL
-        self.fields['training_ratio'].initial = constants.TRAINING_RATIO_INITIAL
+        self.fields['n_splits'].initial = constants.SPLITS_INITIAL

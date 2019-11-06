@@ -62,12 +62,13 @@
 
 {% block javascript %}
     <script type="text/javascript" src="{% static 'js/plotly-plots.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/home-view-controller.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/home-controller.js' %}"></script>
     <script type="text/javascript">
     {% if features_summary %}
         var data_summary = {{ features_summary|safe }};
         var data_frame = {{ data_frame|safe }}
         update_selected_column_summaries(data_summary, data_frame);
+        set_training_summaries(data_summary);
     {% endif %}
     </script>
 {% endblock javascript %}

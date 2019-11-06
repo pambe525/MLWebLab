@@ -95,14 +95,15 @@ class HomeViewTemplateTestCase(SimpleTestCase):
         self.verify_content_area_is_visible(True)
         self.verify_file_selection_enabled(False, self.fake_datafile)
         self.verify_active_tab("nav-train-tab")
-        self.verify_training_set_data('Y', 2, '80%', 8)
+        self.verify_training_set_data('Y', '5')
         self.verify_method_data("Linear Regression")
         self.verify_validation_metrics()
         self.verify_validation_plots()
         self.verify_source_file_data(self.fake_datafile, 10, 3)
 
     def test_train_button_clicked_with_exception(self):
-        csv_data = [["X1", "X2", "Y"], [0, None, 15], [1, 4, 16], [2, 3, 17], [3, None, 18], [4, 1, 19], [5, 0, 20]]
+        csv_data = [["X1", "X2", "Y"], [0, None, 15], [1, 4, 16], [2, 3, 17], [3, None, 18], [4, 1, 19],
+                    [5, 0, 20],[6, 10, 15], [1, 4, 16], [2, 3, 17], [3, 9, 18]]
         self.select_a_file(csv_data, self.fake_datafile)
         self.browser.find_element_by_id("nav-train-tab").click()
         self.browser.find_element_by_id("train_btn").click()
@@ -112,7 +113,7 @@ class HomeViewTemplateTestCase(SimpleTestCase):
         self.verify_content_area_is_visible(True)
         self.verify_file_selection_enabled(False, self.fake_datafile)
         self.verify_active_tab("nav-train-tab")
-        self.verify_training_set_data('Y', 2, '80%', 4)
+        self.verify_training_set_data('Y', '5')
         self.verify_method_data("Linear Regression")
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -187,9 +188,11 @@ class HomeViewTemplateTestCase(SimpleTestCase):
         values = [row.find_elements_by_tag_name("td")[1].text for row in rows]
         self.assertEqual(values, col_values)
 
-    def verify_training_set_data(self, target_feature, base_features, training_ratio, training_rows):
+    def verify_training_set_data(self, target_feature, n_splits):
         self.assertEquals(target_feature, self.browser.find_element_by_id("target_feature").text)
-        self.assertEquals(training_ratio, self.browser.find_element_by_id("training_ratio_select").text)
+        splits_selector = self.browser.find_element_by_name('n_splits')
+        selection = Select(splits_selector).first_selected_option.text
+        self.assertEquals(n_splits, selection)
 
     def verify_method_data(self, training_method):
         self.assertEquals(training_method, self.browser.find_element_by_name("training_method").text)

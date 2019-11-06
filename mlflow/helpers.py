@@ -22,14 +22,11 @@ def set_file_selection_context(context, form, is_enabled):
 # Sets default context dict parameters for home page content container
 def set_control_panel_context(context, form, file_name, data_frame):
     context['control_form'] = form
-    training_ratio = form.fields['training_ratio'].initial
+    training_ratio = form.fields['n_splits'].initial
     context['data_file_name'] = file_name
     context['data_file_rows'] = int(data_frame.shape[0])
     context['data_file_cols'] = int(data_frame.shape[1])
     context['target_feature'] = data_frame.columns[-1]
-    context['base_features'] = data_frame.shape[1] - 1
-    context['training_rows'] = int(data_frame.shape[0] * training_ratio)
-    context['validation_rows'] = context['data_file_rows'] - context['training_rows']
     context['active_tab'] = "data_summary"
     context['training_method'] = form.fields['training_method'].initial
     return context
@@ -53,7 +50,6 @@ def set_features_summary(context, data_frame):
 # Set data_frame
 def set_data_frame(context, data_frame):
     context['data_frame'] = data_frame.to_json()
-    print(data_frame.to_json())
 
 
 # Finds if a pandas data frame has headers
@@ -73,10 +69,10 @@ def read_csv_datafile(file_name):
     dataFrame = read_csv(file_path)
     if int(dataFrame.shape[1]) < 2:
         raise Exception("Data file has only one column. Add at least one more column.")
-    if int(dataFrame.shape[0]) < 2:
-        raise Exception("Data file has only one row. Add at least one more row of data.")
     if not dataframe_has_headers(dataFrame):
         raise Exception("Data file has no headers. Add non-numeric column headers.")
+    if int(dataFrame.shape[0]) < 10:
+        raise Exception("Data file has fewer than 10 records (must have at least 10 records)")
     return dataFrame
 
 

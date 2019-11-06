@@ -51,16 +51,16 @@ class ControlPanelForm_TestCase(SimpleTestCase):
         self.assertFalse(form.is_bound)
         self.assertEqual(len(form.fields['training_method'].choices), 1)
         self.assertEqual(form.fields['training_method'].choices[0][1], constants.TRAINING_METHOD_CHOICES[0][1])
-        self.assertEqual(len(form.fields['training_ratio'].choices), 1)
-        self.assertEqual(form.fields['training_ratio'].choices[0][1], constants.TRAINING_RATIO_CHOICES[0][1])
+        self.assertEqual(len(form.fields['n_splits'].choices), 5)
+        self.assertEqual(form.fields['n_splits'].choices, constants.SPLITS_CHOICES)
         self.assertEqual(form.fields['training_method'].initial, constants.TRAINING_METHOD_INITIAL)
-        self.assertEqual(form.fields['training_ratio'].initial, constants.TRAINING_RATIO_INITIAL)
+        self.assertEqual(form.fields['n_splits'].initial, constants.SPLITS_INITIAL)
 
     def test_instantiation_with_POST_data(self):
-        post_data = {"training_ratio": constants.TRAINING_RATIO_INITIAL,
+        post_data = {"n_splits": constants.SPLITS_INITIAL,
                      "training_method": constants.TRAINING_METHOD_INITIAL}
         form = ControlPanelForm(post_data)
         self.assertTrue(form.is_bound)
         self.assertTrue(form.is_valid())
-        self.assertEqual(form.cleaned_data.get('training_ratio'), str(constants.TRAINING_RATIO_INITIAL))
+        self.assertEqual(form.cleaned_data.get('n_splits'), str(constants.SPLITS_INITIAL))
         self.assertEqual(form.cleaned_data.get('training_method'), constants.TRAINING_METHOD_INITIAL)
