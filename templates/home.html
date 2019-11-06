@@ -68,7 +68,7 @@
         var data_summary = {{ features_summary|safe }};
         var data_frame = {{ data_frame|safe }}
         update_selected_column_summaries(data_summary, data_frame);
-        set_training_summaries(data_summary);
+        set_training_summaries();
     {% endif %}
     </script>
 {% endblock javascript %}

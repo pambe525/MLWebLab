@@ -16,6 +16,10 @@ $().ready(function() {
         $("#glass_pane").show();
     });
 
+    $("select[name='n_splits']").on('change', function(e){
+        set_training_summaries();
+    })
+
 });
 
 function ajaxTrainRequest() {
@@ -31,15 +35,7 @@ function ajaxTrainRequest() {
                 $("#msg_text").text(response["error_message"]);
                 $("#msg_box").removeClass("invisible");
             } else {
-                target_name = $("#target_feature").text();
-                $("#train_score").text(response["mean_train_score"].toFixed(2));
-                $("#test_score").text(response["mean_test_score"].toFixed(2));
-                $("#train_scores_stdev").text(response["train_scores_stdev"].toFixed(2));
-                $("#test_scores_stdev").text(response["test_scores_stdev"].toFixed(2));
-                plot_split_scores("cv_scores_plot", 5, response["train_scores"], response["test_scores"]);
-                plot_validation("validation_plot", target_name, response["y"], response["y_predict"], false);
-                $("#nav-validate-tab").removeClass('disabled');
-                $("#nav-validate-tab").click();
+                set_training_summaries(response);
             }
         },
    });
@@ -69,9 +65,24 @@ function load_selected_column_head(column_name, data_frame) {
     $("#col_row5").text(data_frame[column_name][4]);
 }
 
-function set_training_summaries(initial) {
-    plot_split_scores("cv_scores_plot", 5, null, null);
+function set_training_summaries(response) {
+    var n_splits = parseInt($("#n_splits_select option:selected").text());
     var target_name = $("#target_feature").text();
-    var y_actual = [data_summary[data_summary.length-1]['min'], data_summary[data_summary.length-1]['max']];
-    plot_validation("validation_plot", target_name, y_actual, [], true)
+    var mean_train_score = (response == null) ? "" : response["mean_train_score"].toFixed(2);
+    var mean_test_score  = (response == null) ? "" : response["mean_test_score"].toFixed(2);
+    var train_score_stdev = (response == null) ? "" : response["train_scores_stdev"].toFixed(2);
+    var test_score_stdev  = (response == null) ? "" : response["test_scores_stdev"].toFixed(2);
+
+    var train_scores = (response == null) ? null : response["train_scores"];
+    var test_scores  = (response == null) ? null : response["test_scores"];
+    var target_summary = data_summary[data_summary.length-1];
+    var y_actual = (response == null) ? [target_summary['min'], target_summary['max']] : response["y"];
+    var y_predict = (response == null) ? [] : response["y_predict"];
+    $("#train_score").text(mean_train_score);
+    $("#test_score").text(mean_test_score);
+    $("#train_scores_stdev").text(train_score_stdev);
+    $("#test_scores_stdev").text(test_score_stdev);
+
+    plot_split_scores("cv_scores_plot", n_splits, train_scores, test_scores);
+    plot_validation("validation_plot", target_name, y_actual, y_predict);
 }

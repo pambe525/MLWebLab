@@ -1,8 +1,8 @@
 //---------------------------------------------------------------------------------------------------------------------
 // Validation Plot: Actual Target versus Predicted Target
 //---------------------------------------------------------------------------------------------------------------------
-function plot_validation(div_id, target_name, y_actual, y_predicted, new_plot=null) {
-    if (new_plot == null) new_plot = true;
+function plot_validation(div_id, target_name, y_actual, y_predicted) {
+    var new_plot = (y_predicted.length == 0) ? true : false;
     var plot_div = document.getElementById(div_id);
     var trace1 = {x: [Math.min.apply(null, y_actual),Math.max.apply(null, y_actual)],
                   y:[Math.min.apply(null, y_actual),Math.max.apply(null, y_actual)],
