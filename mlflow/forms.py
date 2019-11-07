@@ -22,7 +22,7 @@ class DataFileForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super(DataFileForm, self).__init__(*args, **kwargs)
         file_choices = get_datafile_choices()
-        self.fields['data_file'] = forms.ChoiceField(label="Data File", choices=file_choices)
+        self.fields['data_file'] = forms.ChoiceField(label="Select Data File", choices=file_choices)
         self.fields['data_file'].initial = file_choices[0][0]
         self.fields['data_file'].widget.attrs['class'] = constants.FILE_SELECT_WIDGET_CLASS
 
@@ -33,14 +33,13 @@ class DataFileForm(forms.Form):
         return valid
 
 
-# ControlPanelForm in sidebar
+# ControlPanelForm in sidebar of Train Model area
 class ControlPanelForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super(ControlPanelForm, self).__init__(*args, **kwargs)
-        # self.fields['data_file_name'] = forms.CharField(widget=forms.HiddenInput)
         self.fields['training_method'] = forms.ChoiceField(choices=constants.TRAINING_METHOD_CHOICES)
-        self.fields['n_splits'] = forms.ChoiceField(choices=constants.SPLITS_CHOICES)
         self.fields['training_method'].widget.attrs['class'] = constants.CONTROL_PANEL_WIDGET_CLASS
-        self.fields['n_splits'].widget.attrs['class'] = constants.CONTROL_PANEL_WIDGET_CLASS
         self.fields['training_method'].initial = constants.TRAINING_METHOD_INITIAL
+        self.fields['n_splits'] = forms.ChoiceField(choices=constants.SPLITS_CHOICES)
+        self.fields['n_splits'].widget.attrs['class'] = constants.CONTROL_PANEL_WIDGET_CLASS
         self.fields['n_splits'].initial = constants.SPLITS_INITIAL

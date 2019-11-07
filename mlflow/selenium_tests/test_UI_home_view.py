@@ -37,19 +37,19 @@ class HomeViewTemplateTestCase(SimpleTestCase):
         file_list = Select(self.browser.find_element_by_name('data_file')).options
         self.assertGreater(len(file_list), 5)
         self.assertTrue(self.fake_datafile in [opt.text for opt in file_list])
-        self.verify_file_selection_enabled(True)
+        self.verify_selected_file()
 
     def test_select_button_clicked_with_no_file_selected(self):
         file_select_btn = self.browser.find_element_by_name('select_btn')
         file_select_btn.click()
         self.verify_content_area_is_visible(False)
-        self.verify_file_selection_enabled(True)
+        self.verify_selected_file()
 
     def test_message_dialog_when_bad_data_in_file(self):
         self.select_a_file([], self.fake_datafile)
         self.verify_message_box_and_close("No columns to parse from file")
         self.verify_content_area_is_visible(False)
-        self.verify_file_selection_enabled(True, self.fake_datafile)
+        self.verify_selected_file(self.fake_datafile)
 
     def test_message_dialog_when_data_file_has_no_headers(self):
         csv_data = self.get_fake_data()
@@ -57,19 +57,13 @@ class HomeViewTemplateTestCase(SimpleTestCase):
         self.select_a_file(csv_data, self.fake_datafile)
         self.verify_message_box_and_close("Data file has no headers")
         self.verify_content_area_is_visible(False)
-        self.verify_file_selection_enabled(True, self.fake_datafile)
+        self.verify_selected_file(self.fake_datafile)
 
     def test_select_button_clicked_with_file_selected(self):
         self.select_a_file(self.get_fake_data(), self.fake_datafile)
         self.verify_content_area_is_visible(True)
-        self.verify_file_selection_enabled(False, self.fake_datafile)
+        self.verify_selected_file(self.fake_datafile)
         self.verify_active_tab("nav-summary-tab")
-
-    def test_change_file_button_clicked(self):
-        self.select_a_file(self.get_fake_data(), self.fake_datafile)
-        self.browser.find_element_by_name('change_btn').click()
-        self.verify_content_area_is_visible(False)
-        self.verify_file_selection_enabled(True)
 
     def test_data_summary_on_selected_file(self):
         csv_data = self.get_fake_data()
@@ -93,7 +87,7 @@ class HomeViewTemplateTestCase(SimpleTestCase):
         self.browser.implicitly_wait(1)
         self.assertFalse(self.browser.find_element_by_id("glass_pane").is_displayed())
         self.verify_content_area_is_visible(True)
-        self.verify_file_selection_enabled(False, self.fake_datafile)
+        self.verify_selected_file(self.fake_datafile)
         self.verify_active_tab("nav-train-tab")
         self.verify_training_set_data('Y', '5')
         self.verify_method_data("Linear Regression")
@@ -111,7 +105,7 @@ class HomeViewTemplateTestCase(SimpleTestCase):
         self.assertFalse(self.browser.find_element_by_id("glass_pane").is_displayed())
         self.verify_message_box_and_close("Input contains NaN")
         self.verify_content_area_is_visible(True)
-        self.verify_file_selection_enabled(False, self.fake_datafile)
+        self.verify_selected_file(self.fake_datafile)
         self.verify_active_tab("nav-train-tab")
         self.verify_training_set_data('Y', '5')
         self.verify_method_data("Linear Regression")
@@ -146,16 +140,10 @@ class HomeViewTemplateTestCase(SimpleTestCase):
         else:
             self.assertTrue('invisible' in container.get_attribute('class'))
 
-    def verify_file_selection_enabled(self, is_enabled, default_selection=constants.FILE_SELECT_DEFAULT):
-        select_btn = self.browser.find_element_by_name('select_btn')
-        change_btn = self.browser.find_element_by_name('change_btn')
+    def verify_selected_file(self, default_selection=constants.FILE_SELECT_DEFAULT):
         file_selector = self.browser.find_element_by_name('data_file')
         selection = Select(file_selector).first_selected_option.text
         self.assertEquals(default_selection, selection)
-        if is_enabled:
-            self.assertTrue(select_btn.is_enabled() and not change_btn.is_enabled() and file_selector.is_enabled())
-        else:
-            self.assertTrue(not select_btn.is_enabled() and change_btn.is_enabled() and not file_selector.is_enabled())
 
     def verify_source_file_data(self, file_name, rows, cols):
         self.browser.find_element_by_id("nav-summary-tab").click()

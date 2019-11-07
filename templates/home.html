@@ -10,20 +10,13 @@
 
   <div class="row mx-0 p-1 bg-dark">
     <!-- File input form  -->
-    <form class="" id="datafile_form" action={% url 'index' %} method="POST">
+    <form action={% url 'index' %} method="POST">
         {% csrf_token %}
         <div class="row mx-0">
         <div class="input-group m-3">
             <span class="input-group-append label-dark m-2">{{ datafile_form.data_file.label_tag }}</span>
-            <span id = "data_file_select" class="input-group-append">{{ datafile_form.data_file }}</span>
-            <button type="submit" name="select_btn" class="btn input-group-append"
-                    {% if select_btn_disabled %} disabled {% endif %}>
-                    Select
-            </button>
-            <button type="submit" name="change_btn" class="btn input-group-append"
-                    {% if change_btn_disabled %} disabled {% endif %}>
-                    Change Data File
-            </button>
+            <span class="input-group-append">{{ datafile_form.data_file }}</span>
+            <button type="submit" name="select_btn" class="btn input-group-append">Load</button>
         </div>
         </div>
     </form>
@@ -39,7 +32,7 @@
 <!-- Content Area -->
 <div id="home_container" class="{% if not container_visible %}invisible{% endif %} container-fluid px-0">
     <nav class="bg-dark">
-      <div class="nav nav-tabs bg-dark" id="nav-tab" role="tablist">
+      <div class="nav nav-tabs bg-dark" role="tablist">
         <a class="nav-item nav-link {% if active_tab == "data_summary" %}active{% endif %}"
             id="nav-summary-tab" data-toggle="tab" href="#nav-summary" role="tab">
             <i class="fa fa-database mx-1"></i> Data Summary</a>
@@ -47,7 +40,7 @@
             id="nav-train-tab" data-toggle="tab" href="#nav-train" role="tab">
             <i class="fa fa-clipboard-check mx-1"></i> Train Model</a>
       </div>
-    <div class="tab-content bg-white" id="nav-tabContent">
+    <div class="tab-content bg-white">
       <div class="tab-pane show {% if active_tab == "data_summary" %}active{% endif %}" id="nav-summary" role="tabpanel">
           {% include "data_summary.html" %}
       </div>

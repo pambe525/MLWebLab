@@ -1,5 +1,0 @@
-<div class="toolbar">
-<button id="btn_add">ADD FILE</button>
-<button id="btn_delete">DELETE</button>
-<button id="btn_edit">EDIT</button>
-</div>
