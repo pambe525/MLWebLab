@@ -10,13 +10,13 @@
 
   <div class="row mx-0 p-1 bg-dark">
     <!-- File input form  -->
-    <form action={% url 'index' %} method="POST">
+    <form id="file_select_form" action={% url 'index' %} method="POST">
         {% csrf_token %}
         <div class="row mx-0">
         <div class="input-group m-3">
             <span class="input-group-append label-dark m-2">{{ datafile_form.data_file.label_tag }}</span>
             <span class="input-group-append">{{ datafile_form.data_file }}</span>
-            <button type="submit" name="select_btn" class="btn input-group-append">Load</button>
+            <button type="submit" id="select_btn" class="btn input-group-append">Load</button>
         </div>
         </div>
     </form>
@@ -30,7 +30,7 @@
     </div>
 
 <!-- Content Area -->
-<div id="home_container" class="{% if not container_visible %}invisible{% endif %} container-fluid px-0">
+<div id="home_container" class="invisible container-fluid px-0">
     <nav class="bg-dark">
       <div class="nav nav-tabs bg-dark" role="tablist">
         <a class="nav-item nav-link {% if active_tab == "data_summary" %}active{% endif %}"
@@ -40,14 +40,14 @@
             id="nav-train-tab" data-toggle="tab" href="#nav-train" role="tab">
             <i class="fa fa-clipboard-check mx-1"></i> Train Model</a>
       </div>
-    <div class="tab-content bg-white">
-      <div class="tab-pane show {% if active_tab == "data_summary" %}active{% endif %}" id="nav-summary" role="tabpanel">
-          {% include "data_summary.html" %}
+      <div class="tab-content bg-white">
+        <div class="tab-pane show {% if active_tab == "data_summary" %}active{% endif %}" id="nav-summary" role="tabpanel">
+           {% include "data_summary.html" %}
+        </div>
+        <div class="tab-pane {% if active_tab == "train" %}active{% endif %}" id="nav-train" role="tabpanel">
+           {% include "train.html" %}
+        </div>
       </div>
-      <div class="tab-pane {% if active_tab == "train" %}active{% endif %}" id="nav-train" role="tabpanel">
-          {% include "train.html" %}
-      </div>
-    </div>
     </nav>
 </div>
 <!-- /Content Area -->
@@ -55,13 +55,15 @@
 
 {% block javascript %}
     <script type="text/javascript" src="{% static 'js/plotly-plots.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/home-controller.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/home-view.js' %}"></script>
     <script type="text/javascript">
-    {% if features_summary %}
-        var data_summary = {{ features_summary|safe }};
-        var data_frame = {{ data_frame|safe }}
-        update_selected_column_summaries(data_summary, data_frame);
-        set_training_summaries();
-    {% endif %}
+        $().ready(initialize);
+        {% if features_summary %}
+            var data_summary = {{ features_summary|safe }};
+            var data_frame = {{ data_frame|safe }}
+            update_selected_column_summaries(data_summary, data_frame);
+            set_training_summaries();
+            $("#home_container").removeClass("invisible");
+        {% endif %}
     </script>
 {% endblock javascript %}

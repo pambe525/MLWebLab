@@ -40,10 +40,23 @@ class HomeViewTemplateTestCase(SimpleTestCase):
         self.verify_selected_file()
 
     def test_select_button_clicked_with_no_file_selected(self):
-        file_select_btn = self.browser.find_element_by_name('select_btn')
+        file_select_btn = self.browser.find_element_by_id('select_btn')
         file_select_btn.click()
         self.verify_content_area_is_visible(False)
         self.verify_selected_file()
+
+    def test_select_button_clicked_with_file_selected(self):
+        self.select_a_file(self.get_fake_data(), self.fake_datafile)
+        self.verify_content_area_is_visible(True)
+        self.verify_selected_file(self.fake_datafile)
+        self.verify_active_tab("nav-summary-tab")
+
+    def test_selection_change_hides_content_area(self):
+        self.select_a_file(self.get_fake_data(), self.fake_datafile)
+        # Re-select a file
+        file_selector = self.browser.find_element_by_name('data_file')
+        Select(file_selector).select_by_visible_text(constants.FILE_SELECT_DEFAULT)
+        self.verify_content_area_is_visible(False)
 
     def test_message_dialog_when_bad_data_in_file(self):
         self.select_a_file([], self.fake_datafile)
@@ -58,12 +71,6 @@ class HomeViewTemplateTestCase(SimpleTestCase):
         self.verify_message_box_and_close("Data file has no headers")
         self.verify_content_area_is_visible(False)
         self.verify_selected_file(self.fake_datafile)
-
-    def test_select_button_clicked_with_file_selected(self):
-        self.select_a_file(self.get_fake_data(), self.fake_datafile)
-        self.verify_content_area_is_visible(True)
-        self.verify_selected_file(self.fake_datafile)
-        self.verify_active_tab("nav-summary-tab")
 
     def test_data_summary_on_selected_file(self):
         csv_data = self.get_fake_data()
@@ -84,7 +91,7 @@ class HomeViewTemplateTestCase(SimpleTestCase):
         self.select_a_file(csv_data, self.fake_datafile)
         self.browser.find_element_by_id("nav-train-tab").click()
         self.browser.find_element_by_id("train_btn").click()
-        self.browser.implicitly_wait(1)
+        self.browser.implicitly_wait(2)
         self.assertFalse(self.browser.find_element_by_id("glass_pane").is_displayed())
         self.verify_content_area_is_visible(True)
         self.verify_selected_file(self.fake_datafile)
@@ -101,7 +108,7 @@ class HomeViewTemplateTestCase(SimpleTestCase):
         self.select_a_file(csv_data, self.fake_datafile)
         self.browser.find_element_by_id("nav-train-tab").click()
         self.browser.find_element_by_id("train_btn").click()
-        self.browser.implicitly_wait(1)
+        self.browser.implicitly_wait(2)
         self.assertFalse(self.browser.find_element_by_id("glass_pane").is_displayed())
         self.verify_message_box_and_close("Input contains NaN")
         self.verify_content_area_is_visible(True)
@@ -130,7 +137,7 @@ class HomeViewTemplateTestCase(SimpleTestCase):
         self.write_csvfile(csv_data)
         file_selector = self.browser.find_element_by_name('data_file')
         Select(file_selector).select_by_visible_text(file_name)
-        file_select_btn = self.browser.find_element_by_name('select_btn')
+        file_select_btn = self.browser.find_element_by_id('select_btn')
         file_select_btn.click()
 
     def verify_content_area_is_visible(self, is_visible):

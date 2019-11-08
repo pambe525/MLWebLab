@@ -1,13 +1,14 @@
-$().ready(function() {
-
+/**
+ * Function to be called when document is loaded
+ */
+function initialize() {
     $("#glass_pane").hide();
-    if ($("#msg_text").text() !== "None") $('#msg_box').removeClass("invisible");
-    else $("#msg_box").addClass("invisible");
+    if ( $("#msg_text").text() !== "None" ) showMsgBox();
+    $("#msg_box_close").on( 'click', hideMsgBox );
+    $("select[name='data_file']").on( 'change', fileSelectionChanged );
+    $("#select_btn").on( 'click', selectButtonClicked );
 
-    $("#msg_box_close").on('click', function () {
-        $("#msg_box").addClass("invisible");
-    });
-
+    // NOT TESTED YET!
     $("#column_name_select").on('change', function(e){
         update_selected_column_summaries(data_summary, data_frame);
     });
@@ -19,8 +20,43 @@ $().ready(function() {
     $("select[name='n_splits']").on('change', function(e){
         set_training_summaries();
     })
+}
 
-});
+function hideMsgBox() {
+    $("#msg_box").addClass("invisible");
+}
+
+function showMsgBox() {
+    $('#msg_box').removeClass("invisible");
+}
+
+function ajax_form_get(formId, successHandler) {
+    var form = $("#"+formId);
+    $.ajax({
+        url: form.attr('action'),
+        type: "POST",
+        data: form.serialize(),
+        dataType: 'json',
+        success: successHandler
+    });
+}
+
+function fileSelectionChanged() {
+    if ($("#source_file").text() === $("select[name='data_file']").val() )
+        $("#home_container").removeClass("invisible");
+    else $("#home_container").addClass("invisible");
+}
+
+function selectButtonClicked() {
+    if ($("select[name='data_file']")[0].selectedIndex !== 0) {
+        $("#glass_pane").show();
+        //ajax_form_get("file_select_form", loadFileData);
+    }
+}
+
+function loadFileData(data) {
+    alert("Hi");
+}
 
 function ajaxTrainRequest() {
     var form = $("#sidebar_form");

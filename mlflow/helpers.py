@@ -11,7 +11,6 @@ from mlflow.forms import DataFileForm, ControlPanelForm
 # Sets context dict parameters when file selection is enabled or disabled
 def set_file_selection_context(context, form, is_enabled):
     context['datafile_form'] = form
-    context['container_visible'] = False if is_enabled else True
     context['error_message'] = None
     return context
 

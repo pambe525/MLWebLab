@@ -28,14 +28,12 @@ class HelperStaticFunctionsTestCase(SimpleTestCase):
         form = MagicMock()
         context = set_file_selection_context(context, form, True)
         self.assertEqual(context["datafile_form"], form)
-        self._verify_content_visible(context, True)
 
     def test_set_file_selection_context_as_disabled(self):
         context = {}
         form = MagicMock()
         context = set_file_selection_context(context, form, False)
         self.assertEqual(context["datafile_form"], form)
-        self._verify_content_visible(context, False)
 
     def test_dataframe_has_headers_with_proper_headers(self):
         data = {"Col1": [1, 2, 3, 4], "col2": [5, 6, 7, 8], "Col3": [9, 10, 11, 12],
@@ -123,7 +121,6 @@ class HelperStaticFunctionsTestCase(SimpleTestCase):
                 mock_datafile_list.assert_called_once()
                 mock_csv_read.assert_not_called()
                 self._verify_file_selection_form(context, "GET", len(file_choices))
-                self._verify_content_visible(context, True)
 
     def test_get_context_with_SELECT_button_and_no_file_selected(self):
         with patch("mlflow.forms.get_datafile_choices") as mock_datafile_list:
@@ -137,12 +134,11 @@ class HelperStaticFunctionsTestCase(SimpleTestCase):
         with patch("mlflow.forms.get_datafile_choices") as mock_datafile_list:
             with patch("mlflow.helpers.read_csv_datafile") as mock_csv_read:
                 file_choices, mock_request = self._setup_mocks(mock_csv_read, mock_datafile_list, "POST")
-                mock_request.POST = {"data_file": "a2.txt", "select_btn": []}
+                mock_request.POST = {"data_file": "a2.txt"}
                 mock_request.session = {"datafile": None, "dataframe": None}
                 context = get_context(mock_request)
                 mock_csv_read.assert_called_once()
                 self._verify_file_selection_form(context, "POST", len(file_choices), selected_file="a2.txt")
-                self._verify_content_visible(context, False)
                 self._verify_container_content(context, "a2.txt", mock_csv_read.return_value)
                 self._verify_validation_content(context, False)
                 self._verify_features_summary(context, self.mock_data_summary)
@@ -156,13 +152,12 @@ class HelperStaticFunctionsTestCase(SimpleTestCase):
         with patch("mlflow.forms.get_datafile_choices") as mock_datafile_list:
             with patch("mlflow.helpers.read_csv_datafile") as mock_csv_read:
                 file_choices, mock_request = self._setup_mocks(mock_csv_read, mock_datafile_list, "POST")
-                mock_request.POST = {"data_file": "a2.txt", "select_btn": []}
+                mock_request.POST = {"data_file": "a2.txt"}
                 mock_csv_read.side_effect = Exception("Error occurred")
                 with self.assertRaises(Exception) as raised:
                     context = get_context(mock_request)
                     self.assertTrue("Error occurred" in str(raised.exception))
                     self._verify_file_selection_form(context, "POST", len(file_choices), selected_file="a2.txt")
-                    self._verify_content_visible(context, True)
 
     # ------------------------------------------------------------------------------------------------------------------
     def _setup_mocks(self, mock_csv_read, mock_datafile_list, method):
@@ -187,16 +182,8 @@ class HelperStaticFunctionsTestCase(SimpleTestCase):
             self.assertEqual(form.fields['data_file'].initial, constants.FILE_SELECT_DEFAULT)
             self.assertEqual(len(form.fields['data_file'].choices), n_files)
         else:
-            # self.assertTrue(form.is_valid())
             self.assertTrue(form.is_bound)
             self.assertEqual(form.fields['data_file'].initial, selected_file)
-
-    def _verify_content_visible(self, context, is_enabled):
-        self.assertEquals(context['error_message'], None)
-        if is_enabled:
-            self.assertFalse(context['container_visible'])
-        else:
-            self.assertTrue(context['container_visible'])
 
     def _verify_container_content(self, context, filename, dataframe):
         self.assertEqual(context['data_file_name'], filename)
