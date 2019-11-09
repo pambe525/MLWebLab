@@ -77,13 +77,15 @@ test( "shows glass pane when select button is clicked with file selected", funct
     assert.ok( $("#glass_pane").is(":visible") );
 });
 
-test( "sends ajax get request to server when select button is clicked", function( assert ) {
+test( "sends ajax request when select button is clicked", function( assert ) {
     assert.expect(0);
-    initialize();
     mockAjax = sinon.stub($, "ajax");
+    initialize();
     $("select[name='data_file']").val('1');
     $('#select_btn').click();
     sinon.assert.called(mockAjax);
+    var expectedArgs = {url:"load_file", data:"data_file=1", dataType:"json", success: loadFileData};
+    sinon.assert.calledWith(mockAjax, expectedArgs);
 });
 
 /**=======================================================================================================
@@ -117,6 +119,7 @@ function _addWidgetsTo(divID) {
         opt.textContent = "option"+i;
         selectDropdown.append(opt);
     }
-    $("#"+divID).append(glassPane, sourceFile).append(msgBox, msgText, msgBoxClose)
-            .append(homeContainer, selectDropdown, selectBtn);
+    fileSelectForm.append(selectDropdown, selectBtn);
+    $("#"+divID).append(glassPane, sourceFile, fileSelectForm).append(msgBox, msgText, msgBoxClose)
+            .append(homeContainer);
 }

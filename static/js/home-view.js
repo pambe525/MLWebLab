@@ -34,7 +34,6 @@ function ajax_form_get(formId, successHandler) {
     var form = $("#"+formId);
     $.ajax({
         url: form.attr('action'),
-        type: "POST",
         data: form.serialize(),
         dataType: 'json',
         success: successHandler
@@ -50,12 +49,13 @@ function fileSelectionChanged() {
 function selectButtonClicked() {
     if ($("select[name='data_file']")[0].selectedIndex !== 0) {
         $("#glass_pane").show();
-        //ajax_form_get("file_select_form", loadFileData);
+        ajax_form_get("file_select_form", loadFileData);
     }
+    return false;
 }
 
 function loadFileData(data) {
-    alert("Hi");
+
 }
 
 function ajaxTrainRequest() {

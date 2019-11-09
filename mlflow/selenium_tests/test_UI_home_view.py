@@ -39,13 +39,13 @@ class HomeViewTemplateTestCase(SimpleTestCase):
         self.assertTrue(self.fake_datafile in [opt.text for opt in file_list])
         self.verify_selected_file()
 
-    def test_select_button_clicked_with_no_file_selected(self):
+    def test_select_button_click_ignored_with_no_file_selected(self):
         file_select_btn = self.browser.find_element_by_id('select_btn')
         file_select_btn.click()
         self.verify_content_area_is_visible(False)
         self.verify_selected_file()
 
-    def test_select_button_clicked_with_file_selected(self):
+    def test_select_button_click_with_file_selected_loads_data(self):
         self.select_a_file(self.get_fake_data(), self.fake_datafile)
         self.verify_content_area_is_visible(True)
         self.verify_selected_file(self.fake_datafile)
@@ -53,18 +53,18 @@ class HomeViewTemplateTestCase(SimpleTestCase):
 
     def test_selection_change_hides_content_area(self):
         self.select_a_file(self.get_fake_data(), self.fake_datafile)
-        # Re-select a file
+        # Change file selection
         file_selector = self.browser.find_element_by_name('data_file')
         Select(file_selector).select_by_visible_text(constants.FILE_SELECT_DEFAULT)
         self.verify_content_area_is_visible(False)
 
-    def test_message_dialog_when_bad_data_in_file(self):
+    def test_message_dialog_shows_when_bad_data_in_file(self):
         self.select_a_file([], self.fake_datafile)
         self.verify_message_box_and_close("No columns to parse from file")
         self.verify_content_area_is_visible(False)
         self.verify_selected_file(self.fake_datafile)
 
-    def test_message_dialog_when_data_file_has_no_headers(self):
+    def test_message_dialog_shows_when_data_file_has_no_headers(self):
         csv_data = self.get_fake_data()
         del csv_data[0]  # remove headers
         self.select_a_file(csv_data, self.fake_datafile)
