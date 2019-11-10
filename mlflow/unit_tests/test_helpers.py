@@ -105,7 +105,7 @@ class HelperStaticFunctionsTestCase(SimpleTestCase):
         self.assertEqual(response['data_file_rows'], data_frame.shape[0])
         self.assertEqual(response['data_file_cols'], data_frame.shape[1])
         self.assertEqual(response['target_feature'], data_frame.columns[-1])
-        self.assertEqual(response['features_summary'], self.mock_data_summary)
+        self.assertEqual(response['column_summary'], self.mock_data_summary)
         self.assertEqual(response['data_frame'], data_frame.to_json())
 
     # ----------------------------------------------------------------------------------------------

@@ -40,8 +40,8 @@ def set_data_file_response(response, data_frame):
         column_stats = {
             'name': column_name,
             'type': str(data_frame.dtypes[column_name]),
-            'min': round(data_frame[column_name].min(), 2),
-            'max': round(data_frame[column_name].max(), 2),
+            'min': round(min(data_frame[column_name]), 2),
+            'max': round(max(data_frame[column_name]), 2),
             'mean': round(data_frame[column_name].mean(), 2),
             'stdev': round(data_frame[column_name].std(), 2)
         }

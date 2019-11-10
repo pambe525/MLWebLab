@@ -19,14 +19,15 @@ function initialize() {
 
     $("select[name='n_splits']").on('change', function(e){
         set_training_summaries();
-    })
+    });
 }
 
 function hideMsgBox() {
     $("#msg_box").addClass("invisible");
 }
 
-function showMsgBox() {
+function showMsgBox(message) {
+    if (message !== null) $("#msg_text").text(message);
     $('#msg_box').removeClass("invisible");
 }
 
@@ -54,8 +55,14 @@ function selectButtonClicked() {
     return false;
 }
 
-function loadFileData(data) {
-
+function loadFileData(response) {
+    $("#glass_pane").hide();
+    if ( hasError(response) ) {
+        $("#msg_text").text(response["error_message"]);
+            $("#msg_box").removeClass("invisible");
+        } else {
+            updateDataFileSummary(response);
+        }
 }
 
 function ajaxTrainRequest() {
@@ -67,7 +74,7 @@ function ajaxTrainRequest() {
         dataType: 'json',
         success: function(response) {
             $("#glass_pane").hide();
-            if (response["error_message"] !== "None") {
+            if (response["error_message"] !== null) {
                 $("#msg_text").text(response["error_message"]);
                 $("#msg_box").removeClass("invisible");
             } else {
@@ -77,28 +84,45 @@ function ajaxTrainRequest() {
    });
 }
 
-function update_selected_column_summaries(data_summary, data_frame) {
-    var column_index = $("#column_name_select option:selected").val();
-    var column_name = $("#column_name_select option:selected").text();
-    load_selected_column_stats(column_index, data_summary);
-    load_selected_column_head(column_name, data_frame);
-    plot_column_histogram("column_histogram", column_name, data_frame);
+function hasError(response) {
+    return (response["error_message"] !== null);
 }
 
-function load_selected_column_stats(column_index, data_summary) {
-    $("#column_type").text(data_summary[column_index]['type']);
-    $("#column_min").text(data_summary[column_index]['min']);
-    $("#column_max").text(data_summary[column_index]['max']);
-    $("#column_mean").text(data_summary[column_index]['mean']);
-    $("#column_std").text(data_summary[column_index]['stdev']);
+function updateDataFileSummary(response) {
+    hideMsgBox();
+    $("#home_container").removeClass("invisible");
+    $("#source_file").text(response['file_name']);
+    $("#source_rows").text(response['data_file_rows']);
+    $("#source_cols").text(response['data_file_cols']);
+    loadColumnStats(response['column_summary']);
+    // plot_column_histogram("column_histogram", column_name, data_frame);
 }
 
-function load_selected_column_head(column_name, data_frame) {
-    $("#col_row1").text(data_frame[column_name][0]);
-    $("#col_row2").text(data_frame[column_name][1]);
-    $("#col_row3").text(data_frame[column_name][2]);
-    $("#col_row4").text(data_frame[column_name][3]);
-    $("#col_row5").text(data_frame[column_name][4]);
+function loadColumnStats(column_summary) {
+    $("#column_stats_table tr[class='clickable-row']").remove();
+    var table = $("#column_stats_table")
+    for (var i=0; i < column_summary.length; i++) {
+        var row = document.createElement("tr");
+        row.setAttribute('class','clickable-row');
+        row.append( getCell(column_summary[i]['name']) );
+        row.append( getCell(column_summary[i]['type']) );
+        row.append( getCell(column_summary[i]['min']) );
+        row.append( getCell(column_summary[i]['max']) );
+        row.append( getCell(column_summary[i]['mean']) );
+        row.append( getCell(column_summary[i]['stdev']) );
+        table.append(row);
+    }
+    $("#column_stats_table tr[class='clickable-row']").on('click', function(){
+        if( !$(this).hasClass("highlight") )
+            $(this).addClass("highlight").siblings().removeClass("highlight");
+    });
+}
+
+function getCell(content) {
+    var cell = document.createElement("td");
+    cell.setAttribute('class','info-cell');
+    cell.innerHTML = content;
+    return cell;
 }
 
 function set_training_summaries(response) {

@@ -10,41 +10,24 @@
     </div>
 </div>
 <br>
-<div class="h5 my-2">SUMMARY BY DATA COLUMNS</div>
-<div class="input-group mt-3">
-    <div class="input-group-append m-2 h5 text-dark" style="padding:4px">Select Data Column:</div>
-    <div class="inout-group-append" style="width:auto">
-        <select id="column_name_select" class="custom-select h5 text-primary">
-            {% for item in features_summary %}
-            <option value={{ forloop.counter0 }}>{{ item.name }}</option>
-            {% endfor %}
-        </select>
-    </div>
-</div>
+
 <div class="row mx-0">
-    <div class="mx-2">
-        <div class="h5 p-2 text-dark">Column Stats</div>
-        <table id="column_stats_table" class="table table-sm" style="width:200px; border:2px solid darkgray">
-            <tr><td class="label-cell" width="80">Data Type</td><td id="column_type" class="info-cell"></td></tr>
-            <tr><td class="label-cell">Minimum</td><td id="column_min" class="info-cell"></td></tr>
-            <tr><td class="label-cell">Maximum</td><td id="column_max" class="info-cell"></td></tr>
-            <tr><td class="label-cell">Mean</td><td id="column_mean" class="info-cell"></td></tr>
-            <tr><td class="label-cell">Std Dev</td><td id="column_std" class="info-cell"></td></tr>
+    <div class="my-2">
+        <span class="p-3 h5">SUMMARY BY DATA COLUMNS</span>
+        <table id="column_stats_table" class="m-3 table table-sm col-*" style="border:1px solid darkgray">
+            <tr class="thead-dark">
+                <th>Column Name</th>
+                <th>Data Type</th>
+                <th>Minimum</th>
+                <th>Maximum</th>
+                <th>Mean</th>
+                <th>Std Dev</th>
+            </tr>
         </table>
     </div>
     <div class="mx-2">
         <div class="h5 p-2 text-dark" style="width:300px; text-align:center">Histogram of Column Values</div>
         <div id="column_histogram" style="width:300px; height:160px"></div>
-    </div>
-    <div class="mx-2">
-        <div class="h5 p-2 text-dark">First 5 column values</div>
-        <table id="column_values_table" class="table table-sm" style="width:160px; border:2px solid darkgray">
-            <tr><td class="label-cell" width="70">Row #1</td><td class="info-cell" id="col_row1"></td></tr>
-            <tr><td class="label-cell">Row #2</td><td class="info-cell" id="col_row2"></td></tr>
-            <tr><td class="label-cell">Row #3</td><td class="info-cell" id="col_row3"></td></tr>
-            <tr><td class="label-cell">Row #4</td><td class="info-cell" id="col_row4"></td></tr>
-            <tr><td class="label-cell">Row #5</td><td class="info-cell" id="col_row5"></td></tr>
-        </table>
     </div>
 </div>
 

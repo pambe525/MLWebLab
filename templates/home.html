@@ -10,13 +10,13 @@
 
   <div class="row mx-0 p-1 bg-dark">
     <!-- File input form  -->
-    <form id="file_select_form" action={% url 'index' %} method="POST">
+    <form id="file_select_form" action={% url 'load_file' %}>
         {% csrf_token %}
         <div class="row mx-0">
         <div class="input-group m-3">
             <span class="input-group-append label-dark m-2">{{ datafile_form.data_file.label_tag }}</span>
             <span class="input-group-append">{{ datafile_form.data_file }}</span>
-            <button type="submit" id="select_btn" class="btn input-group-append">Load</button>
+            <button id="select_btn" class="btn input-group-append">Load</button>
         </div>
         </div>
     </form>
@@ -33,18 +33,18 @@
 <div id="home_container" class="invisible container-fluid px-0">
     <nav class="bg-dark">
       <div class="nav nav-tabs bg-dark" role="tablist">
-        <a class="nav-item nav-link {% if active_tab == "data_summary" %}active{% endif %}"
+        <a class="nav-item nav-link active"
             id="nav-summary-tab" data-toggle="tab" href="#nav-summary" role="tab">
             <i class="fa fa-database mx-1"></i> Data Summary</a>
-        <a class="nav-item nav-link {% if active_tab == "train" %}active{% endif %}"
+        <a class="nav-item nav-link"
             id="nav-train-tab" data-toggle="tab" href="#nav-train" role="tab">
             <i class="fa fa-clipboard-check mx-1"></i> Train Model</a>
       </div>
       <div class="tab-content bg-white">
-        <div class="tab-pane show {% if active_tab == "data_summary" %}active{% endif %}" id="nav-summary" role="tabpanel">
+        <div class="tab-pane show active" id="nav-summary" role="tabpanel">
            {% include "data_summary.html" %}
         </div>
-        <div class="tab-pane {% if active_tab == "train" %}active{% endif %}" id="nav-train" role="tabpanel">
+        <div class="tab-pane" id="nav-train" role="tabpanel">
            {% include "train.html" %}
         </div>
       </div>

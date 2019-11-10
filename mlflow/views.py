@@ -26,7 +26,7 @@ def load_file(request):
 
 def train_model(request):
     n_splits = int(request.GET.get('n_splits'))
-    response = {"error_message": "None"}
+    response = {"error_message": None}
     json_data = request.session['data_frame']
     try:
         fit_result = fit_linear_regression(json_data, n_splits)
