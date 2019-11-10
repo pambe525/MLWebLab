@@ -107,13 +107,3 @@ class HelperStaticFunctionsTestCase(SimpleTestCase):
         self.assertEqual(response['target_feature'], data_frame.columns[-1])
         self.assertEqual(response['column_summary'], self.mock_data_summary)
         self.assertEqual(response['data_frame'], data_frame.to_json())
-
-    # ----------------------------------------------------------------------------------------------
-    # def _verify_validation_content(self, context, is_enabled):
-    #     if not is_enabled:
-    #         self.assertEqual(context['active_tab'], "data_summary")
-    #     else:
-    #         self.assertEqual(context['active_tab'], "train")
-    #         self.assertEqual(context['training_method'], "Linear Regression")
-    #         self.assertGreater(float(context['validation_score']), 0)
-    #         self.assertGreater(float(context['training_score']), 0)

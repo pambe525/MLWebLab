@@ -9,10 +9,6 @@ function initialize() {
     $("#select_btn").on( 'click', selectButtonClicked );
 
     // NOT TESTED YET!
-    $("#column_name_select").on('change', function(e){
-        update_selected_column_summaries(data_summary, data_frame);
-    });
-
     $("#train_btn").on('click', function (e) {
         $("#glass_pane").show();
     });
@@ -20,6 +16,10 @@ function initialize() {
     $("select[name='n_splits']").on('change', function(e){
         set_training_summaries();
     });
+}
+
+function errorOccurred(response) {
+    return (response["error_message"] !== null);
 }
 
 function hideMsgBox() {
@@ -50,19 +50,29 @@ function fileSelectionChanged() {
 function selectButtonClicked() {
     if ($("select[name='data_file']")[0].selectedIndex !== 0) {
         $("#glass_pane").show();
-        ajax_form_get("file_select_form", loadFileData);
+        ajax_form_get("file_select_form", displayFileData);
     }
     return false;
 }
 
-function loadFileData(response) {
+function displayFileData(response) {
     $("#glass_pane").hide();
-    if ( hasError(response) ) {
-        $("#msg_text").text(response["error_message"]);
-            $("#msg_box").removeClass("invisible");
-        } else {
-            updateDataFileSummary(response);
-        }
+    if ( errorOccurred(response) )
+        showMsgBox(response["error_message"]);
+    else {
+        hideMsgBox();
+        updateDataFileSummary(response);
+        $("#nav-summary-tab").click();
+        $("#home_container").removeClass("invisible");
+    }
+}
+
+function updateDataFileSummary(response) {
+    $("#source_file").text(response['file_name']);
+    $("#source_rows").text(response['data_file_rows']);
+    $("#source_cols").text(response['data_file_cols']);
+    //loadColumnStats(response['column_summary']);
+    // plot_column_histogram("column_histogram", column_name, data_frame);
 }
 
 function ajaxTrainRequest() {
@@ -82,20 +92,6 @@ function ajaxTrainRequest() {
             }
         },
    });
-}
-
-function hasError(response) {
-    return (response["error_message"] !== null);
-}
-
-function updateDataFileSummary(response) {
-    hideMsgBox();
-    $("#home_container").removeClass("invisible");
-    $("#source_file").text(response['file_name']);
-    $("#source_rows").text(response['data_file_rows']);
-    $("#source_cols").text(response['data_file_cols']);
-    loadColumnStats(response['column_summary']);
-    // plot_column_histogram("column_histogram", column_name, data_frame);
 }
 
 function loadColumnStats(column_summary) {
