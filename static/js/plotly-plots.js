@@ -61,20 +61,52 @@ function plot_split_scores(div_id, n_splits, train_scores, test_scores) {
     Plotly.newPlot(plot_div, data, layout, {displayModeBar: false});
 }
 
-function plot_column_histogram(div_id, column_name, data_frame) {
+function plot_column_histogram(div_id, column_name, column_values) {
     var plot_div = document.getElementById(div_id);
-    var n_records = Object.keys(data_frame[column_name]).length;
-    var column_values = [];
-    for (var i = 0; i < n_records; i++)
-        column_values[i] = (data_frame[column_name][i.toString()]);
     var trace = {
         x: column_values, type: 'histogram',
         marker:{color:"rgba(100, 200, 102, 0.6)", line:{color:"rgba(100, 200, 102, 1.0)", width:1}},
     };
     var layout = {
-        xaxis: {linecolor: '#888', linewidth: 1, mirror: true, ticks:"outside",  tickfont:{size: 9}},
+        xaxis: {linecolor: '#888', linewidth: 1, mirror: true, ticks:"outside", tickfont:{size: 9},
+                title: {text: column_name, font: {size: 12}}},
         yaxis: {linecolor: '#888', linewidth: 1, mirror: true, ticks:"outside", tickfont:{size: 9}},
-        margin: {l:40, r:10, t:5, b:25, pad:0}, showlegend: false, bargap: 0.08, plot_bgcolor: 'lightyellow'
+        margin: {l:40, r:10, t:5, b:40, pad:0}, showlegend: false, bargap: 0.08, plot_bgcolor: 'lightyellow'
     };
     Plotly.newPlot(plot_div, [trace], layout, {displayModeBar: false});
 }
+
+/*
+class PlotlyPlot {
+    constructor() {
+        this.layout = this.setLayout()
+    }
+    title(title, fontSize) {
+
+    }
+    xAxis(title, fontSize) {
+
+    }
+    yAxis(title, fontSize) {
+
+    }
+    legend(x, y, fontSize) {
+
+    }
+    addHistogram(x) {
+
+    }
+    addLinePlot(x, y, linecolor) {
+
+    }
+    addScatter(x, y, marker) {
+
+    }
+    newPlot(divId) {
+
+    }
+    updatePlot(divID) {
+
+    }
+}
+*/

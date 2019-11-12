@@ -56,14 +56,4 @@
 {% block javascript %}
     <script type="text/javascript" src="{% static 'js/plotly-plots.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/home-view.js' %}"></script>
-    <script type="text/javascript">
-        $().ready(initialize);
-        {% if features_summary %}
-            var data_summary = {{ features_summary|safe }};
-            var data_frame = {{ data_frame|safe }}
-            update_selected_column_summaries(data_summary, data_frame);
-            set_training_summaries();
-            $("#home_container").removeClass("invisible");
-        {% endif %}
-    </script>
 {% endblock javascript %}

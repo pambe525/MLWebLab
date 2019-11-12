@@ -1,6 +1,10 @@
 /**
  * Function to be called when document is loaded
  */
+
+var data_frame = null;
+$().ready(initialize);
+
 function initialize() {
     $("#glass_pane").hide();
     if ( $("#msg_text").text() !== "None" ) showMsgBox();
@@ -61,7 +65,10 @@ function displayFileData(response) {
         showMsgBox(response["error_message"]);
     else {
         hideMsgBox();
+        data_frame = JSON.parse(response['data_frame']);
         updateDataFileSummary(response);
+        setClickableRowHandler("column_stats_table", plotHistogramOnClick);
+        clickTableRow("column_stats_table", 0);
         $("#nav-summary-tab").click();
         $("#home_container").removeClass("invisible");
     }
@@ -71,8 +78,53 @@ function updateDataFileSummary(response) {
     $("#source_file").text(response['file_name']);
     $("#source_rows").text(response['data_file_rows']);
     $("#source_cols").text(response['data_file_cols']);
-    //loadColumnStats(response['column_summary']);
-    // plot_column_histogram("column_histogram", column_name, data_frame);
+    loadColumnStats(response['column_summary']);
+}
+
+function loadColumnStats(column_summary) {
+    $("#column_stats_table tr[class*='clickable-row']").remove();
+    var table = $("#column_stats_table")
+    for (var i=0; i < column_summary.length; i++) {
+        var row = document.createElement("tr");
+        row.setAttribute('class','clickable-row');
+        row.append( getCell(column_summary[i]['name']) );
+        row.append( getCell(column_summary[i]['type']) );
+        row.append( getCell(column_summary[i]['min']) );
+        row.append( getCell(column_summary[i]['max']) );
+        row.append( getCell(column_summary[i]['mean']) );
+        row.append( getCell(column_summary[i]['stdev']) );
+        table.append(row);
+    }
+
+}
+
+function setClickableRowHandler(tableID, onClickHandler) {
+    $("#"+tableID+" tr[class='clickable-row']").on('click', function(){
+        if( !$(this).hasClass("highlight") ) {
+            $(this).addClass("highlight").siblings().removeClass("highlight");
+            onClickHandler($(this));
+        }
+    });
+}
+
+function plotHistogramOnClick(rowElement) {
+    var column_name = rowElement.children()[0].innerHTML;
+    var n_records = Object.keys(data_frame[column_name]).length;
+    var column_values = [];
+    for (var i = 0; i < n_records; i++)
+        column_values[i] = (data_frame[column_name][i.toString()]);
+    plot_column_histogram("column_histogram", column_name, column_values);
+}
+
+function clickTableRow(tableID, rowIndex) {
+    $("#"+tableID+" tr[class='clickable-row']")[rowIndex].click();
+}
+
+function getCell(content) {
+    var cell = document.createElement("td");
+    cell.setAttribute('class','info-cell');
+    cell.innerHTML = content;
+    return cell;
 }
 
 function ajaxTrainRequest() {
@@ -92,33 +144,6 @@ function ajaxTrainRequest() {
             }
         },
    });
-}
-
-function loadColumnStats(column_summary) {
-    $("#column_stats_table tr[class='clickable-row']").remove();
-    var table = $("#column_stats_table")
-    for (var i=0; i < column_summary.length; i++) {
-        var row = document.createElement("tr");
-        row.setAttribute('class','clickable-row');
-        row.append( getCell(column_summary[i]['name']) );
-        row.append( getCell(column_summary[i]['type']) );
-        row.append( getCell(column_summary[i]['min']) );
-        row.append( getCell(column_summary[i]['max']) );
-        row.append( getCell(column_summary[i]['mean']) );
-        row.append( getCell(column_summary[i]['stdev']) );
-        table.append(row);
-    }
-    $("#column_stats_table tr[class='clickable-row']").on('click', function(){
-        if( !$(this).hasClass("highlight") )
-            $(this).addClass("highlight").siblings().removeClass("highlight");
-    });
-}
-
-function getCell(content) {
-    var cell = document.createElement("td");
-    cell.setAttribute('class','info-cell');
-    cell.innerHTML = content;
-    return cell;
 }
 
 function set_training_summaries(response) {
