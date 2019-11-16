@@ -2,7 +2,7 @@
 // Validation Plot: Actual Target versus Predicted Target
 //---------------------------------------------------------------------------------------------------------------------
 function plot_validation(div_id, target_name, y_actual, y_predicted) {
-    var new_plot = (y_predicted.length == 0) ? true : false;
+    var new_plot = (y_predicted.length === 0);
     var plot_div = document.getElementById(div_id);
     var trace1 = {x: [Math.min.apply(null, y_actual),Math.max.apply(null, y_actual)],
                   y:[Math.min.apply(null, y_actual),Math.max.apply(null, y_actual)],
@@ -10,7 +10,6 @@ function plot_validation(div_id, target_name, y_actual, y_predicted) {
     if ( !new_plot )
         var trace2 = {x: y_actual, y: y_predicted, type: 'scatter', mode: 'markers', name: "",
                     marker:{color: 'green', size:5}};
-
     var data = new_plot ? [trace1] : [trace1, trace2];
     var layout = {
       title: {
@@ -31,8 +30,9 @@ function plot_validation(div_id, target_name, y_actual, y_predicted) {
       margin: {l:70, r:20, t:50, b:60}, showlegend: false,
       plot_bgcolor: 'lightyellow', paper_bgcolor: '#eee',
     };
-    if (new_plot) Plotly.newPlot(plot_div, data, layout, {displayModeBar: false});
-    else Plotly.plot(plot_div, data, layout, {displayModeBar: false});
+    Plotly.newPlot(plot_div, data, layout, {displayModeBar: false});
+    // if (new_plot) Plotly.newPlot(plot_div, data, layout, {displayModeBar: false});
+    // else Plotly.plot(plot_div, data, layout, {displayModeBar: false});
 }
 
 function plot_split_scores(div_id, n_splits, train_scores, test_scores) {
@@ -41,8 +41,8 @@ function plot_split_scores(div_id, n_splits, train_scores, test_scores) {
     for (var i = 1; i <= n_splits; i++) x_values.push(i);
     if (train_scores == null) train_scores = new Array(n_splits);
     if (test_scores == null) test_scores = new Array(n_splits);
-    var trace1 = {x: x_values, y: train_scores, name:'Training Score'};
-    var trace2 = {x: x_values, y: test_scores, name:"Validation Score"};
+    var trace1 = {x: x_values, y: train_scores, name:'Training '};
+    var trace2 = {x: x_values, y: test_scores, name:'Validation'};
     var data =[trace1, trace2];
     var layout = {
       xaxis: {
@@ -56,7 +56,7 @@ function plot_split_scores(div_id, n_splits, train_scores, test_scores) {
           tickfont:{size:8}
       },
       margin: {l:40, r:10, t:10, b:30, pad:0}, showlegend: true, plot_bgcolor: 'white',
-      legend: {x: 0.1, y: 1.7, font: {size: 10}}
+      legend: {x: 1.05, y: 0.7, font: {size: 10}}
     };
     Plotly.newPlot(plot_div, data, layout, {displayModeBar: false});
 }

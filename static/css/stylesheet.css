@@ -111,7 +111,6 @@ hr {
 
 /** TILE STYLING **/
 .tile {
-    box-shadow:2px 2px 3px #777;
     display: flex;
     background-color: #2874a6;
 }

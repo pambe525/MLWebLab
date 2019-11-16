@@ -10,6 +10,12 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 from mlflow import constants
 
+def is_number(text):
+    try:
+        float(text)
+    except ValueError:
+        return False
+    return True
 
 @tag('selenium')
 class HomeViewTemplateTestCase(SimpleTestCase):
@@ -57,7 +63,7 @@ class HomeViewTemplateTestCase(SimpleTestCase):
 
     def test_select_button_click_with_file_selected_loads_data(self):
         self.write_data_and_select_file(self.get_fake_data(), self.fake_datafile)
-        #self.verify_glass_pane_is_visible(True)
+        # self.verify_glass_pane_is_visible(True)
         self.wait_until_visible(By.ID, "home_container")
         self.verify_content_area_is_visible(True)
         self.verify_msgbox_is_visible(False)
@@ -118,10 +124,10 @@ class HomeViewTemplateTestCase(SimpleTestCase):
         self.wait_until_visible(By.ID, "home_container")
         self.verify_source_file_data(self.fake_datafile, 10, 4)
         self.verify_column_stats_table(self.get_fake_data())
-        self.verify_column_stats_table_row_is_highlited(0)
+        self.verify_column_stats_table_row_is_highlighted(0)
         self.verify_histogram_plot(0)
 
-    def test_column_stats_table_row_selection_changes_plot(self):
+    def test_column_stats_table_rows_cleared_when_data_file_changes(self):
         self.write_data_and_select_file(self.get_fake_data(), self.fake_datafile)
         self.wait_until_visible(By.ID, "home_container")
         self.select_file_by_index(1)
@@ -130,46 +136,74 @@ class HomeViewTemplateTestCase(SimpleTestCase):
         rows = self.browser.find_element_by_id("column_stats_table").find_elements_by_class_name("clickable-row")
         self.assertEqual(len(rows), columns)
 
-    # def test_column_stats_table_rows_cleared_when_data_file_changes(self):
-    #     self.write_data_and_select_file(self.get_fake_data(), self.fake_datafile)
-    #     self.wait_until_visible(By.ID, "home_container")
-    #     file_selector = self.browser.find_element_by_name('data_file')
-    #
-    #     self.select_column_stats_table_row(3)
-    #     self.verify_column_stats_table_row_is_highlited(3)
-    #     self.verify_histogram_plot(3)
+    def test_column_stats_table_row_selection_changes_plot(self):
+        self.write_data_and_select_file(self.get_fake_data(), self.fake_datafile)
+        self.wait_until_visible(By.ID, "home_container")
+        self.select_column_stats_table_row(3)
+        self.verify_column_stats_table_row_is_highlighted(3)
+        self.verify_histogram_plot(3)
 
-    # def test_train_button_clicked_with_default_settings(self):
-    #     csv_data = [["X1", "X2", "Y"], [0, 9, 24], [1, 8, 23], [2, 7, 22], [3, 6, 21], [4, 5, 20], [5, 4, 19],
-    #                 [6, 3, 18], [7, 2, 17], [8, 1, 16], [9, 0, 15]]
-    #     self.write_data_and_select_file(csv_data, self.fake_datafile)
-    #     self.browser.find_element_by_id("nav-train-tab").click()
-    #     self.browser.find_element_by_id("train_btn").click()
-    #     self.browser.implicitly_wait(2)
-    #     self.assertFalse(self.browser.find_element_by_id("glass_pane").is_displayed())
-    #     self.verify_content_area_is_visible(True)
-    #     self.verify_selected_file(self.fake_datafile)
-    #     self.verify_active_tab("nav-train-tab")
-    #     self.verify_training_set_data('Y', '5')
-    #     self.verify_method_data("Linear Regression")
-    #     self.verify_validation_metrics()
-    #     self.verify_validation_plots()
-    #     self.verify_source_file_data(self.fake_datafile, 10, 3)
-    #
-    # def test_train_button_clicked_with_exception(self):
-    #     csv_data = [["X1", "X2", "Y"], [0, None, 15], [1, 4, 16], [2, 3, 17], [3, None, 18], [4, 1, 19],
-    #                 [5, 0, 20], [6, 10, 15], [1, 4, 16], [2, 3, 17], [3, 9, 18]]
-    #     self.write_data_and_select_file(csv_data, self.fake_datafile)
-    #     self.browser.find_element_by_id("nav-train-tab").click()
-    #     self.browser.find_element_by_id("train_btn").click()
-    #     self.browser.implicitly_wait(2)
-    #     self.assertFalse(self.browser.find_element_by_id("glass_pane").is_displayed())
-    #     self.verify_message_box_and_close("Input contains NaN")
-    #     self.verify_content_area_is_visible(True)
-    #     self.verify_selected_file(self.fake_datafile)
-    #     self.verify_active_tab("nav-train-tab")
-    #     self.verify_training_set_data('Y', '5')
-    #     self.verify_method_data("Linear Regression")
+    # ========================================================================================
+    # MODEL TRAINING TAB TESTS
+    # ----------------------------------------------------------------------------------------
+    def test_initial_model_training_setup(self):
+        self.write_data_and_select_file(self.get_fake_data(), self.fake_datafile)
+        self.wait_until_visible(By.ID, "home_container")
+        self.browser.find_element_by_id("nav-train-tab").click()  # change tab
+        self.verify_training_controls("col4", 5, "Linear Regression")
+        self.verify_initial_validation_metrics()
+        self.verify_validation_plots_exist()
+        self.verify_plot_xaxis_tick_range("cv_scores_plot", 1, 5)
+        self.verify_plot_has_lines("validation_plot", 1)
+        self.verify_plot_has_points("validation_plot", 0)
+
+    def test_changing_splits_changes_scores_plot_xrange(self):
+        self.write_data_and_select_file(self.get_fake_data(), self.fake_datafile)
+        self.wait_until_visible(By.ID, "home_container")
+        self.browser.find_element_by_id("nav-train-tab").click()  # change tab
+        file_selector = self.browser.find_element_by_name('n_splits')
+        Select(file_selector).select_by_visible_text("3")
+        self.verify_plot_xaxis_tick_range("cv_scores_plot", 1, 3)
+
+    def test_train_button_clicked_with_default_settings(self):
+        csv_data = [["X1", "X2", "Y"], [0, 9, 24], [1, 8, 23], [2, 7, 22], [3, 6, 21], [4, 5, 20],
+                    [5, 4, 19], [6, 3, 18], [7, 2, 17], [8, 1, 16], [9, 0, 15]]
+        self.write_data_and_select_file(csv_data, self.fake_datafile)
+        self.wait_until_visible(By.ID, "home_container")
+        self.browser.find_element_by_id("nav-train-tab").click()
+        self.browser.find_element_by_id("train_btn").click()
+        self.verify_computed_validation_metrics()
+        self.verify_plot_xaxis_tick_range("cv_scores_plot", 1, 5)
+        self.verify_plot_has_lines("cv_scores_plot", 2)
+        self.verify_plot_has_points("cv_scores_plot", 10)
+        self.verify_plot_has_lines("validation_plot", 1)
+        self.verify_plot_has_points("validation_plot", 10)
+
+    def test_changing_splits_clears_previous_training_data(self):
+        csv_data = [["X1", "X2", "Y"], [0, 9, 24], [1, 8, 23], [2, 7, 22], [3, 6, 21], [4, 5, 20],
+                    [5, 4, 19], [6, 3, 18], [7, 2, 17], [8, 1, 16], [9, 0, 15]]
+        self.write_data_and_select_file(csv_data, self.fake_datafile)
+        self.wait_until_visible(By.ID, "home_container")
+        self.browser.find_element_by_id("nav-train-tab").click()
+        self.browser.find_element_by_id("train_btn").click()  # training run
+        file_selector = self.browser.find_element_by_name('n_splits')  # change splits
+        Select(file_selector).select_by_visible_text("3")
+        self.verify_initial_validation_metrics()
+        self.verify_plot_xaxis_tick_range("cv_scores_plot", 1, 3)
+        self.verify_plot_has_lines("cv_scores_plot", 0)
+        self.verify_plot_has_points("cv_scores_plot", 0)
+        self.verify_plot_has_lines("validation_plot", 1)
+        self.verify_plot_has_points("validation_plot", 0)
+
+    def test_train_button_clicked_with_exception(self):
+        csv_data = [["X1", "X2", "Y"], [0, 1, 15], [1, 4, 16], [2, 3, 17], [3, 2, 18], [4, 1, 19],
+                    [5, 0, 20], [6, 10, 15], [1, 4, 16], [2, 3, 17], [3, None, 18]]
+        self.write_data_and_select_file(csv_data, self.fake_datafile)
+        self.wait_until_visible(By.ID, "home_container")
+        self.browser.find_element_by_id("nav-train-tab").click()
+        self.browser.find_element_by_id("train_btn").click()
+        self.verify_message_box_and_close("Input contains NaN")
+        self.verify_content_area_is_visible(True)
 
     # ------------------------------------------------------------------------------------------------------------------
     # HELPER METHODS
@@ -256,7 +290,7 @@ class HomeViewTemplateTestCase(SimpleTestCase):
             self.assertEqual(cells[4].text, str(index + 19))
             self.assertEqual(cells[5].text, '12.11')
 
-    def verify_column_stats_table_row_is_highlited(self, data_row_index):
+    def verify_column_stats_table_row_is_highlighted(self, data_row_index):
         column_stats_table = self.browser.find_element_by_id("column_stats_table")
         rows = column_stats_table.find_elements_by_class_name('clickable-row')
         self.assertEqual(rows[data_row_index].value_of_css_property('background-color'), 'rgb(173, 216, 230)')
@@ -269,26 +303,44 @@ class HomeViewTemplateTestCase(SimpleTestCase):
         self.assertIsNotNone(plot)
         self.assertEqual(plot.find_element_by_class_name('xtitle').text, column_name)
 
-    def verify_training_set_data(self, target_feature, n_splits):
+    def verify_training_controls(self, target_feature, n_splits, method):
         self.assertEquals(target_feature, self.browser.find_element_by_id("target_feature").text)
         splits_selector = self.browser.find_element_by_name('n_splits')
-        selection = Select(splits_selector).first_selected_option.text
+        selection = int(Select(splits_selector).first_selected_option.text)
         self.assertEquals(n_splits, selection)
+        method_selector = self.browser.find_element_by_name("training_method")
+        self.assertEqual(Select(method_selector).first_selected_option.text, method)
 
-    def verify_method_data(self, training_method):
-        self.assertEquals(training_method, self.browser.find_element_by_name("training_method").text)
+    def verify_initial_validation_metrics(self):
+        self.assertEqual(self.browser.find_element_by_id("train_score").text, "")
+        self.assertEqual(self.browser.find_element_by_id("test_score").text, "")
+        self.assertEqual(self.browser.find_element_by_id("train_scores_stdev").text, "")
+        self.assertEqual(self.browser.find_element_by_id("test_scores_stdev").text, "")
 
-    def verify_validation_set_data(self, validation_rows):
-        self.assertEquals(validation_rows, int(self.browser.find_element_by_id("validation_rows").text))
+    def verify_computed_validation_metrics(self):
+        self.assertTrue(is_number(self.browser.find_element_by_id("train_score").text))
+        self.assertTrue(is_number(self.browser.find_element_by_id("test_score").text))
+        self.assertTrue(is_number(self.browser.find_element_by_id("train_scores_stdev").text))
+        self.assertTrue(is_number(self.browser.find_element_by_id("test_scores_stdev").text))
 
-    def verify_validation_metrics(self):
-        self.browser.find_element_by_id("nav-train-tab").click()
-        self.assertEqual(self.browser.find_element_by_name("training_method").text, "Linear Regression")
-        self.assertGreater(float(self.browser.find_element_by_id("test_score").text), 0)
-        self.assertGreater(float(self.browser.find_element_by_id("train_score").text), 0)
-        self.assertGreaterEqual(float(self.browser.find_element_by_id("train_scores_stdev").text), 0.0)
-        self.assertGreaterEqual(float(self.browser.find_element_by_id("test_scores_stdev").text), 0.0)
+    def verify_validation_plots_exist(self):
+        plot1 = self.browser.find_element_by_id("cv_scores_plot").find_element_by_class_name("plotly")
+        plot2 = self.browser.find_element_by_id("validation_plot").find_element_by_class_name("plotly")
+        self.assertIsNotNone(plot1)
+        self.assertIsNotNone(plot2)
 
-    def verify_validation_plots(self):
-        plot = self.browser.find_element_by_id("validation_plot").find_element_by_class_name("plotly")
-        self.assertIsNotNone(plot)
+    def verify_plot_xaxis_tick_range(self, div_id, min, max):
+        xpath = "//*[@id='" + div_id + "']//*[@class='xtick']/*"
+        xticks = self.browser.find_elements_by_xpath(xpath)
+        self.assertEqual(int(xticks[0].text), min)
+        self.assertEqual(int(xticks[-1].text), max)
+
+    def verify_plot_has_lines(self, div_id, count):
+        xpath = "//*[@id='" + div_id + "']//*[@class='lines']/*"
+        lines = self.browser.find_elements_by_xpath(xpath)
+        self.assertEqual(len(lines), count)
+
+    def verify_plot_has_points(self, div_id, count):
+        xpath = "//*[@id='" + div_id + "']//*[@class='points']/*"
+        points = self.browser.find_elements_by_xpath(xpath)
+        self.assertEqual(len(points), count)

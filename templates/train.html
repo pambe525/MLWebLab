@@ -13,7 +13,7 @@
             </div>
             <hr class="spacer">
             <div class="card-header">TARGET FEATURE</div>
-            <div class="card-label static-field" id="target_feature">{{ target_feature }}</div>
+            <div class="card-label static-field" id="target_feature"></div>
             <hr class="spacer">
             <div class="card-header">K-FOLD CROSS VALIDATION</div>
 	        <div class="row mx-0">
@@ -30,19 +30,19 @@
     </form>
     <div class="col" style="width:500">
         <div class="row mx-0">
-            <div id="cv_scores_plot" class="m-1" style="width:230px; height:160px;"></div>
+            <div id="cv_scores_plot" class="m-1" style="width:300px; height:160px;"></div>
             <div class="col-*">
                 <div class="tile m-2">
                     <div class="tile-text" id="train_score" style="width:80px"></div>
                     <div class="tile-title">
-                        Average Training Score
+                        Mean Training Score
                         <div class="tile-subtitle">Std Dev: <b><span id="train_scores_stdev"></span></b></div>
                     </div>
                 </div>
                 <div class="tile m-2">
                     <div class="tile-text" id="test_score" style="width:80px"></div>
                     <div class="tile-title">
-                        Average Validation Score
+                        Mean Validation Score
                         <div class="tile-subtitle"> Std Dev: <b><span id="test_scores_stdev"></span></b></div>
                     </div>
                 </div>
