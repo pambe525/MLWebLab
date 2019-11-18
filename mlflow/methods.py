@@ -1,14 +1,13 @@
 from statistics import mean, stdev
 
-from pandas import read_json
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import cross_validate
 from sklearn.utils import shuffle
 
 
 # TRAINING METHODS AND ALGORITHMS
-def fit_linear_regression(json_data, n_splits):
-    dataframe = shuffle(read_json(json_data))
+def fit_linear_regression(data_frame, n_splits):
+    dataframe = shuffle(data_frame)
     X = dataframe[dataframe.columns[:-1]].values
     y = dataframe[dataframe.columns[-1]].values
     estimator = LinearRegression()
@@ -21,3 +20,8 @@ def fit_linear_regression(json_data, n_splits):
         'y': y.tolist(), 'y_predict': y_predict.tolist()
     }
     return fit_result
+
+
+def correlation_matrix(data_frame):
+    corr = data_frame.corr()
+    return corr[corr.columns].values.tolist()

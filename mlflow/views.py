@@ -4,6 +4,7 @@ from django.shortcuts import render
 from mlflow.forms import DataFileForm, ControlPanelForm
 from mlflow.helpers import read_csv_datafile, set_data_file_response
 from mlflow.methods import fit_linear_regression
+from pandas import read_json
 
 
 def home_view(request):
@@ -29,7 +30,8 @@ def train_model(request):
     response = {"error_message": None}
     json_data = request.session['data_frame']
     try:
-        fit_result = fit_linear_regression(json_data, n_splits)
+        data_frame = read_json(json_data)
+        fit_result = fit_linear_regression(data_frame, n_splits)
         response.update(fit_result)
     except Exception as e:
         response["error_message"] = str(e)

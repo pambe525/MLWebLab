@@ -4,6 +4,7 @@ import os.path
 from pandas import read_csv
 
 from mlflow import constants
+from mlflow.methods import correlation_matrix
 
 
 # Finds if a pandas data frame has headers
@@ -48,3 +49,4 @@ def set_data_file_response(response, data_frame):
         summary.append(column_stats)
     response['column_summary'] = summary
     response['data_frame'] = data_frame.to_json()
+    response['correlation_matrix'] = correlation_matrix(data_frame)
