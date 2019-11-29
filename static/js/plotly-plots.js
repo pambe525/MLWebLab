@@ -31,8 +31,6 @@ function plot_validation(div_id, target_name, y_actual, y_predicted) {
       plot_bgcolor: 'lightyellow', paper_bgcolor: '#eee',
     };
     Plotly.newPlot(plot_div, data, layout, {displayModeBar: false});
-    // if (new_plot) Plotly.newPlot(plot_div, data, layout, {displayModeBar: false});
-    // else Plotly.plot(plot_div, data, layout, {displayModeBar: false});
 }
 
 function plot_split_scores(div_id, n_splits, train_scores, test_scores) {
@@ -74,6 +72,54 @@ function plot_column_histogram(div_id, column_name, column_values) {
         margin: {l:40, r:10, t:5, b:40, pad:0}, showlegend: false, bargap: 0.08, plot_bgcolor: 'lightyellow'
     };
     Plotly.newPlot(plot_div, [trace], layout, {displayModeBar: false});
+}
+
+function plot_correlation_heatmap(div_id, column_names, corr_matrix) {
+    var plot = document.getElementById(div_id);
+    var colorScaleValues = [[-1.0, "blue"], [0.0, 'white'], [1.0, 'orange']];
+    var data = [{z: corr_matrix, x: column_names, y: column_names,
+        type: 'heatmap', colorscale: colorScaleValues}];
+    var layout = {
+        margin: {l:120, t:30, r:5, b:'auto'}, autosize: true, width: 500,
+        title: {text: 'Correlation Coefficients Heat Map', font: {family:"Arial", size: 20}},
+    };
+    Plotly.newPlot(div_id, data, layout, {displayModeBar: false});
+
+    plot.on("plotly_click", function(data){
+        var xName = data.points[0].x;
+        var yName = data.points[0].y;
+        var xValues = getColumnValues(xName);
+        var yValues = getColumnValues(yName);
+        plot_covariance("covariance_plot", xName, yName, xValues, yValues);
+    });
+}
+
+function plot_covariance(div_id, xName, yName, xValues, yValues) {
+    var trace1 = {x: xValues, y: yValues, type: 'scatter', mode: 'markers'};
+    // if ( !new_plot )
+    //     var trace2 = {x: y_actual, y: y_predicted, type: 'scatter', mode: 'markers', name: "",
+    //                 marker:{color: 'green', size:5}};
+    var data = [trace1];
+    var layout = {
+      title: {
+        text: '<b>Variation of ' +  yName + ' with ' + xName + '</b>',
+        font: {family:"Helvetica", size: 15}
+      },
+
+      xaxis: {
+          title: {text: '<b>' + xName + '</b>', font: {size: 11}}, linecolor: '#666',
+          linewidth: 2, mirror: true, ticks:"outside", zerolinecolor: "#999", zerolinewidth: 2,
+          tickfont:{size:10}
+      },
+      yaxis: {
+          title: {text: '<b>' + yName + '</b>', font: {size: 11}}, linecolor: '#666',
+          linewidth: 2, mirror: true, ticks:"outside", zerolinecolor: "#999", zerolinewidth: 2,
+          tickfont:{size:10}
+      },
+      margin: {l:70, r:20, t:50, b:60}, showlegend: false,
+      plot_bgcolor: 'lightyellow', paper_bgcolor: '#eee',
+    };
+    Plotly.newPlot(div_id, data, layout, {displayModeBar: false});
 }
 
 /*

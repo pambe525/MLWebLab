@@ -107,3 +107,4 @@ class HelperStaticFunctionsTestCase(SimpleTestCase):
         self.assertEqual(response['target_feature'], data_frame.columns[-1])
         self.assertEqual(response['column_summary'], self.mock_data_summary)
         self.assertEqual(response['data_frame'], data_frame.to_json())
+        self.assertEqual(len(response['correlation_matrix']), 5)

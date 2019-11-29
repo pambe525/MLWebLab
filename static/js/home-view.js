@@ -69,17 +69,22 @@ function displayFileData(response) {
     if ( errorOccurred(response) )
         showMsgBox(response["error_message"]);
     else {
-        hideMsgBox();
-        dataFrame = JSON.parse(response['data_frame']);
-        columnSummary = response['column_summary']
-        updateDataFileSummary(response);
-        setClickableRowHandler("column_stats_table", plotHistogramOnClick);
-        $("#target_feature").text(response["target_feature"]);
-        initializeTrainingMetrics();
-        initializeTrainingPlots();
-        $("#column_stats_table tr[class='clickable-row']")[0].click();
-        $("#nav-summary-tab").click();
-        $("#home_container").removeClass("invisible");
+        try {
+            hideMsgBox();
+            dataFrame = JSON.parse(response['data_frame']);
+            columnSummary = response['column_summary'];
+            updateDataFileSummary(response);
+            setClickableRowHandler("column_stats_table", plotHistogramOnClick);
+            $("#target_feature").text(response["target_feature"]);
+            displayHeatMap(response);
+            initializeTrainingMetrics();
+            initializeTrainingPlots();
+            $("#column_stats_table tr[class='clickable-row']")[0].click();
+            $("#nav-summary-tab").click();
+            $("#home_container").removeClass("invisible");
+        } catch(e) {
+            alert(e);
+        }
     }
 }
 
@@ -117,11 +122,16 @@ function setClickableRowHandler(tableID, onClickHandler) {
 
 function plotHistogramOnClick(rowElement) {
     var columnName = rowElement.children()[0].innerHTML;
+    var columnValues = getColumnValues(columnName);
+    plot_column_histogram("column_histogram", columnName, columnValues);
+}
+
+function getColumnValues(columnName) {
     var nRecords = Object.keys(dataFrame[columnName]).length;
     var columnValues = [];
     for (var i = 0; i < nRecords; i++)
         columnValues[i] = (dataFrame[columnName][i.toString()]);
-    plot_column_histogram("column_histogram", columnName, columnValues);
+    return columnValues;
 }
 
 function getCell(content) {
@@ -129,6 +139,12 @@ function getCell(content) {
     cell.setAttribute('class','info-cell');
     cell.innerHTML = content;
     return cell;
+}
+
+function displayHeatMap(response) {
+    var corrMatrix = response['correlation_matrix'];
+    var columnNames = Object.keys(dataFrame);
+    plot_correlation_heatmap("covariance_heatmap", columnNames, corrMatrix)
 }
 
 function initializeTrainingMetrics() {

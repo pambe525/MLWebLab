@@ -152,8 +152,9 @@ class HomeViewTemplateTestCase(SimpleTestCase):
         self.browser.find_element_by_id("nav-train-tab").click()  # change tab
         self.verify_training_controls("col4", 5, "Linear Regression")
         self.verify_initial_validation_metrics()
-        self.verify_validation_plots_exist()
+        self.verify_plot_exists("cv_scores_plot")
         self.verify_plot_xaxis_tick_range("cv_scores_plot", 1, 5)
+        self.verify_plot_exists("validation_plot")
         self.verify_plot_has_lines("validation_plot", 1)
         self.verify_plot_has_points("validation_plot", 0)
 
@@ -186,6 +187,7 @@ class HomeViewTemplateTestCase(SimpleTestCase):
         self.wait_until_visible(By.ID, "home_container")
         self.browser.find_element_by_id("nav-train-tab").click()
         self.browser.find_element_by_id("train_btn").click()  # training run
+        self.wait_until_invisible(By.ID, "glass_pane")
         file_selector = self.browser.find_element_by_name('n_splits')  # change splits
         Select(file_selector).select_by_visible_text("3")
         self.verify_initial_validation_metrics()
@@ -204,6 +206,15 @@ class HomeViewTemplateTestCase(SimpleTestCase):
         self.browser.find_element_by_id("train_btn").click()
         self.verify_message_box_and_close("Input contains NaN")
         self.verify_content_area_is_visible(True)
+
+    def test_data_exploration_section(self):
+        csv_data = [["X1", "X2", "Y"], [0, 1, 15], [1, 4, 16], [2, 3, 17], [3, 2, 18], [4, 1, 19],
+                    [5, 0, 20], [6, 10, 15], [1, 4, 16], [2, 3, 17], [3, None, 18]]
+        self.write_data_and_select_file(csv_data, self.fake_datafile)
+        self.wait_until_visible(By.ID, "home_container")
+        self.browser.find_element_by_id("nav-explore-tab").click()  # change tab
+        self.verify_plot_exists("covariance_heatmap")
+
 
     # ------------------------------------------------------------------------------------------------------------------
     # HELPER METHODS
@@ -242,6 +253,10 @@ class HomeViewTemplateTestCase(SimpleTestCase):
     def wait_until_visible(self, by, id):
         wait = WebDriverWait(self.browser, 10)
         return wait.until(EC.visibility_of_element_located((by, id)))
+
+    def wait_until_invisible(self, by, id):
+        wait = WebDriverWait(self.browser, 10)
+        return wait.until(EC.invisibility_of_element((by, id)))
 
     def verify_glass_pane_is_visible(self, is_visible=True):
         glass_pane = self.browser.find_element_by_id('glass_pane')
@@ -323,11 +338,9 @@ class HomeViewTemplateTestCase(SimpleTestCase):
         self.assertTrue(is_number(self.browser.find_element_by_id("train_scores_stdev").text))
         self.assertTrue(is_number(self.browser.find_element_by_id("test_scores_stdev").text))
 
-    def verify_validation_plots_exist(self):
-        plot1 = self.browser.find_element_by_id("cv_scores_plot").find_element_by_class_name("plotly")
-        plot2 = self.browser.find_element_by_id("validation_plot").find_element_by_class_name("plotly")
-        self.assertIsNotNone(plot1)
-        self.assertIsNotNone(plot2)
+    def verify_plot_exists(self, div_id):
+        plot = self.browser.find_element_by_id(div_id).find_element_by_class_name("plotly")
+        self.assertIsNotNone(plot)
 
     def verify_plot_xaxis_tick_range(self, div_id, min, max):
         xpath = "//*[@id='" + div_id + "']//*[@class='xtick']/*"
