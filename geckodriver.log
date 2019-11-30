@@ -10743,4 +10743,84 @@ JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.cs
 [Ch
 ###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
 
-[GPU
+[GPU1575124364437	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Prashant\\AppData\\Local\\Temp\\rust_mozprofilefT7EMg"
+1575124366623	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1575124366624	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1575124366625	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1575124366625	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+1575124376211	Marionette	INFO	Listening on port 51221
+[Child 3784, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1572401533/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child1575124376437	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://localhost:8000/, line 1: ReferenceError: ajaxTrainRequest is not defined
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://localhost:8000/, line 1: ReferenceError: ajaxTrainRequest is not defined
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://localhost:8000/, line 1: ReferenceError: ajaxTrainRequest is not defined
+1575124424691	Marionette	INFO	Stopped listening on port 51221
+[Child 12268, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1572401533/build/src/ipc/chromium/src/chrome/common[Parent 11908, Gecko_IOThread] WARNING: pipe error: 109: file z:/task_1572401533/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line /3i4p1c
+_cha[Child 7928, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1572401533/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+nn[Cel_win.cc, line 341
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+[GPU 7864, Chrome
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+
+1575124835852	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Prashant\\AppData\\Local\\Temp\\rust_mozprofileIWumLD"
+1575124837093	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1575124837093	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1575124837094	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1575124837094	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+1575124841815	Marionette	INFO	Listening on port 51517
+1575124842258	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://localhost:8000/, line 1: ReferenceError: ajaxTrainRequest is not defined
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://localhost:8000/, line 1: ReferenceError: ajaxTrainRequest is not defined
+JavaScript error: http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css, line 1: SyntaxError: unexpected token: '{'
+JavaScript error: http://localhost:8000/, line 1: ReferenceError: ajaxTrainRequest is not defined
+1575124887432	Marionette	INFO	Stopped listening on port 51517
+[Parent 460, Gecko_IOThread] WARNING: pipe error: 109: file z:/task_1572401533/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 5708, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1572401533/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 5708, Chrome_ChildThread] WARNI[Child 1540, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1572401533/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 1540, Chro[Parent 460, Gecko_IOThread] WARNING: pipe error: 109: file z:/task_1572401533/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 11764, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1572401533/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Chi
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+

@@ -101,12 +101,12 @@ function loadColumnStatsTable() {
     for (var i=0; i < columnSummary.length; i++) {
         var row = document.createElement("tr");
         row.setAttribute('class','clickable-row');
-        row.append( getCell(columnSummary[i]['name']) );
-        row.append( getCell(columnSummary[i]['type']) );
-        row.append( getCell(columnSummary[i]['min']) );
-        row.append( getCell(columnSummary[i]['max']) );
-        row.append( getCell(columnSummary[i]['mean']) );
-        row.append( getCell(columnSummary[i]['stdev']) );
+        row.appendChild( getCell(columnSummary[i]['name']) );
+        row.appendChild( getCell(columnSummary[i]['type']) );
+        row.appendChild( getCell(columnSummary[i]['min']) );
+        row.appendChild( getCell(columnSummary[i]['max']) );
+        row.appendChild( getCell(columnSummary[i]['mean']) );
+        row.appendChild( getCell(columnSummary[i]['stdev']) );
         table.append(row);
     }
 }
