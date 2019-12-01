@@ -97,7 +97,7 @@ function updateDataFileSummary(response) {
 
 function loadColumnStatsTable() {
     $("#column_stats_table tr[class*='clickable-row']").remove();
-    var table = $("#column_stats_table")
+    var tbody = $("#column_stats_table tbody");
     for (var i=0; i < columnSummary.length; i++) {
         var row = document.createElement("tr");
         row.setAttribute('class','clickable-row');
@@ -107,7 +107,7 @@ function loadColumnStatsTable() {
         row.appendChild( getCell(columnSummary[i]['max']) );
         row.appendChild( getCell(columnSummary[i]['mean']) );
         row.appendChild( getCell(columnSummary[i]['stdev']) );
-        table.append(row);
+        tbody.append(row);
     }
 }
 

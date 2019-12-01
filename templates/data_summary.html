@@ -13,21 +13,23 @@
 
 <div class="row mx-0">
     <div class="my-2">
-        <span class="p-3 h5">SUMMARY BY DATA COLUMNS</span>
-        <table id="column_stats_table" class="m-3 table col-*" style="border:1px solid darkgray">
-            <tr class="thead-dark">
-                <th>Column Name</th>
-                <th>Data Type</th>
-                <th>Minimum</th>
-                <th>Maximum</th>
-                <th>Mean</th>
-                <th>Std Dev</th>
-            </tr>
+        <span class="h4">Summary of Data Columns</span>
+        <table id="column_stats_table" class="table table-sm mt-3" style="border:1px solid darkgray">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Column Name</th>
+                    <th>Data Type</th>
+                    <th>Minimum</th>
+                    <th>Maximum</th>
+                    <th>Mean</th>
+                    <th>Std Dev</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
         </table>
     </div>
-    <div class="mx-3">
-        <div class="h5 p-2 text-dark" style="width:300px; text-align:center">HISTOGRAM OF COLUMN DATA</div>
-        <div id="column_histogram" style="width:300px; height:200px"></div>
+    <div class="m-2" style="padding:10px; border:1px solid gray">
+        <div id="column_histogram" style="width:300px; height:250px"></div>
     </div>
 </div>
 

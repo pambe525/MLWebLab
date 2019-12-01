@@ -66,23 +66,20 @@ function plot_column_histogram(div_id, column_name, column_values) {
         marker:{color:"rgba(100, 200, 102, 0.6)", line:{color:"rgba(100, 200, 102, 1.0)", width:1}},
     };
     var layout = {
-        xaxis: {linecolor: '#888', linewidth: 1, mirror: true, ticks:"outside", tickfont:{size: 9},
-                title: {text: column_name, font: {size: 12}}},
-        yaxis: {linecolor: '#888', linewidth: 1, mirror: true, ticks:"outside", tickfont:{size: 9}},
-        margin: {l:40, r:10, t:5, b:40, pad:0}, showlegend: false, bargap: 0.08, plot_bgcolor: 'lightyellow'
+        margin: {r:10, l:10, pad:0}, showlegend: false, bargap: 0.08, plot_bgcolor: 'lightyellow'
     };
+    setPlotTitle(layout, "Histogram of Column Data");
+    setXAxis(layout, column_name);
     Plotly.newPlot(plot_div, [trace], layout, {displayModeBar: false});
 }
 
 function plot_correlation_heatmap(div_id, column_names, corr_matrix) {
     var plot = document.getElementById(div_id);
-    var colorScaleValues = [[-1.0, "blue"], [0.0, 'white'], [1.0, 'orange']];
-    var data = [{z: corr_matrix, x: column_names, y: column_names,
-        type: 'heatmap', colorscale: colorScaleValues}];
-    var layout = {
-        margin: {l:120, t:30, r:5, b:'auto'}, autosize: true, width: 500,
-        title: {text: 'Correlation Coefficients Heat Map', font: {family:"Arial", size: 20}},
-    };
+    var colorScaleValues = [[0, 'darkred'], [0.5, 'white'], [1.0, 'black']];
+    var data = [{type: 'heatmap', z: corr_matrix, x: column_names, y: column_names,
+         colorscale: colorScaleValues, zmin: -1.0, zmax: 1.0}];
+    var layout = {margin: {l:'auto', r:'auto', b:'auto'}};
+    setPlotTitle(layout, "Correlation Coefficients Heat Map")
     Plotly.newPlot(div_id, data, layout, {displayModeBar: false});
 
     plot.on("plotly_click", function(data){
@@ -96,30 +93,39 @@ function plot_correlation_heatmap(div_id, column_names, corr_matrix) {
 
 function plot_covariance(div_id, xName, yName, xValues, yValues) {
     var trace1 = {x: xValues, y: yValues, type: 'scatter', mode: 'markers'};
-    // if ( !new_plot )
-    //     var trace2 = {x: y_actual, y: y_predicted, type: 'scatter', mode: 'markers', name: "",
-    //                 marker:{color: 'green', size:5}};
     var data = [trace1];
-    var layout = {
-      title: {
-        text: '<b>Variation of ' +  yName + ' with ' + xName + '</b>',
-        font: {family:"Helvetica", size: 15}
-      },
-
-      xaxis: {
-          title: {text: '<b>' + xName + '</b>', font: {size: 11}}, linecolor: '#666',
-          linewidth: 2, mirror: true, ticks:"outside", zerolinecolor: "#999", zerolinewidth: 2,
-          tickfont:{size:10}
-      },
-      yaxis: {
-          title: {text: '<b>' + yName + '</b>', font: {size: 11}}, linecolor: '#666',
-          linewidth: 2, mirror: true, ticks:"outside", zerolinecolor: "#999", zerolinewidth: 2,
-          tickfont:{size:10}
-      },
-      margin: {l:70, r:20, t:50, b:60}, showlegend: false,
-      plot_bgcolor: 'lightyellow', paper_bgcolor: '#eee',
-    };
+    var layout = {margin:{r:10}, showlegend: false, plot_bgcolor: 'lightyellow'};
+    setPlotTitle(layout, "Variation of " +  yName + " with " + xName);
+    setXAxis(layout, xName);
+    setYAxis(layout, yName);
     Plotly.newPlot(div_id, data, layout, {displayModeBar: false});
+}
+
+/**
+ * Utility functions
+ */
+function setPlotTitle(layout, title) {
+    if (layout == null) layout = {};
+    layout.title = {text: '<b>'+title+'</b>', font: {family:"Arial", size: 15}};
+    layout.margin.t = 36;
+    return layout;
+}
+
+function setXAxis(layout, xtitle) {
+    if (layout == null) layout = {};
+    layout.xaxis = {linecolor: '#666', linewidth: 1, mirror: true, ticks:"outside", zerolinecolor: "#999",
+        zerolinewidth: 2, tickfont:{size:10}};
+    layout.xaxis.title = {text: xtitle, font: {size: 12}, standoff: 10};
+    layout.margin.b = 50;
+    return layout;
+}
+
+function setYAxis(layout, ytitle) {
+    if (layout == null) layout = {};
+    layout.yaxis = {linecolor: '#666', linewidth: 1, mirror: true, ticks:"outside", zerolinecolor: "#999",
+        zerolinewidth: 2, tickfont:{size:10}};
+    layout.yaxis.title = {text: ytitle, font: {size: 12}, standoff: 10};
+    return layout;
 }
 
 /*
