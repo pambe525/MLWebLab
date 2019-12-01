@@ -1,86 +1,64 @@
 //---------------------------------------------------------------------------------------------------------------------
 // Validation Plot: Actual Target versus Predicted Target
 //---------------------------------------------------------------------------------------------------------------------
-function plot_validation(div_id, target_name, y_actual, y_predicted) {
-    var new_plot = (y_predicted.length === 0);
-    var plot_div = document.getElementById(div_id);
-    var trace1 = {x: [Math.min.apply(null, y_actual),Math.max.apply(null, y_actual)],
-                  y:[Math.min.apply(null, y_actual),Math.max.apply(null, y_actual)],
+function plot_validation(divId, targetName, yActual, yPredicted) {
+    var new_plot = (yPredicted.length === 0);
+    var plot_div = document.getElementById(divId);
+    var trace1 = {x: [Math.min.apply(null, yActual),Math.max.apply(null, yActual)],
+                  y:[Math.min.apply(null, yActual),Math.max.apply(null, yActual)],
                   mode: 'lines', line:{color:'gray', width:1}};
     if ( !new_plot )
-        var trace2 = {x: y_actual, y: y_predicted, type: 'scatter', mode: 'markers', name: "",
+        var trace2 = {x: yActual, y: yPredicted, type: 'scatter', mode: 'markers', name: "",
                     marker:{color: 'green', size:5}};
     var data = new_plot ? [trace1] : [trace1, trace2];
-    var layout = {
-      title: {
-        text: '<b>Actual ' + target_name + " versus Predicted " + target_name +'</b>',
-        font: {family:"Helvetica", size: 15}
-      },
-
-      xaxis: {
-          title: {text: '<b>Actual ' + target_name + '</b>', font: {size: 11}}, linecolor: '#666',
-          linewidth: 2, mirror: true, ticks:"outside", zerolinecolor: "#999", zerolinewidth: 2,
-          tickfont:{size:10}
-      },
-      yaxis: {
-          title: {text: '<b>Predicted ' + target_name + '</b>', font: {size: 11}}, linecolor: '#666',
-          linewidth: 2, mirror: true, ticks:"outside", zerolinecolor: "#999", zerolinewidth: 2,
-          tickfont:{size:10}
-      },
-      margin: {l:70, r:20, t:50, b:60}, showlegend: false,
-      plot_bgcolor: 'lightyellow', paper_bgcolor: '#eee',
-    };
+    var layout = {margin: {r:20}, showlegend: false, plot_bgcolor: 'lightyellow'};
+    setPlotTitle(layout, "Actual "+targetName+" versus Predicted "+targetName);
+    setXAxis(layout, "Actual "+targetName);
+    setYAxis(layout, "Predicted "+targetName);
     Plotly.newPlot(plot_div, data, layout, {displayModeBar: false});
 }
 
-function plot_split_scores(div_id, n_splits, train_scores, test_scores) {
-    var plot_div = document.getElementById(div_id);
+function plot_split_scores(divId, nSplits, trainScores, testScores) {
+    var plot_div = document.getElementById(divId);
     var x_values = [];
-    for (var i = 1; i <= n_splits; i++) x_values.push(i);
-    if (train_scores == null) train_scores = new Array(n_splits);
-    if (test_scores == null) test_scores = new Array(n_splits);
-    var trace1 = {x: x_values, y: train_scores, name:'Training '};
-    var trace2 = {x: x_values, y: test_scores, name:'Validation'};
+    for (var i = 1; i <= nSplits; i++) x_values.push(i);
+    if (trainScores == null) trainScores = new Array(nSplits);
+    if (testScores == null) testScores = new Array(nSplits);
+    var trace1 = {x: x_values, y: trainScores, name:'Training '};
+    var trace2 = {x: x_values, y: testScores, name:'Validation'};
     var data =[trace1, trace2];
     var layout = {
-      xaxis: {
-          title: {text: 'Split #', font: {size: 10}}, linecolor: '#666',
-          linewidth: 1, mirror: true, ticks:"outside", zerolinecolor: "#999", zerolinewidth: 2,
-          tickfont:{size:8}
-      },
-      yaxis: {
-          title: {text: 'Score', font: {size: 10}}, linecolor: '#666',
-          linewidth: 1, mirror: true, ticks:"outside", zerolinecolor: "#999", zerolinewidth: 2,
-          tickfont:{size:8}
-      },
-      margin: {l:40, r:10, t:10, b:30, pad:0}, showlegend: true, plot_bgcolor: 'white',
+      margin: {r:10, pad:0}, showlegend: true, plot_bgcolor: 'lightyellow',
       legend: {x: 1.05, y: 0.7, font: {size: 10}}
     };
+    setPlotTitle(layout, "Scores at each split");
+    setXAxis(layout, "Split #");
+    setYAxis(layout, "Score");
     Plotly.newPlot(plot_div, data, layout, {displayModeBar: false});
 }
 
-function plot_column_histogram(div_id, column_name, column_values) {
-    var plot_div = document.getElementById(div_id);
-    var trace = {
-        x: column_values, type: 'histogram',
+function plot_column_histogram(divId, columnName, columnValues) {
+    let plot_div = document.getElementById(divId);
+    let trace = {
+        x: columnValues, type: 'histogram',
         marker:{color:"rgba(100, 200, 102, 0.6)", line:{color:"rgba(100, 200, 102, 1.0)", width:1}},
     };
     var layout = {
         margin: {r:10, l:10, pad:0}, showlegend: false, bargap: 0.08, plot_bgcolor: 'lightyellow'
     };
     setPlotTitle(layout, "Histogram of Column Data");
-    setXAxis(layout, column_name);
+    setXAxis(layout, columnName);
     Plotly.newPlot(plot_div, [trace], layout, {displayModeBar: false});
 }
 
-function plot_correlation_heatmap(div_id, column_names, corr_matrix) {
-    var plot = document.getElementById(div_id);
+function plot_correlation_heatmap(divId, columnNames, corrMatrix) {
+    var plot = document.getElementById(divId);
     var colorScaleValues = [[0, 'darkred'], [0.5, 'white'], [1.0, 'black']];
-    var data = [{type: 'heatmap', z: corr_matrix, x: column_names, y: column_names,
+    var data = [{type: 'heatmap', z: corrMatrix, x: columnNames, y: columnNames,
          colorscale: colorScaleValues, zmin: -1.0, zmax: 1.0}];
     var layout = {margin: {l:'auto', r:'auto', b:'auto'}};
     setPlotTitle(layout, "Correlation Coefficients Heat Map")
-    Plotly.newPlot(div_id, data, layout, {displayModeBar: false});
+    Plotly.newPlot(divId, data, layout, {displayModeBar: false});
 
     plot.on("plotly_click", function(data){
         var xName = data.points[0].x;
@@ -91,14 +69,14 @@ function plot_correlation_heatmap(div_id, column_names, corr_matrix) {
     });
 }
 
-function plot_covariance(div_id, xName, yName, xValues, yValues) {
+function plot_covariance(divId, xName, yName, xValues, yValues) {
     var trace1 = {x: xValues, y: yValues, type: 'scatter', mode: 'markers'};
     var data = [trace1];
     var layout = {margin:{r:10}, showlegend: false, plot_bgcolor: 'lightyellow'};
     setPlotTitle(layout, "Variation of " +  yName + " with " + xName);
     setXAxis(layout, xName);
     setYAxis(layout, yName);
-    Plotly.newPlot(div_id, data, layout, {displayModeBar: false});
+    Plotly.newPlot(divId, data, layout, {displayModeBar: false});
 }
 
 /**
