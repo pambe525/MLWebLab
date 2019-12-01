@@ -66,6 +66,7 @@ function plot_correlation_heatmap(divId, columnNames, corrMatrix) {
         var xValues = getColumnValues(xName);
         var yValues = getColumnValues(yName);
         plot_covariance("covariance_plot", xName, yName, xValues, yValues);
+        $("#corr_coeff").text(data.points[0].z.toFixed(2));
     });
 }
 
@@ -92,7 +93,7 @@ function setPlotTitle(layout, title) {
 function setXAxis(layout, xtitle) {
     if (layout == null) layout = {};
     layout.xaxis = {linecolor: '#666', linewidth: 1, mirror: true, ticks:"outside", zerolinecolor: "#999",
-        zerolinewidth: 2, tickfont:{size:10}};
+        zerolinewidth: 2, tickfont:{size:10}, fixedrange: true};
     layout.xaxis.title = {text: xtitle, font: {size: 12}, standoff: 10};
     layout.margin.b = 50;
     return layout;
@@ -101,7 +102,7 @@ function setXAxis(layout, xtitle) {
 function setYAxis(layout, ytitle) {
     if (layout == null) layout = {};
     layout.yaxis = {linecolor: '#666', linewidth: 1, mirror: true, ticks:"outside", zerolinecolor: "#999",
-        zerolinewidth: 2, tickfont:{size:10}};
+        zerolinewidth: 2, tickfont:{size:10}, fixedrange: true};
     layout.yaxis.title = {text: ytitle, font: {size: 12}, standoff: 10};
     return layout;
 }
