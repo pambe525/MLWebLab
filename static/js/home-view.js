@@ -123,7 +123,7 @@ function setClickableRowHandler(tableID, onClickHandler) {
 function plotHistogramOnClick(rowElement) {
     var columnName = rowElement.children()[0].innerHTML;
     var columnValues = getColumnValues(columnName);
-    plot_column_histogram("column_histogram", columnName, columnValues);
+    plotHistogram("column_histogram", columnName, columnValues);
 }
 
 function getColumnValues(columnName) {

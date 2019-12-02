@@ -1,8 +1,8 @@
-//---------------------------------------------------------------------------------------------------------------------
-// Validation Plot: Actual Target versus Predicted Target
-//---------------------------------------------------------------------------------------------------------------------
+/**--------------------------------------------------------------------------------------------------------------------
+ * Validation Plot: Actual Target versus Predicted Target
+ */
 function plotValidation(divId, targetName, yActual, yPredicted) {
-    var newPlot = (yPredicted.length == 0);
+    var newPlot = (yPredicted.length === 0);
     var plot = new PlotlyPlot(divId);
     plot.setTitle("Actual "+targetName+" versus Predicted "+targetName);
     plot.setXAxis("Actual "+targetName);
@@ -14,6 +14,9 @@ function plotValidation(divId, targetName, yActual, yPredicted) {
     plot.show();
 }
 
+/**--------------------------------------------------------------------------------------------------------------------
+ * Plot of K-Fold Split scores for each split
+ */
 function plotSplitScores(divId, nSplits, trainScores, testScores) {
     var plot = new PlotlyPlot(divId);
     plot.setTitle("Scores at each split", 12);
@@ -29,30 +32,29 @@ function plotSplitScores(divId, nSplits, trainScores, testScores) {
     plot.show();
 }
 
-function plot_column_histogram(divId, columnName, columnValues) {
-    let plotDiv = document.getElementById(divId);
-    let trace = {
-        x: columnValues, type: 'histogram',
-        marker:{color:"rgba(100, 200, 102, 0.6)", line:{color:"rgba(100, 200, 102, 1.0)", width:1}},
-    };
-    var layout = {
-        margin: {r:10, l:10, pad:0}, showlegend: false, bargap: 0.08, plot_bgcolor: 'lightyellow'
-    };
-    setPlotTitle(layout, "Histogram of Column Data");
-    setXAxis(layout, columnName);
-    Plotly.newPlot(plotDiv, [trace], layout, {displayModeBar: false});
-}
+/**--------------------------------------------------------------------------------------------------------------------
+ * Histogram Plot for values in a Data Column
+ */
+function plotHistogram(divId, columnName, columnValues) {
+    var plot = new PlotlyPlot(divId);
+    plot.setTitle("Histogram of Column Data");
+    plot.setXAxis(columnName);
+    plot.setYAxis("Count");
+    plot.addHistogram(columnValues);
+    plot.show();
+ }
 
+ /**--------------------------------------------------------------------------------------------------------------------
+ * Heatmap of correlation coefficients of data columns matrix
+ */
 function plotCorrelationHeatmap(divId, columnNames, corrMatrix) {
-    var plot = document.getElementById(divId);
-    var colorScaleValues = [[0, 'darkred'], [0.5, 'white'], [1.0, 'black']];
-    var data = [{type: 'heatmap', z: corrMatrix, x: columnNames, y: columnNames,
-         colorscale: colorScaleValues, zmin: -1.0, zmax: 1.0}];
-    var layout = {margin: {l:'auto', r:'auto', b:'auto'}};
-    setPlotTitle(layout, "Correlation Coefficients Heat Map")
-    Plotly.newPlot(divId, data, layout, {displayModeBar: false});
+    var plot = new PlotlyPlot(divId);
+    plot.setTitle("Correlation Coefficients Heat Map");
+    var colorScaleValues = [[0, 'darkred'], [0.5, 'white'], [1.0, 'darkblue']];
+    plot.addHeatMap(columnNames, columnNames, corrMatrix, colorScaleValues);
+    plot.show();
 
-    plot.on("plotly_click", function(data){
+    plot.plotDiv.on("plotly_click", function(data){
         var xName = data.points[0].x;
         var yName = data.points[0].y;
         var xValues = getColumnValues(xName);
@@ -62,41 +64,16 @@ function plotCorrelationHeatmap(divId, columnNames, corrMatrix) {
     });
 }
 
-function plotCovariance(divId, xName, yName, xValues, yValues) {
-    var trace1 = {x: xValues, y: yValues, type: 'scatter', mode: 'markers'};
-    var data = [trace1];
-    var layout = {margin:{r:10}, showlegend: false, plot_bgcolor: 'lightyellow'};
-    setPlotTitle(layout, "Variation of " +  yName + " with " + xName);
-    setXAxis(layout, xName);
-    setYAxis(layout, yName);
-    Plotly.newPlot(divId, data, layout, {displayModeBar: false});
-}
-
-/**
- * Utility functions
+/**--------------------------------------------------------------------------------------------------------------------
+ * Scatter plot of variance betwene two data columns
  */
-function setPlotTitle(layout, title) {
-    if (layout == null) layout = {};
-    layout.title = {text: '<b>'+title+'</b>', font: {family:"Arial", size: 15}};
-    layout.margin.t = 36;
-    return layout;
-}
-
-function setXAxis(layout, xtitle) {
-    if (layout == null) layout = {};
-    layout.xaxis = {linecolor: '#666', linewidth: 1, mirror: true, ticks:"outside", zerolinecolor: "#999",
-        zerolinewidth: 2, tickfont:{size:10}, fixedrange: true};
-    layout.xaxis.title = {text: xtitle, font: {size: 12}, standoff: 10};
-    layout.margin.b = 50;
-    return layout;
-}
-
-function setYAxis(layout, ytitle) {
-    if (layout == null) layout = {};
-    layout.yaxis = {linecolor: '#666', linewidth: 1, mirror: true, ticks:"outside", zerolinecolor: "#999",
-        zerolinewidth: 2, tickfont:{size:10}, fixedrange: true};
-    layout.yaxis.title = {text: ytitle, font: {size: 12}, standoff: 10};
-    return layout;
+function plotCovariance(divId, xName, yName, xValues, yValues) {
+    var plot = new PlotlyPlot(divId);
+    plot.setTitle("Variation of " +  yName + " with " + xName);
+    plot.setXAxis(xName);
+    plot.setYAxis(yName);
+    plot.addScatterPlot(xValues, yValues);
+    plot.show();
 }
 
 /**-----------------------------------------------------------------------------------------------------------------
@@ -107,7 +84,6 @@ class PlotlyPlot {
         this.plotDiv = document.getElementById(divId);
         this.layout = {};
         this.data = [];
-        this.layout.yaxis = {title: {font:{size:0}}};
         this.layout.margin = {r:10, l:"auto"};
         this.layout.showlegend = false;
         this.layout.plot_bgcolor = "lightyellow";
@@ -129,18 +105,35 @@ class PlotlyPlot {
         this.layout.showlegend = true;
         this.layout.legend = {x: xOffset, y: yOffset, font: {size: fontSize}};
     }
-    addHistogram(x) {
-
+    addHistogram(xValues) {
+        var trace = {x: xValues, type: 'histogram'};
+        trace.marker = {color:"rgba(100, 200, 102, 0.6)", line:{color:"rgba(100, 200, 102, 1.0)", width:1}};
+        this.data.push(trace);
+        this.layout.bargap = 0.08;
+        this.layout.margin.l = xValues.length.toString().length * 10 + 20;
     }
     addLinePlot(xArray, yArray, lineColor, name="", hasPoints=false) {
         var trace = {x: xArray, y: yArray, mode: 'lines', line:{color:lineColor, width:2}, name:name};
         if (hasPoints) trace.mode = 'lines+markers';
         this.data.push(trace);
+        this.layout.margin.l = this._getMaxCharsInNumbers(yArray)*6 + 15;
     }
     addScatterPlot(xArray, yArray, markerColor) {
         var trace = {x: xArray, y: yArray, type: 'scatter', mode: 'markers',
             name: "", marker:{color: markerColor, size:5}};
         this.data.push(trace);
+        this.layout.margin.l = this._getMaxCharsInNumbers(yArray)*6 + 15;
+    }
+    addHeatMap(xNames, yNames, zMatrix, colorScaleValues) {
+        var trace = {type: 'heatmap', z: zMatrix, x: xNames, y: yNames, colorscale: colorScaleValues,
+            zmin: -1.0, zmax: 1.0};
+        trace.colorbar = {thickness: 20, tickfont:{size:10}};
+        this.data = [trace];
+        var maxCharCount = this._getMaxCharsInNames(yNames);
+        this.layout.margin.l = maxCharCount * 6 + 12;
+        this.layout.margin.b = maxCharCount * 4 + 15;
+        this.layout.xaxis = this._getAxisDefault();
+        this.layout.yaxis = this._getAxisDefault();
     }
     show() {
         Plotly.newPlot(this.plotDiv, this.data, this.layout, {displayModeBar: false});
@@ -149,6 +142,19 @@ class PlotlyPlot {
         return {linecolor: '#666', linewidth: 1, mirror: true, ticks:"outside", zerolinecolor: "#999",
             zerolinewidth: 2, tickfont:{size:10}, fixedrange: true};
     }
+    _getMaxCharsInNames(namesArray) {
+        var charCount = 0;
+        for (let i = 0; i < namesArray.length; i++)
+            if (namesArray[i].length > charCount) charCount = namesArray[i].length;
+        return charCount;
+    }
+    _getMaxCharsInNumbers(numArray) {
+        var maxCharCount = 6, charCount = 0;
+        for (var i = 0; i < numArray.length; i++) {
+            var len = (numArray[i]) ? numArray[i].toString().length : 0;
+            if (charCount < len) charCount = len;
+            if (charCount > maxCharCount) charCount = maxCharCount;
+            if (charCount === maxCharCount) break;
+        }
+    }
 }
-
-
