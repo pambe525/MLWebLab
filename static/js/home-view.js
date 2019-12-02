@@ -29,7 +29,7 @@ function showMsgBox(message) {
     $('#msg_box').removeClass("invisible");
 }
 
-function ajax_form_get(formId, successHandler) {
+function sendAjaxFormRequest(formId, successHandler) {
     var form = $("#"+formId);
     $.ajax({
         url: form.attr('action'),
@@ -48,7 +48,7 @@ function fileSelectionChangeHandler() {
 function selectButtonClickHandler() {
     if ($("select[name='data_file']")[0].selectedIndex !== 0) {
         $("#glass_pane").show();
-        ajax_form_get("file_select_form", displayFileData);
+        sendAjaxFormRequest("file_select_form", displayFileData);
     }
     return false;
 }
@@ -60,7 +60,7 @@ function splitSelectionChangeHandler() {
 
 function trainButtonClickHandler() {
     $("#glass_pane").show();
-    ajax_form_get("sidebar_form", displayTrainingSummary);
+    sendAjaxFormRequest("sidebar_form", displayTrainingSummary);
     return false;
 }
 
@@ -144,7 +144,7 @@ function getCell(content) {
 function displayHeatMap(response) {
     var corrMatrix = response['correlation_matrix'];
     var columnNames = Object.keys(dataFrame);
-    plot_correlation_heatmap("covariance_heatmap", columnNames, corrMatrix)
+    plotCorrelationHeatmap("covariance_heatmap", columnNames, corrMatrix)
 }
 
 function initializeTrainingMetrics() {
@@ -157,19 +157,19 @@ function initializeTrainingMetrics() {
 function initializeTrainingPlots() {
     var nSplits = parseInt($("#n_splits_select option:selected").text());
     var targetName = $("#target_feature").text();
-    plot_split_scores("cv_scores_plot", nSplits, null, null);
+    plotSplitScores("cv_scores_plot", nSplits, null, null);
     var targetSummary = columnSummary[columnSummary.length-1];
     var yActual = [targetSummary['min'], targetSummary['max']];
-    plot_validation("validation_plot", targetName, yActual, []);
+    plotValidation("validation_plot", targetName, yActual, []);
 }
 
 function displayTrainingSummary(response) {
     $("#glass_pane").hide();
     if ( errorOccurred(response) ) showMsgBox(response["error_message"]);
-    else set_training_summaries(response);
+    else setTrainingSummaries(response);
 }
 
-function set_training_summaries(response) {
+function setTrainingSummaries(response) {
     $("#train_score").text(response["mean_train_score"].toFixed(2));
     $("#test_score").text(response["mean_test_score"].toFixed(2));
     $("#train_scores_stdev").text(response["train_scores_stdev"].toFixed(2));
@@ -178,6 +178,6 @@ function set_training_summaries(response) {
     var targetName = $("#target_feature").text();
     var yActual = response["y"];
     var yPredict = response["y_predict"];
-    plot_split_scores("cv_scores_plot", nSplits, response["train_scores"], response["test_scores"]);
-    plot_validation("validation_plot", targetName, yActual, yPredict);
+    plotSplitScores("cv_scores_plot", nSplits, response["train_scores"], response["test_scores"]);
+    plotValidation("validation_plot", targetName, yActual, yPredict);
 }

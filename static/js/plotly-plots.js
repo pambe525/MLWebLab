@@ -1,44 +1,36 @@
 //---------------------------------------------------------------------------------------------------------------------
 // Validation Plot: Actual Target versus Predicted Target
 //---------------------------------------------------------------------------------------------------------------------
-function plot_validation(divId, targetName, yActual, yPredicted) {
-    var new_plot = (yPredicted.length === 0);
-    var plot_div = document.getElementById(divId);
-    var trace1 = {x: [Math.min.apply(null, yActual),Math.max.apply(null, yActual)],
-                  y:[Math.min.apply(null, yActual),Math.max.apply(null, yActual)],
-                  mode: 'lines', line:{color:'gray', width:1}};
-    if ( !new_plot )
-        var trace2 = {x: yActual, y: yPredicted, type: 'scatter', mode: 'markers', name: "",
-                    marker:{color: 'green', size:5}};
-    var data = new_plot ? [trace1] : [trace1, trace2];
-    var layout = {margin: {r:20}, showlegend: false, plot_bgcolor: 'lightyellow'};
-    setPlotTitle(layout, "Actual "+targetName+" versus Predicted "+targetName);
-    setXAxis(layout, "Actual "+targetName);
-    setYAxis(layout, "Predicted "+targetName);
-    Plotly.newPlot(plot_div, data, layout, {displayModeBar: false});
+function plotValidation(divId, targetName, yActual, yPredicted) {
+    var newPlot = (yPredicted.length == 0);
+    var plot = new PlotlyPlot(divId);
+    plot.setTitle("Actual "+targetName+" versus Predicted "+targetName);
+    plot.setXAxis("Actual "+targetName);
+    plot.setYAxis("Predicted "+targetName);
+    var xPoints = [Math.min.apply(null, yActual), Math.max.apply(null, yActual)];
+    var yPoints = [Math.min.apply(null, yActual), Math.max.apply(null, yActual)];
+    plot.addLinePlot(xPoints, yPoints, "gray");
+    if ( !newPlot ) plot.addScatterPlot(yActual, yPredicted, "green");
+    plot.show();
 }
 
-function plot_split_scores(divId, nSplits, trainScores, testScores) {
-    var plot_div = document.getElementById(divId);
+function plotSplitScores(divId, nSplits, trainScores, testScores) {
+    var plot = new PlotlyPlot(divId);
+    plot.setTitle("Scores at each split", 12);
+    plot.setXAxis("Split #", 10);
+    plot.setYAxis("Score", 10);
     var x_values = [];
-    for (var i = 1; i <= nSplits; i++) x_values.push(i);
+    for (let i = 1; i <= nSplits; i++) x_values.push(i);
     if (trainScores == null) trainScores = new Array(nSplits);
     if (testScores == null) testScores = new Array(nSplits);
-    var trace1 = {x: x_values, y: trainScores, name:'Training '};
-    var trace2 = {x: x_values, y: testScores, name:'Validation'};
-    var data =[trace1, trace2];
-    var layout = {
-      margin: {r:10, pad:0}, showlegend: true, plot_bgcolor: 'lightyellow',
-      legend: {x: 1.05, y: 0.7, font: {size: 10}}
-    };
-    setPlotTitle(layout, "Scores at each split");
-    setXAxis(layout, "Split #");
-    setYAxis(layout, "Score");
-    Plotly.newPlot(plot_div, data, layout, {displayModeBar: false});
+    plot.addLinePlot(x_values, trainScores, "lightblue", "Training", true);
+    plot.addLinePlot(x_values, testScores, "orange", "Validation", true);
+    plot.setLegend(1.05, 0.8);
+    plot.show();
 }
 
 function plot_column_histogram(divId, columnName, columnValues) {
-    let plot_div = document.getElementById(divId);
+    let plotDiv = document.getElementById(divId);
     let trace = {
         x: columnValues, type: 'histogram',
         marker:{color:"rgba(100, 200, 102, 0.6)", line:{color:"rgba(100, 200, 102, 1.0)", width:1}},
@@ -48,10 +40,10 @@ function plot_column_histogram(divId, columnName, columnValues) {
     };
     setPlotTitle(layout, "Histogram of Column Data");
     setXAxis(layout, columnName);
-    Plotly.newPlot(plot_div, [trace], layout, {displayModeBar: false});
+    Plotly.newPlot(plotDiv, [trace], layout, {displayModeBar: false});
 }
 
-function plot_correlation_heatmap(divId, columnNames, corrMatrix) {
+function plotCorrelationHeatmap(divId, columnNames, corrMatrix) {
     var plot = document.getElementById(divId);
     var colorScaleValues = [[0, 'darkred'], [0.5, 'white'], [1.0, 'black']];
     var data = [{type: 'heatmap', z: corrMatrix, x: columnNames, y: columnNames,
@@ -65,12 +57,12 @@ function plot_correlation_heatmap(divId, columnNames, corrMatrix) {
         var yName = data.points[0].y;
         var xValues = getColumnValues(xName);
         var yValues = getColumnValues(yName);
-        plot_covariance("covariance_plot", xName, yName, xValues, yValues);
+        plotCovariance("covariance_plot", xName, yName, xValues, yValues);
         $("#corr_coeff").text(data.points[0].z.toFixed(2));
     });
 }
 
-function plot_covariance(divId, xName, yName, xValues, yValues) {
+function plotCovariance(divId, xName, yName, xValues, yValues) {
     var trace1 = {x: xValues, y: yValues, type: 'scatter', mode: 'markers'};
     var data = [trace1];
     var layout = {margin:{r:10}, showlegend: false, plot_bgcolor: 'lightyellow'};
@@ -107,37 +99,56 @@ function setYAxis(layout, ytitle) {
     return layout;
 }
 
-/*
+/**-----------------------------------------------------------------------------------------------------------------
+ * CLASS: PlotlyPlot
+ */
 class PlotlyPlot {
-    constructor() {
-        this.layout = this.setLayout()
+    constructor(divId) {
+        this.plotDiv = document.getElementById(divId);
+        this.layout = {};
+        this.data = [];
+        this.layout.yaxis = {title: {font:{size:0}}};
+        this.layout.margin = {r:10, l:"auto"};
+        this.layout.showlegend = false;
+        this.layout.plot_bgcolor = "lightyellow";
     }
-    title(title, fontSize) {
-
+    setTitle(title, fontSize=15) {
+        this.layout.title = {text: '<b>'+title+'</b>', font: {family:"Arial", size: fontSize}};
+        this.layout.margin.t = 20 + fontSize;
     }
-    xAxis(title, fontSize) {
-
+    setXAxis(xTitle, fontSize=12) {
+        this.layout.xaxis = this._getAxisDefault();
+        this.layout.xaxis.title = {text: xTitle, font: {size: fontSize}, standoff: 10};
+        this.layout.margin.b = 38 + fontSize;
     }
-    yAxis(title, fontSize) {
-
+    setYAxis(yTitle, fontSize=12) {
+        this.layout.yaxis = this._getAxisDefault();
+        this.layout.yaxis.title = {text: yTitle, font: {size: fontSize}, standoff: 10};
     }
-    legend(x, y, fontSize) {
-
+    setLegend(xOffset, yOffset, fontSize=10) {
+        this.layout.showlegend = true;
+        this.layout.legend = {x: xOffset, y: yOffset, font: {size: fontSize}};
     }
     addHistogram(x) {
 
     }
-    addLinePlot(x, y, linecolor) {
-
+    addLinePlot(xArray, yArray, lineColor, name="", hasPoints=false) {
+        var trace = {x: xArray, y: yArray, mode: 'lines', line:{color:lineColor, width:2}, name:name};
+        if (hasPoints) trace.mode = 'lines+markers';
+        this.data.push(trace);
     }
-    addScatter(x, y, marker) {
-
+    addScatterPlot(xArray, yArray, markerColor) {
+        var trace = {x: xArray, y: yArray, type: 'scatter', mode: 'markers',
+            name: "", marker:{color: markerColor, size:5}};
+        this.data.push(trace);
     }
-    newPlot(divId) {
-
+    show() {
+        Plotly.newPlot(this.plotDiv, this.data, this.layout, {displayModeBar: false});
     }
-    updatePlot(divID) {
-
+    _getAxisDefault() {
+        return {linecolor: '#666', linewidth: 1, mirror: true, ticks:"outside", zerolinecolor: "#999",
+            zerolinewidth: 2, tickfont:{size:10}, fixedrange: true};
     }
 }
-*/
+
+
