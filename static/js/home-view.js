@@ -144,7 +144,23 @@ function getCell(content) {
 function displayHeatMap(response) {
     var corrMatrix = response['correlation_matrix'];
     var columnNames = Object.keys(dataFrame);
-    plotCorrelationHeatmap("covariance_heatmap", columnNames, corrMatrix)
+    plotCorrelationHeatmap("covariance_heatmap", columnNames, corrMatrix);
+    document.getElementById("covariance_heatmap").on("plotly_click", heatmapClickHandler);
+    var xName = columnNames[0];
+    var yName = columnNames[columnNames.length-1];
+    var xValues = getColumnValues(xName);
+    var yValues = getColumnValues(yName);
+    var coeff = corrMatrix[0][columnNames.length-1].toFixed(2);
+    plotCovariance("covariance_plot", xName, yName, xValues, yValues, coeff);
+}
+
+function heatmapClickHandler(data) {
+    var xName = data.points[0].x;
+    var yName = data.points[0].y;
+    var xValues = getColumnValues(xName);
+    var yValues = getColumnValues(yName);
+    var coeff = data.points[0].z.toFixed(2);
+    plotCovariance("covariance_plot", xName, yName, xValues, yValues, coeff);
 }
 
 function initializeTrainingMetrics() {

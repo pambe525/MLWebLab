@@ -53,26 +53,20 @@ function plotCorrelationHeatmap(divId, columnNames, corrMatrix) {
     var colorScaleValues = [[0, 'darkred'], [0.5, 'white'], [1.0, 'darkblue']];
     plot.addHeatMap(columnNames, columnNames, corrMatrix, colorScaleValues);
     plot.show();
-
-    plot.plotDiv.on("plotly_click", function(data){
-        var xName = data.points[0].x;
-        var yName = data.points[0].y;
-        var xValues = getColumnValues(xName);
-        var yValues = getColumnValues(yName);
-        plotCovariance("covariance_plot", xName, yName, xValues, yValues);
-        $("#corr_coeff").text(data.points[0].z.toFixed(2));
-    });
 }
 
 /**--------------------------------------------------------------------------------------------------------------------
  * Scatter plot of variance betwene two data columns
  */
-function plotCovariance(divId, xName, yName, xValues, yValues) {
+function plotCovariance(divId, xName, yName, xValues, yValues, coeff) {
     var plot = new PlotlyPlot(divId);
-    plot.setTitle("Variation of " +  yName + " with " + xName);
+    var title = yName + " (Y) vs " + xName + " (X)";
+    plot.setTitle(title);
     plot.setXAxis(xName);
     plot.setYAxis(yName);
     plot.addScatterPlot(xValues, yValues);
+    plot.layout.margin.t = 60;
+    plot.addAnnotation("Corr. Coeff: " + coeff, 0.5, 1.08);
     plot.show();
 }
 
@@ -84,12 +78,13 @@ class PlotlyPlot {
         this.plotDiv = document.getElementById(divId);
         this.layout = {};
         this.data = [];
-        this.layout.margin = {r:10, l:"auto"};
+        this.layout.margin = {r:10};
         this.layout.showlegend = false;
         this.layout.plot_bgcolor = "lightyellow";
+        this.layout.annotations = [];
     }
     setTitle(title, fontSize=15) {
-        this.layout.title = {text: '<b>'+title+'</b>', font: {family:"Arial", size: fontSize}};
+        this.layout.title = {text: '<b>'+title+'</b>', font: {size: fontSize}};
         this.layout.margin.t = 20 + fontSize;
     }
     setXAxis(xTitle, fontSize=12) {
@@ -105,6 +100,11 @@ class PlotlyPlot {
         this.layout.showlegend = true;
         this.layout.legend = {x: xOffset, y: yOffset, font: {size: fontSize}};
     }
+    addAnnotation(text, xPaper, yPaper) {
+        var annotation = { xref: 'paper', yref: 'paper', x: xPaper, y: yPaper, showarrow: false,
+            font:{color:'white'}, bgcolor: 'black', borderpad: 3, opacity: 0.8, text: text};
+        this.layout.annotations.push(annotation);
+    }
     addHistogram(xValues) {
         var trace = {x: xValues, type: 'histogram'};
         trace.marker = {color:"rgba(100, 200, 102, 0.6)", line:{color:"rgba(100, 200, 102, 1.0)", width:1}};
@@ -116,13 +116,13 @@ class PlotlyPlot {
         var trace = {x: xArray, y: yArray, mode: 'lines', line:{color:lineColor, width:2}, name:name};
         if (hasPoints) trace.mode = 'lines+markers';
         this.data.push(trace);
-        this.layout.margin.l = this._getMaxCharsInNumbers(yArray)*6 + 15;
+        this.layout.margin.l = this._getMaxCharsInNumbers(yArray)*6 + 5;
     }
     addScatterPlot(xArray, yArray, markerColor) {
         var trace = {x: xArray, y: yArray, type: 'scatter', mode: 'markers',
             name: "", marker:{color: markerColor, size:5}};
         this.data.push(trace);
-        this.layout.margin.l = this._getMaxCharsInNumbers(yArray)*6 + 15;
+        this.layout.margin.l = this._getMaxCharsInNumbers(yArray)*6 + 5;
     }
     addHeatMap(xNames, yNames, zMatrix, colorScaleValues) {
         var trace = {type: 'heatmap', z: zMatrix, x: xNames, y: yNames, colorscale: colorScaleValues,
